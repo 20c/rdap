@@ -1,0 +1,21 @@
+language: python
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+branches:
+  except:
+    - gh-pages
+matrix:
+  fast_finish: true
+before_install:
+  - sudo apt-get -qq update
+install:
+  - python -m pip install -U pip
+  - pip install -U setuptools
+  - pip install tox-travis codecov
+script:
+  - tox
+after_success:
+  - codecov
