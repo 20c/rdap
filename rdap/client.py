@@ -31,7 +31,7 @@ class RdapClient(object):
         self.recurse_roles = set(config.get("recurse_roles", ["administrative", "technical"]))
 
         self.headers = requests.utils.default_headers()
-        self.headers["User-Agent"] = "rdap/{} {}".format(rdap.__version__, self.headers["User-Agent"])
+        self.headers["User-Agent"] = "20C-rdap/{} {}".format(rdap.__version__, self.headers["User-Agent"])
 
         self._asn_req = None
         self._history = []
