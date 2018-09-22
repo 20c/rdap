@@ -23,6 +23,14 @@ class RdapObject(object):
     def emails(self):
         return self.parsed()['emails']
 
+    @property
+    def org_name(self):
+        return self.parsed()['org_name']
+
+    @property
+    def org_address(self):
+        return self.parsed()['org_address']
+
     def parsed(self):
         """
         returns parsed dict
@@ -36,7 +44,6 @@ class RdapAsn(RdapObject):
     """
     access interface for lazy parsing of RDAP looked up aut-num objects
     """
-
     def __init__(self, data, rdapc=None, **kwargs):
         super(RdapAsn, self).__init__(data, rdapc, **kwargs)
         # needs to be a set for isdisjoint

@@ -7,7 +7,7 @@ import requests
 import rdap
 from rdap.config import Config
 from rdap.objects import RdapAsn
-from rdap.exceptions import RdapNotFoundError
+from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
 class RdapClient(object):
@@ -40,10 +40,11 @@ class RdapClient(object):
 
         if res.status_code == 200:
             return res
-        elif res.status_code == 404:
-            raise RdapNotFoundError()
 
-        raise RuntimeError("status for {} was {}".format(res.url, res.status_code))
+        msg = "RDAP lookup to {} returned {}".format(res.url, res.status_code)
+        if res.status_code == 404:
+            raise RdapNotFoundError(msg)
+        raise RdapHTTPError(msg)
 
     @property
     def history(self):

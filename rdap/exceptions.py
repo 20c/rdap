@@ -1,6 +1,9 @@
 
 class RdapException(Exception):
-    """rdap base exception"""
+    """Base exception used by this module."""
 
-class RdapNotFoundError(LookupError):
-    """RDAP query returned a 404 Not Found"""
+class RdapHTTPError(RdapException):
+    """An HTTP error occurred."""
+
+class RdapNotFoundError(RdapHTTPError):
+    """RDAP query returned 404 Not Found."""

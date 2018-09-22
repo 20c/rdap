@@ -12,4 +12,4 @@ from rdap.objects import RdapAsn
 from rdap.exceptions import (RdapException, RdapNotFoundError)
 
 # client to base namespace
-from .client import RdapClient
+from rdap.client import RdapClient
