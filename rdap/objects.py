@@ -46,8 +46,6 @@ class RdapAsn(RdapObject):
     """
     def __init__(self, data, rdapc=None, **kwargs):
         super(RdapAsn, self).__init__(data, rdapc, **kwargs)
-        # needs to be a set for isdisjoint
-        self._recurse_roles = set(["administrative", "technical"])
 
     def _parse_vcard(self, data):
         """
@@ -100,7 +98,7 @@ class RdapAsn(RdapObject):
                 emails |= vcard.get('emails', set())
 
             # if role is in settings to recurse, try to do a lookup
-            if handle and not self._recurse_roles.isdisjoint(roles):
+            if handle and not self._rdapc.recurse_roles.isdisjoint(roles):
                 rdata = self._rdapc.get_entity_data(handle)
                 vcard = self._parse_vcard(rdata)
                 emails |= vcard.get('emails', set())

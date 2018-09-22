@@ -11,6 +11,8 @@ class Config(munge.Config):
             'rdap': {
                 "bootstrap_url": "https://rdap.db.ripe.net/",
                 "output_format": "yaml",
+                "recurse_roles": ["administrative", "technical"],
+                "lacnic_apikey": None,
                 },
             },
         'codec': 'yaml',

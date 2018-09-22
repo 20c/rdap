@@ -26,6 +26,10 @@ class RdapClient(object):
 
         self.url = config.get("bootstrap_url", "https://rdap.db.ripe.net/").rstrip('/')
 
+        # use setter
+        self._recurse_roles = None
+        self.recurse_roles = set(config.get("recurse_roles", ["administrative", "technical"]))
+
         self.headers = requests.utils.default_headers()
         self.headers["User-Agent"] = "rdap/{} {}".format(rdap.__version__, self.headers["User-Agent"])
 
@@ -49,6 +53,20 @@ class RdapClient(object):
     @property
     def history(self):
         return self._history
+
+    @property
+    def recurse_roles(self):
+        """Gets the set of roles this will do recursive lookups for."""
+        return self._recurse_roles
+
+    @recurse_roles.setter
+    def recurse_roles(self, value):
+        """
+        Sets the set of roles this will do recursive lookups for.
+
+        Will accept any interable that can be passed to set().
+        """
+        self._recurse_roles = set(value)
 
     def get(self, query):
         """
