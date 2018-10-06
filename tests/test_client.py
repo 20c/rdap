@@ -1,5 +1,7 @@
+import pytest
 
 from rdap import client
+from rdap.exceptions import RdapHTTPError
 
 
 def test_strip_auth_none():
@@ -17,3 +19,13 @@ def test_strip_auth():
 
     # test only auth
     assert url == client.strip_auth(url + "&apikey=12345")
+
+
+def test_lacnic_bad_apikey():
+    rdapc = client.RdapClient(dict(lacnic_apikey="12345"))
+    with pytest.raises(RdapHTTPError) as excinfo:
+        rdapc.get_asn(28001).parsed()
+
+
+def test_lacnic_no_apikey(rdapc):
+    assert rdapc.get_asn(28001).parsed()

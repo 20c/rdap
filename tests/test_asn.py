@@ -24,3 +24,9 @@ def test_rdap_asn_lookup(rdapc, data_rdap_autnum):
     asn = rdapc.get_asn(data_rdap_autnum.name)
     assert_parsed(data_rdap_autnum, asn.parsed())
 
+
+def test_rdap_asn_object(rdapc):
+    data = dict(test="data")
+    asn = RdapAsn(data, rdapc)
+    assert rdapc == asn._rdapc
+    assert data == asn._data
