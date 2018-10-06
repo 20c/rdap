@@ -2,19 +2,25 @@
 from setuptools import find_packages, setup
 
 
-version = open('facsimile/VERSION').read().strip()
-requirements = open('facsimile/requirements.txt').read().split("\n")
-test_requirements = open('facsimile/requirements-test.txt').read().split("\n")
+def read_file(name):
+    with open(name) as fobj:
+        return fobj.read().strip()
+
+
+LONG_DESCRIPTION = read_file("README.md")
+VERSION = read_file("facsimile/VERSION")
+REQUIREMENTS = read_file("facsimile/requirements.txt").split('\n')
+TEST_REQUIREMENTS = read_file("facsimile/requirements-test.txt").split('\n')
 
 
 setup(
     name='rdap',
-    version=version,
+    version=VERSION,
     author='20C',
     author_email='code@20c.com',
     description='Registration Data Access Protocol tools',
-    long_description='',
-    license='LICENSE.txt',
+    long_description=LONG_DESCRIPTION,
+    license='LICENSE',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: Apache Software License',
@@ -30,10 +36,10 @@ setup(
     packages = find_packages(),
     include_package_data=True,
     url='https://github.com/20c/rdap',
-    download_url='https://github.com/20c/rdap/%s' % version,
+    download_url='https://github.com/20c/rdap/archive/{}.zip'.format(VERSION),
 
-    install_requires=requirements,
-    test_requires=test_requirements,
+    install_requires=REQUIREMENTS,
+    test_requires=TEST_REQUIREMENTS,
 
     entry_points={
         'console_scripts': [

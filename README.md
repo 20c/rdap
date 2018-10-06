@@ -9,7 +9,14 @@
 
 Registration Data Access Protocol tools
 
-### Usage
+## Installation
+
+```sh
+pip install rdap
+```
+
+
+## Usage
 
 ```sh
 usage: rdap [-h] [--debug] [--home HOME] [--verbose] [--quiet] [--version]
@@ -36,7 +43,7 @@ optional arguments:
 ```
 
 
-### Config file
+## Config file
 
 The client uses the `--home` option to point to a directory, which should have a `config.yaml` file in it, defaults shown below.
 
