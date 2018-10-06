@@ -2,6 +2,12 @@
 from builtins import object
 import re
 
+try:
+    from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
+except ImportError:
+    from urlparse import parse_qs, urlsplit, urlunsplit
+    from urllib import urlencode
+
 import requests
 
 import rdap
@@ -10,9 +16,59 @@ from rdap.objects import RdapAsn
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
+class RdapRequestAuth(requests.auth.AuthBase):
+    """
+    Adds authentication to HTTP RDAP Request objects.
+
+    Currently only supports LACNIC's APIKEY
+    """
+
+    def __init__(self, lacnic_apikey=None):
+        self.lacnic_apikey = lacnic_apikey
+
+        self.has_auth = False
+        if lacnic_apikey:
+            self.has_auth = True
+
+    def __call__(self, request):
+        # update history?
+
+        if not self.has_auth:
+            return request
+
+        # apikeys, quick and dirty until other RIRs support them
+        # checks scheme as well since API keys shouldn't be sent over http
+        if request.url.startswith("https://rdap.lacnic.net/"):
+            params = dict(apikey=self.lacnic_apikey)
+            request.prepare_url(request.url, params)
+
+        return request
+
+
+def strip_auth(url):
+    """
+    Strip any sensitive auth information out of the URL.
+    """
+    parsed = urlsplit(url)
+    if not parsed.query:
+        return url
+
+    params = parse_qs(parsed.query)
+
+    # LACNIC
+    if "apikey" in params:
+        del params["apikey"]
+        parts = list(parsed)
+        # overwrite query, use str() since py2 returns a newstr
+        parts[3] = str(urlencode(params, doseq=True))
+        return urlunsplit(parts)
+
+    return url
+
+
 class RdapClient(object):
     """
-    does RDAP queries against defined URL
+    Client to do RDAP queries against defined bootstrap URL.
     """
 
     def __init__(self, config=None):
@@ -30,22 +86,26 @@ class RdapClient(object):
         self._recurse_roles = None
         self.recurse_roles = set(config.get("recurse_roles", ["administrative", "technical"]))
 
-        self.headers = requests.utils.default_headers()
-        self.headers["User-Agent"] = "20C-rdap/{} {}".format(rdap.__version__, self.headers["User-Agent"])
-
         self._asn_req = None
         self._history = []
 
+        self.http = requests.Session()
+        self.http.auth = RdapRequestAuth(**dict(
+            lacnic_apikey=config.get("lacnic_apikey", None),
+            ))
+
+        self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(rdap.__version__, self.http.headers["User-Agent"])
+
     def _get(self, url):
-        res = requests.get(url, headers=self.headers)
+        res = self.http.get(url)
         for redir in res.history:
-            self._history.append((redir.url, redir.status_code))
-        self._history.append((res.url, res.status_code))
+            self._history.append((strip_auth(redir.url), redir.status_code))
+        self._history.append((strip_auth(res.url), res.status_code))
 
         if res.status_code == 200:
             return res
 
-        msg = "RDAP lookup to {} returned {}".format(res.url, res.status_code)
+        msg = "RDAP lookup to {} returned {}".format(strip_auth(res.url), res.status_code)
         if res.status_code == 404:
             raise RdapNotFoundError(msg)
         raise RdapHTTPError(msg)
@@ -62,7 +122,7 @@ class RdapClient(object):
     @recurse_roles.setter
     def recurse_roles(self, value):
         """
-        Sets the set of roles this will do recursive lookups for.
+        Sets the set of roles this client will do recursive lookups for.
 
         Will accept any interable that can be passed to set().
         """
