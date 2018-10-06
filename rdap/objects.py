@@ -98,10 +98,11 @@ class RdapAsn(RdapObject):
                 emails |= vcard.get('emails', set())
 
             # if role is in settings to recurse, try to do a lookup
-            if handle and not self._rdapc.recurse_roles.isdisjoint(roles):
-                rdata = self._rdapc.get_entity_data(handle)
-                vcard = self._parse_vcard(rdata)
-                emails |= vcard.get('emails', set())
+            if handle and self._rdapc:
+                if not self._rdapc.recurse_roles.isdisjoint(roles):
+                    rdata = self._rdapc.get_entity_data(handle)
+                    vcard = self._parse_vcard(rdata)
+                    emails |= vcard.get('emails', set())
 
         # WORKAROUND APNIC keeps org info in remarks
         if 'apnic' in self._data.get('port43', None):

@@ -12,9 +12,23 @@ def assert_parsed(data, parsed):
     assert data.expected == parsed
 
 
+def test_rdap_asn_object(rdapc):
+    data = dict(test="data")
+    asn = RdapAsn(data, rdapc)
+    assert rdapc == asn._rdapc
+    assert data == asn._data
+
+
 def test_rdap_asn_lookup_not_found(rdapc):
     with pytest.raises(RdapNotFoundError):
         rdapc.get_asn(65535)
+
+
+def test_rdap_asn_lookup_no_client(rdapc):
+    asn = rdapc.get_asn(63311)
+    # force null the client
+    asn._rdapc = None
+    assert asn.parsed()
 
 
 @pytest.RequestsData("rdap") # XXX , real_http=True)
@@ -23,10 +37,3 @@ def test_rdap_asn_lookup(rdapc, data_rdap_autnum):
     #asn = rdap.get_asn(205726)
     asn = rdapc.get_asn(data_rdap_autnum.name)
     assert_parsed(data_rdap_autnum, asn.parsed())
-
-
-def test_rdap_asn_object(rdapc):
-    data = dict(test="data")
-    asn = RdapAsn(data, rdapc)
-    assert rdapc == asn._rdapc
-    assert data == asn._data
