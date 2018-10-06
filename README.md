@@ -4,7 +4,6 @@
 [![PyPI](https://img.shields.io/pypi/v/rdap.svg?maxAge=3600)](https://pypi.python.org/pypi/rdap)
 [![PyPI](https://img.shields.io/pypi/pyversions/rdap.svg?maxAge=3600)](https://pypi.python.org/pypi/rdap)
 [![Travis CI](https://img.shields.io/travis/20c/rdap.svg?maxAge=3600)](https://travis-ci.org/20c/rdap)
-[![Code Health](https://landscape.io/github/20c/rdap/master/landscape.svg?style=flat)](https://landscape.io/github/20c/rdap/master)
 [![Codecov](https://img.shields.io/codecov/c/github/20c/rdap/master.svg?maxAge=3600)](https://codecov.io/github/20c/rdap)
 [![Requires.io](https://img.shields.io/requires/github/20c/rdap.svg?maxAge=3600)](https://requires.io/github/20c/rdap/requirements)
 
@@ -34,6 +33,23 @@ optional arguments:
   --output-format OUTPUT_FORMAT
                         output format (yaml, json, text)
   --show-requests       show all requests
+```
+
+
+### Config file
+
+The client uses the `--home` option to point to a directory, which should have a `config.yaml` file in it, defaults shown below.
+
+```yaml
+rdap:
+  # URL to bootstrap the initial request off
+  bootstrap_url: https://rdap.db.ripe.net/
+  # how to format the output
+  output_format: yaml
+  # API key for use at rdap.lacnic.net
+  lacnic_apikey: None
+  # role types to recursively query when processing
+  recurse_roles: ["administrative", "technical"]
 ```
 
 
