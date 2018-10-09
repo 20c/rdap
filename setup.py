@@ -20,6 +20,7 @@ setup(
     author_email='code@20c.com',
     description='Registration Data Access Protocol tools',
     long_description=LONG_DESCRIPTION,
+    long_description_content_type="text/markdown",
     license='LICENSE',
     classifiers=[
         'Development Status :: 3 - Alpha',
