@@ -133,18 +133,25 @@ class RdapClient(object):
 
     def get(self, query):
         """
-        Generic get that tries to figure out object type.
+        Generic get that tries to figure out object type and returns an object.
         """
         qstr = query.strip().lower()
+
+        # ASN
         if qstr.startswith("as"):
             return self.get_asn(qstr[2:])
 
+        # IP address
         try:
             address = ipaddress.ip_interface(str(qstr))
             return self.get_ip(address.ip)
 
         except ValueError:
             pass
+
+        # domain
+        if "." in qstr:
+            return self.get_domain(qstr)
 
         raise NotImplementedError("unknown query {}".format(query))
 
@@ -157,12 +164,18 @@ class RdapClient(object):
         self._asn_req = self._get(url)
         return RdapAsn(self._asn_req.json(), self)
 
+    def get_domain(self, domain):
+        """
+        Get a domain object.
+        """
+        url = "{}/domain/{}".format(self.url, domain)
+        return RdapObject(self._get(url).json(), self)
+
     def get_ip(self, address):
         """
         Get an IP object.
         """
         url = "{}/ip/{}".format(self.url, address)
-        # save reqest to get url for following entity lookups
         return RdapObject(self._get(url).json(), self)
 
     def get_entity_data(self, handle):

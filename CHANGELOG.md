@@ -6,6 +6,7 @@
 - add --parse option to display the parsed output
 - RdapObject::handle
 - ip address lookup
+- domain name lookup
 
 ### Fixed
 ### Changed
