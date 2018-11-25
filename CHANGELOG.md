@@ -3,19 +3,23 @@
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+### Deprecated
+### Removed
+### Security
+
+
+## [0.4.0] 2018-11-25
+### Added
 - add --parse option to display the parsed output
 - RdapObject::handle
 - ip address lookup
 - domain name lookup
 
-### Fixed
 ### Changed
 - default CLI to display full data
 - rename `raw` to `data` on RdapObjects
-
-### Deprecated
-### Removed
-### Security
 
 
 ## [0.2.1] 2018-10-09
