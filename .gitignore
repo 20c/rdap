@@ -5,6 +5,7 @@
 .coverage
 .pytest_cache/
 .tox
+Ctl/tmp
 coverage.xml
 dist/
 site/
