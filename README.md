@@ -20,7 +20,7 @@ pip install rdap
 
 ```sh
 usage: rdap [-h] [--debug] [--home HOME] [--verbose] [--quiet] [--version]
-            [--output-format OUTPUT_FORMAT] [--show-requests]
+            [--output-format OUTPUT_FORMAT] [--show-requests] [--parse]
             query [query ...]
 
 rdap
@@ -40,6 +40,7 @@ optional arguments:
   --output-format OUTPUT_FORMAT
                         output format (yaml, json, text)
   --show-requests       show all requests
+  --parse               parse data into object before display
 ```
 
 
