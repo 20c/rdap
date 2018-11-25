@@ -20,6 +20,10 @@ class RdapObject(object):
         return self.parsed()['name']
 
     @property
+    def handle(self):
+        return self._data['handle']
+
+    @property
     def emails(self):
         return self.parsed()['emails']
 
