@@ -1,18 +1,21 @@
-
-from builtins import object
+from __future__ import (absolute_import, division, print_function)
+from builtins import object, str
 import re
 
+# import for either Python 2 or 3
 try:
     from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 except ImportError:
     from urlparse import parse_qs, urlsplit, urlunsplit
     from urllib import urlencode
 
+import ipaddress
+
 import requests
 
 import rdap
 from rdap.config import Config
-from rdap.objects import RdapAsn
+from rdap.objects import RdapAsn, RdapObject
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
@@ -130,22 +133,37 @@ class RdapClient(object):
 
     def get(self, query):
         """
-        generic get that tries to figure out object type
+        Generic get that tries to figure out object type.
         """
         qstr = query.strip().lower()
         if qstr.startswith("as"):
             return self.get_asn(qstr[2:])
 
+        try:
+            address = ipaddress.ip_interface(str(qstr))
+            return self.get_ip(address.ip)
+
+        except ValueError:
+            pass
+
         raise NotImplementedError("unknown query {}".format(query))
 
     def get_asn(self, asn):
         """
-        get ASN object
+        Get an ASN object.
         """
         url = "{}/autnum/{}".format(self.url, int(asn))
         # save reqest to get url for following entity lookups
         self._asn_req = self._get(url)
         return RdapAsn(self._asn_req.json(), self)
+
+    def get_ip(self, address):
+        """
+        Get an IP object.
+        """
+        url = "{}/ip/{}".format(self.url, address)
+        # save reqest to get url for following entity lookups
+        return RdapObject(self._get(url).json(), self)
 
     def get_entity_data(self, handle):
         """
