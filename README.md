@@ -46,7 +46,9 @@ optional arguments:
 
 ## Config file
 
-The client uses the `--home` option to point to a directory, which should have a `config.yaml` file in it, defaults shown below.
+The client uses the `--home` option to point to a directory, by default will check in order: `$RDAP_HOME`, `./.rdap`, `~/.rdap`, `~/.config/rdap`
+
+The directory should have a `config.yaml` file in it, defaults shown below.
 
 ```yaml
 rdap:
