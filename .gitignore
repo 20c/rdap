@@ -4,6 +4,7 @@
 .cache/
 .coverage
 .pytest_cache/
+.rdap/
 .tox
 Ctl/tmp
 coverage.xml
