@@ -8,9 +8,9 @@ def read_file(name):
 
 
 LONG_DESCRIPTION = read_file("README.md")
-VERSION = read_file("facsimile/VERSION")
-REQUIREMENTS = read_file("facsimile/requirements.txt").split('\n')
-TEST_REQUIREMENTS = read_file("facsimile/requirements-test.txt").split('\n')
+VERSION = read_file("Ctl/VERSION")
+REQUIREMENTS = read_file("Ctl/requirements.txt").split('\n')
+TEST_REQUIREMENTS = read_file("Ctl/requirements-test.txt").split('\n')
 
 
 setup(

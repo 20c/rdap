@@ -1,4 +1,4 @@
 include LICENSE
-recursive-include facsimile *.txt
+recursive-include Ctl *.txt
 recursive-include rdap *.py
-include facsimile/VERSION
+include Ctl/VERSION
