@@ -12,7 +12,7 @@ class RdapObject(object):
         self._parsed = dict()
 
     @property
-    def raw(self):
+    def data(self):
         return self._data
 
     @property

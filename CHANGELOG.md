@@ -3,8 +3,13 @@
 
 ## [Unreleased]
 ### Added
+- add --parse option to display the parsed output
+
 ### Fixed
 ### Changed
+- default CLI to display full data
+- rename `raw` to `data` on RdapObjects
+
 ### Deprecated
 ### Removed
 ### Security

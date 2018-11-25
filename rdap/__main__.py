@@ -41,6 +41,7 @@ def main(argv=None):
                         version="{}s version {}".format("%(prog)", rdap.__version__))
     parser.add_argument("--output-format", help="output format (yaml, json, text)")
     parser.add_argument("--show-requests", action="store_true", help="show all requests")
+    parser.add_argument("--parse", action="store_true", help="parse data into object before display")
 
     parser.add_argument('query', nargs='+')
     args = parser.parse_args(argv)
@@ -56,8 +57,11 @@ def main(argv=None):
 
     codec = munge.get_codec(output_format)()
     for each in argd['query']:
-        data = client.get(each).parsed()
-        print(codec.dumps(data))
+        obj = client.get(each)
+        if argd.get("parse", False):
+            print(codec.dumps(obj.parsed()))
+        else:
+            print(codec.dumps(obj.data))
 
     if argd.get("show_requests", False):
         print("# Requests")
