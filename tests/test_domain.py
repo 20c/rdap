@@ -1,5 +1,8 @@
+from rdap import RdapClient
 
-def test_rdap_domain_lookup(rdapc):
+
+def test_rdap_domain_lookup():
+    rdapc = RdapClient()
     rdapc.url = "https://rdap.test.norid.no"
     query = "norid-test.no"
     obj = rdapc.get_domain(query)
