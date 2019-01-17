@@ -3,6 +3,8 @@
 
 ## [Unreleased]
 ### Added
+- add config for request timeout, default to 0.5 seconds
+
 ### Fixed
 ### Changed
 ### Deprecated

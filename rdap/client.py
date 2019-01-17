@@ -91,6 +91,7 @@ class RdapClient(object):
 
         self._asn_req = None
         self._history = []
+        self.timeout = config.get("timeout", 0.5)
 
         self.http = requests.Session()
         self.http.auth = RdapRequestAuth(**dict(
@@ -100,7 +101,7 @@ class RdapClient(object):
         self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(rdap.__version__, self.http.headers["User-Agent"])
 
     def _get(self, url):
-        res = self.http.get(url)
+        res = self.http.get(url, timeout=self.timeout)
         for redir in res.history:
             self._history.append((strip_auth(redir.url), redir.status_code))
         self._history.append((strip_auth(res.url), res.status_code))

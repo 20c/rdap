@@ -60,6 +60,8 @@ rdap:
   lacnic_apikey: None
   # role types to recursively query when processing
   recurse_roles: ["administrative", "technical"]
+  # HTTP request timeout in seconds, used for both connect and read
+  timeout: 0.5
 ```
 
 
