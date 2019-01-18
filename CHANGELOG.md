@@ -3,15 +3,19 @@
 
 ## [Unreleased]
 ### Added
-- add config for request timeout, default to 0.5 seconds
-
 ### Fixed
 ### Changed
-- bump pytest-filedata to 0.4.0 for pytest4
-
 ### Deprecated
 ### Removed
 ### Security
+
+
+## [0.5.0] 2019-12-18
+### Added
+- add config for request timeout, default to 0.5 seconds
+
+### Changed
+- bump pytest-filedata to 0.4.0 for pytest4
 
 
 ## [0.4.0] 2018-11-25
