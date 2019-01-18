@@ -7,6 +7,8 @@
 
 ### Fixed
 ### Changed
+- bump pytest-filedata to 0.4.0 for pytest4
+
 ### Deprecated
 ### Removed
 ### Security
