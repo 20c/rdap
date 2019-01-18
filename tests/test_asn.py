@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import pytest
+import pytest_filedata
 
 from rdap import RdapAsn
 from rdap import RdapNotFoundError
@@ -31,7 +32,7 @@ def test_rdap_asn_lookup_no_client(rdapc):
     assert asn.parsed()
 
 
-@pytest.RequestsData("rdap") # XXX , real_http=True)
+@pytest_filedata.RequestsData("rdap") # XXX , real_http=True)
 def test_rdap_asn_lookup(rdapc, data_rdap_autnum):
     print(data_rdap_autnum.name)
     #asn = rdap.get_asn(205726)
