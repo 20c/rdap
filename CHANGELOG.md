@@ -4,6 +4,8 @@
 ## [Unreleased]
 ### Added
 ### Fixed
+- changed MANIFEST file to not include tmp dirs, #3
+
 ### Changed
 ### Deprecated
 ### Removed
