@@ -4,12 +4,15 @@
 ## [Unreleased]
 ### Added
 ### Fixed
-- changed MANIFEST file to not include tmp dirs, #3
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Security
+
+
+## [0.5.1] 2019-05-08
+### Fixed
+- changed MANIFEST file to not include tmp dirs, #3
 
 
 ## [0.5.0] 2019-12-18
