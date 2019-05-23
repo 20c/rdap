@@ -10,12 +10,13 @@ except ImportError:
     from urllib import urlencode
 
 import ipaddress
+from functools import lru_cache
 
 import requests
 
 import rdap
 from rdap.config import Config
-from rdap.objects import RdapAsn, RdapObject
+from rdap.objects import RdapAsn, RdapObject, RdapNetwork, RdapDomain, RdapEntity
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
@@ -156,6 +157,23 @@ class RdapClient(object):
 
         raise NotImplementedError("unknown query {}".format(query))
 
+    @lru_cache(maxsize=1024)
+    def get_rdap(self, url):
+        """
+        get RDAP information from an RDAP url and return an object form
+        """
+        data = self._get(url).json()
+        klasses = {
+            'entity': RdapEntity,
+            'domain': RdapDomain,
+            'ip network': RdapNetwork,
+        }
+        classname = data['objectClassName']
+        if classname in klasses:
+            return klasses[classname](data, self)
+        else:
+            raise NotImplementedError
+
     def get_asn(self, asn):
         """
         Get an ASN object.
@@ -170,14 +188,21 @@ class RdapClient(object):
         Get a domain object.
         """
         url = "{}/domain/{}".format(self.url, domain)
-        return RdapObject(self._get(url).json(), self)
+        return RdapDomain(self._get(url).json(), self)
 
     def get_ip(self, address):
         """
         Get an IP object.
         """
         url = "{}/ip/{}".format(self.url, address)
-        return RdapObject(self._get(url).json(), self)
+        return RdapNetwork(self._get(url).json(), self)
+
+    def get_entity(self, handle, base_url):
+        """
+        get entity information in object form
+        """
+        url = "{}/entity/{}".format(base_url, handle)
+        return RdapEntity(self._get(url).json(), self)
 
     def get_entity_data(self, handle):
         """
