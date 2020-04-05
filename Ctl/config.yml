@@ -9,6 +9,15 @@ ctl:
       config:
         repo_url: git@github.com:20c/rdap.git
 
+    - name: changelog
+      type: changelog
+
+    - name: pypi
+      type: pypi
+      config:
+        config_file: ~/.pypirc
+        sign: true
+
     - name: version
       type: version
       config:
