@@ -10,7 +10,6 @@ class RdapObject(object):
         self._rdapc = rdapc
         self._data = data
         self._parsed = dict()
-        self._parse()
 
     @property
     def data(self):
@@ -23,6 +22,22 @@ class RdapObject(object):
     @property
     def handle(self):
         return self._data['handle']
+
+    @property
+    def emails(self):
+        return self.parsed()['emails']
+
+    @property
+    def org_name(self):
+        return self.parsed()['org_name']
+
+    @property
+    def org_address(self):
+        return self.parsed()['org_address']
+
+    @property
+    def kind(self):
+        return self.parsed()['kind']
 
     def parsed(self):
         """
@@ -66,31 +81,6 @@ class RdapObject(object):
         return None
 
     def _parse(self):
-        """ parses data into our format """
-        name = self._data.get('name', '')
-        self._parsed = dict(
-            name=name,
-        )
-
-
-
-class RdapAsn(RdapObject):
-    """
-    access interface for lazy parsing of RDAP looked up aut-num objects
-    """
-    def __init__(self, data, rdapc=None):
-        super().__init__(data, rdapc)
-
-
-class RdapNetwork(RdapObject):
-    def __init__(self, data, rdapc=None):
-        super().__init__(data, rdapc)
-
-    @property
-    def emails(self):
-        return self.parsed()['emails']
-
-    def _parse(self):
         """ parses data into our format, and use entities for address info ?"""
         name = self._data.get('name', '')
         # emails done with a set to eat duplicates
@@ -103,7 +93,10 @@ class RdapNetwork(RdapObject):
             emails |= vcard.get('emails', set())
             roles = ent.get('roles', [])
             handle = ent.get('handle', None)
+            # try for link to 'self', if registry doesn't supply it, fall back to creating it.
             handle_url = self._parse_entity_self_link(ent)
+            if not handle_url:
+                handle_url = self._rdapc.get_entity_url(handle)
 
             if 'registrant' in roles:
                 if 'fn' in vcard:
@@ -119,12 +112,12 @@ class RdapNetwork(RdapObject):
             # if role is in settings to recurse, try to do a lookup
             if handle and self._rdapc:
                 if not self._rdapc.recurse_roles.isdisjoint(roles):
-                    rdata = self._rdapc.get_rdap(handle_url).data
+                    rdata = self._rdapc.get_data(handle_url)
                     vcard = self._parse_vcard(rdata)
                     emails |= vcard.get('emails', set())
 
         # WORKAROUND APNIC keeps org info in remarks
-        if 'apnic' in self._data.get('port43', None):
+        if 'apnic' in self._data.get('port43', ""):
             try:
                 for rem in self._data['remarks']:
                     if rem["title"] == "description":
@@ -141,6 +134,20 @@ class RdapNetwork(RdapObject):
         )
 
 
+
+class RdapAsn(RdapObject):
+    """
+    access interface for lazy parsing of RDAP looked up aut-num objects
+    """
+    def __init__(self, data, rdapc=None):
+        super().__init__(data, rdapc)
+
+
+class RdapNetwork(RdapObject):
+    def __init__(self, data, rdapc=None):
+        super().__init__(data, rdapc)
+
+
 class RdapDomain(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
@@ -149,40 +156,3 @@ class RdapDomain(RdapObject):
 class RdapEntity(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
-
-    @property
-    def emails(self):
-        return self.parsed()['emails']
-
-    @property
-    def kind(self):
-        return self.parsed()['kind']
-
-    def _parse(self):
-        """ parses data into our format """
-        # emails done with a set to eat duplicates
-        emails = set()
-
-        vcard = self._parse_vcard(self._data)
-        emails |= vcard.get('emails', set())
-
-        name = vcard.get('fn', None)
-        address = vcard.get('adr', None)
-        kind = vcard.get('kind', None)
-
-        # WORKAROUND APNIC keeps org info in remarks
-        if 'apnic' in self._data.get('port43', None):
-            try:
-                for rem in self._data['remarks']:
-                    if rem["title"] == "description":
-                        org_name = rem['description'][0]
-                        break
-            except KeyError:
-                pass
-
-        self._parsed = dict(
-            name=name,
-            emails=sorted(emails),
-            address=address,
-            kind=kind,
-        )

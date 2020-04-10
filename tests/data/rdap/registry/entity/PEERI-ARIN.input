@@ -1,0 +1,52 @@
+{
+  "rdapConformance" : [ "rdap_level_0" ],
+  "notices" : [ {
+    "title" : "Terms of Service",
+    "description" : [ "By using the ARIN RDAP/Whois service, you are agreeing to the RDAP/Whois Terms of Use" ],
+    "links" : [ {
+      "value" : "https://rdap.arin.net/registry/entity/PEERI-ARIN",
+      "rel" : "about",
+      "type" : "text/html",
+      "href" : "https://www.arin.net/resources/registry/whois/tou/"
+    } ]
+  }, {
+    "title" : "Whois Inaccuracy Reporting",
+    "description" : [ "If you see inaccuracies in the results, please visit: " ],
+    "links" : [ {
+      "value" : "https://rdap.arin.net/registry/entity/PEERI-ARIN",
+      "rel" : "about",
+      "type" : "text/html",
+      "href" : "https://www.arin.net/resources/registry/whois/inaccuracy_reporting/"
+    } ]
+  }, {
+    "title" : "Copyright Notice",
+    "description" : [ "Copyright 1997-2020, American Registry for Internet Numbers, Ltd." ]
+  } ],
+  "handle" : "PEERI-ARIN",
+  "vcardArray" : [ "vcard", [ [ "version", { }, "text", "4.0" ], [ "adr", {
+    "label" : "101 Park Ave.\r\n41st. floor\nNew York\nNY\n10178\nUnited States"
+  }, "text", [ "", "", "", "", "", "", "" ] ], [ "fn", { }, "text", "Peering" ], [ "org", { }, "text", "Peering" ], [ "kind", { }, "text", "group" ], [ "email", { }, "text", "peering@ntt.net" ], [ "tel", {
+    "type" : [ "work", "voice" ]
+  }, "text", "+1-877-688-6625" ] ] ],
+  "links" : [ {
+    "value" : "https://rdap.arin.net/registry/entity/PEERI-ARIN",
+    "rel" : "self",
+    "type" : "application/rdap+json",
+    "href" : "https://rdap.arin.net/registry/entity/PEERI-ARIN"
+  }, {
+    "value" : "https://rdap.arin.net/registry/entity/PEERI-ARIN",
+    "rel" : "alternate",
+    "type" : "application/xml",
+    "href" : "https://whois.arin.net/rest/poc/PEERI-ARIN"
+  } ],
+  "events" : [ {
+    "eventAction" : "last changed",
+    "eventDate" : "2020-01-07T13:05:54-05:00"
+  }, {
+    "eventAction" : "registration",
+    "eventDate" : "2006-09-05T19:36:06-04:00"
+  } ],
+  "status" : [ "validated" ],
+  "port43" : "whois.arin.net",
+  "objectClassName" : "entity"
+}

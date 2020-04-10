@@ -160,19 +160,25 @@ class RdapClient(object):
     @lru_cache(maxsize=1024)
     def get_rdap(self, url):
         """
-        get RDAP information from an RDAP url and return an object form
+        Get RDAP information from an full RDAP url and returns an object
+
+        Note: this relies on objectClassName which not all RDAP registries support.
         """
         data = self._get(url).json()
-        klasses = {
-            'entity': RdapEntity,
+        classes = {
+            'autnum': RdapAsn,
             'domain': RdapDomain,
+            'entity': RdapEntity,
             'ip network': RdapNetwork,
         }
-        classname = data['objectClassName']
-        if classname in klasses:
-            return klasses[classname](data, self)
+
+        classname = data.get('objectClassName', None)
+        if not classname:
+            raise NotImplementedError("query '{}' did not return an objectClassName".format(url))
+        if classname in classes:
+            return classes[classname](data, self)
         else:
-            raise NotImplementedError
+            raise NotImplementedError("Unknown objectClassName '{}' from '{}'".format(classname, url))
 
     def get_asn(self, asn):
         """
@@ -188,7 +194,7 @@ class RdapClient(object):
         Get a domain object.
         """
         url = "{}/domain/{}".format(self.url, domain)
-        return RdapDomain(self._get(url).json(), self)
+        return RdapAsn(self._get(url).json(), self)
 
     def get_ip(self, address):
         """
@@ -204,9 +210,11 @@ class RdapClient(object):
         url = "{}/entity/{}".format(base_url, handle)
         return RdapEntity(self._get(url).json(), self)
 
-    def get_entity_data(self, handle):
+    def get_entity_url(self, handle):
         """
-        get raw entity information, no need for an object
+        Get entity url for handle.
+
+        This fucntion must be able to handle doing recursive lookups to the current URL after a bootstrap redirect for registries that don't link 'self'
         """
         if self._asn_req:
             url = re.split("/autnum/", self._asn_req.url)[0]
@@ -214,4 +222,10 @@ class RdapClient(object):
             url = self.url
 
         url = "{}/entity/{}".format(url, handle)
+        return url
+
+    def get_data(self, url):
+        """
+        Get raw data and return it for when there's no need for parsing.
+        """
         return self._get(url).json()
