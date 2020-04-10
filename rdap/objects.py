@@ -35,6 +35,10 @@ class RdapObject(object):
     def org_address(self):
         return self.parsed()['org_address']
 
+    @property
+    def kind(self):
+        return self.parsed()['kind']
+
     def parsed(self):
         """
         returns parsed dict
@@ -42,14 +46,6 @@ class RdapObject(object):
         if not self._parsed:
             self._parse()
         return self._parsed
-
-
-class RdapAsn(RdapObject):
-    """
-    access interface for lazy parsing of RDAP looked up aut-num objects
-    """
-    def __init__(self, data, rdapc=None, **kwargs):
-        super(RdapAsn, self).__init__(data, rdapc, **kwargs)
 
     def _parse_vcard(self, data):
         """
@@ -66,6 +62,8 @@ class RdapAsn(RdapObject):
                         typ[3].strip().lower())
                 elif typ[0] == 'fn':
                     vcard[typ[0]] = typ[3].strip()
+                elif typ[0] == 'kind':
+                    vcard[typ[0]] = typ[3].strip()
                 elif typ[0] == 'adr':
                     # WORKAROUND ARIN uses label in the extra field
                     adr = typ[1].get('label', '').strip()
@@ -76,19 +74,29 @@ class RdapAsn(RdapObject):
                         vcard['adr'] = adr
         return vcard
 
+    def _parse_entity_self_link(self, entity):
+        for link in entity.get('links', []):
+            if link['rel'] == 'self':
+                return link['href']
+        return None
+
     def _parse(self):
-        """ parses data into our format """
+        """ parses data into our format, and use entities for address info ?"""
         name = self._data.get('name', '')
         # emails done with a set to eat duplicates
         emails = set()
         org_name = ''
         org_address = ''
 
-        for ent in self._data['entities']:
+        for ent in self._data.get('entities', []):
             vcard = self._parse_vcard(ent)
             emails |= vcard.get('emails', set())
             roles = ent.get('roles', [])
             handle = ent.get('handle', None)
+            # try for link to 'self', if registry doesn't supply it, fall back to creating it.
+            handle_url = self._parse_entity_self_link(ent)
+            if not handle_url:
+                handle_url = self._rdapc.get_entity_url(handle)
 
             if 'registrant' in roles:
                 if 'fn' in vcard:
@@ -104,12 +112,12 @@ class RdapAsn(RdapObject):
             # if role is in settings to recurse, try to do a lookup
             if handle and self._rdapc:
                 if not self._rdapc.recurse_roles.isdisjoint(roles):
-                    rdata = self._rdapc.get_entity_data(handle)
+                    rdata = self._rdapc.get_data(handle_url)
                     vcard = self._parse_vcard(rdata)
                     emails |= vcard.get('emails', set())
 
         # WORKAROUND APNIC keeps org info in remarks
-        if 'apnic' in self._data.get('port43', None):
+        if 'apnic' in self._data.get('port43', ""):
             try:
                 for rem in self._data['remarks']:
                     if rem["title"] == "description":
@@ -124,3 +132,27 @@ class RdapAsn(RdapObject):
             org_name=org_name,
             org_address=org_address,
         )
+
+
+
+class RdapAsn(RdapObject):
+    """
+    access interface for lazy parsing of RDAP looked up aut-num objects
+    """
+    def __init__(self, data, rdapc=None):
+        super().__init__(data, rdapc)
+
+
+class RdapNetwork(RdapObject):
+    def __init__(self, data, rdapc=None):
+        super().__init__(data, rdapc)
+
+
+class RdapDomain(RdapObject):
+    def __init__(self, data, rdapc=None):
+        super().__init__(data, rdapc)
+
+
+class RdapEntity(RdapObject):
+    def __init__(self, data, rdapc=None):
+        super().__init__(data, rdapc)

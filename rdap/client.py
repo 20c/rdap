@@ -10,12 +10,13 @@ except ImportError:
     from urllib import urlencode
 
 import ipaddress
+from functools import lru_cache
 
 import requests
 
 import rdap
 from rdap.config import Config
-from rdap.objects import RdapAsn, RdapObject
+from rdap.objects import RdapAsn, RdapObject, RdapNetwork, RdapDomain, RdapEntity
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
@@ -156,6 +157,29 @@ class RdapClient(object):
 
         raise NotImplementedError("unknown query {}".format(query))
 
+    @lru_cache(maxsize=1024)
+    def get_rdap(self, url):
+        """
+        Get RDAP information from an full RDAP url and returns an object
+
+        Note: this relies on objectClassName which not all RDAP registries support.
+        """
+        data = self._get(url).json()
+        classes = {
+            'autnum': RdapAsn,
+            'domain': RdapDomain,
+            'entity': RdapEntity,
+            'ip network': RdapNetwork,
+        }
+
+        classname = data.get('objectClassName', None)
+        if not classname:
+            raise NotImplementedError("query '{}' did not return an objectClassName".format(url))
+        if classname in classes:
+            return classes[classname](data, self)
+        else:
+            raise NotImplementedError("Unknown objectClassName '{}' from '{}'".format(classname, url))
+
     def get_asn(self, asn):
         """
         Get an ASN object.
@@ -170,18 +194,27 @@ class RdapClient(object):
         Get a domain object.
         """
         url = "{}/domain/{}".format(self.url, domain)
-        return RdapObject(self._get(url).json(), self)
+        return RdapAsn(self._get(url).json(), self)
 
     def get_ip(self, address):
         """
         Get an IP object.
         """
         url = "{}/ip/{}".format(self.url, address)
-        return RdapObject(self._get(url).json(), self)
+        return RdapNetwork(self._get(url).json(), self)
 
-    def get_entity_data(self, handle):
+    def get_entity(self, handle, base_url):
         """
-        get raw entity information, no need for an object
+        get entity information in object form
+        """
+        url = "{}/entity/{}".format(base_url, handle)
+        return RdapEntity(self._get(url).json(), self)
+
+    def get_entity_url(self, handle):
+        """
+        Get entity url for handle.
+
+        This fucntion must be able to handle doing recursive lookups to the current URL after a bootstrap redirect for registries that don't link 'self'
         """
         if self._asn_req:
             url = re.split("/autnum/", self._asn_req.url)[0]
@@ -189,4 +222,10 @@ class RdapClient(object):
             url = self.url
 
         url = "{}/entity/{}".format(url, handle)
+        return url
+
+    def get_data(self, url):
+        """
+        Get raw data and return it for when there's no need for parsing.
+        """
         return self._get(url).json()
