@@ -6,8 +6,8 @@ import re
 try:
     from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 except ImportError:
-    from urlparse import parse_qs, urlsplit, urlunsplit
-    from urllib import urlencode
+    from urllib.parse import parse_qs, urlsplit, urlunsplit
+    from urllib.parse import urlencode
 
 import ipaddress
 from functools import lru_cache
