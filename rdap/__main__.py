@@ -1,4 +1,4 @@
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 import argparse
 import sys
@@ -11,12 +11,12 @@ from rdap.config import Config
 
 def add_options(parser, options):
     for opt in options:
-        name = opt.pop('name')
+        name = opt.pop("name")
 
         # clicks is_flag
-        if 'is_flag' in opt:
-            del opt['is_flag']
-            opt['action'] = 'store_true'
+        if "is_flag" in opt:
+            del opt["is_flag"]
+            opt["action"] = "store_true"
 
         parser.add_argument(name, **opt)
 
@@ -25,7 +25,8 @@ class Context(munge.click.Context):
     """
     command line interface context
     """
-    app_name = 'rdap'
+
+    app_name = "rdap"
     config_class = Config
 
 
@@ -37,13 +38,20 @@ def main(argv=None):
 
     parser = argparse.ArgumentParser(description="rdap")
     add_options(parser, Context.option_list())
-    parser.add_argument("--version", action="version",
-                        version="{}s version {}".format("%(prog)", rdap.__version__))
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="{}s version {}".format("%(prog)", rdap.__version__),
+    )
     parser.add_argument("--output-format", help="output format (yaml, json, text)")
-    parser.add_argument("--show-requests", action="store_true", help="show all requests")
-    parser.add_argument("--parse", action="store_true", help="parse data into object before display")
+    parser.add_argument(
+        "--show-requests", action="store_true", help="show all requests"
+    )
+    parser.add_argument(
+        "--parse", action="store_true", help="parse data into object before display"
+    )
 
-    parser.add_argument('query', nargs='+')
+    parser.add_argument("query", nargs="+")
     args = parser.parse_args(argv)
 
     # get dict of options and update config
@@ -53,10 +61,10 @@ def main(argv=None):
     client = rdap.RdapClient(ctx.config)
     output_format = argd.get("output_format")
     if not output_format:
-        output_format = ctx.config.get_nested('rdap', 'output_format')
+        output_format = ctx.config.get_nested("rdap", "output_format")
 
     codec = munge.get_codec(output_format)()
-    for each in argd['query']:
+    for each in argd["query"]:
         obj = client.get(each)
         if argd.get("parse", False):
             print(codec.dumps(obj.parsed()))

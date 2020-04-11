@@ -1,5 +1,7 @@
 Unreleased:
-  added: []
+  added:
+  - black formatting
+  - more object types [#4]
   changed: []
   deprecated: []
   fixed: []
