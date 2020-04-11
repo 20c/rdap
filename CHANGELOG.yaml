@@ -3,7 +3,8 @@ Unreleased:
   changed: []
   deprecated: []
   fixed: []
-  removed: []
+  removed:
+  - python 2.7 and 3.4 support
   security: []
 0.2.0:
   added:
