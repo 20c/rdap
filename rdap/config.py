@@ -9,7 +9,7 @@ class Config(munge.Config):
     defaults = {
         "config": {
             "rdap": {
-                "bootstrap_url": "https://rdap.db.ripe.net/",
+                "bootstrap_url": "https://rdap.org/",
                 "output_format": "yaml",
                 "recurse_roles": ["administrative", "technical"],
                 "lacnic_apikey": None,

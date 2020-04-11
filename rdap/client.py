@@ -84,7 +84,7 @@ class RdapClient(object):
         elif isinstance(config, Config):
             config = config.get("rdap")
 
-        self.url = config.get("bootstrap_url", "https://rdap.db.ripe.net/").rstrip("/")
+        self.url = config.get("bootstrap_url", "https://rdap.org/").rstrip("/")
 
         # use setter
         self._recurse_roles = None

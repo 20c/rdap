@@ -2,7 +2,8 @@ Unreleased:
   added:
   - black formatting
   - more object types [#4]
-  changed: []
+  changed:
+  - default bootstrap_url to rdap.org
   deprecated: []
   fixed: []
   removed:

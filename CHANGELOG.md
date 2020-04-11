@@ -5,6 +5,8 @@
 ### Added
 - black formatting
 - more object types [#4]
+### Changed
+- default bootstrap_url to rdap.org
 ### Removed
 - python 2.7 and 3.4 support
 
