@@ -1,13 +1,15 @@
 Unreleased:
   added:
   - black formatting
-  - more object types [#4]
+  - more object types (#4)
+  - python 3.8 tests
   changed:
   - default bootstrap_url to rdap.org
   deprecated: []
   fixed: []
   removed:
-  - python 2.7 and 3.4 support
+  - python 2.7 support
+  - python 3.4 tests
   security: []
 0.2.0:
   added:

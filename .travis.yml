@@ -3,6 +3,7 @@ python:
   - 3.5
   - 3.6
   - 3.7
+  - 3.8
 branches:
   except:
     - gh-pages
@@ -12,8 +13,7 @@ before_install:
   - sudo apt-get -qq update
 install:
   - python -m pip install -U pip
-  - pip install -U setuptools
-  - pip install tox-travis codecov
+  - pip install -U setuptools tox-travis codecov
 script:
   - tox
 after_success:

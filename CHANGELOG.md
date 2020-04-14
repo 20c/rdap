@@ -4,11 +4,13 @@
 ## Unreleased
 ### Added
 - black formatting
-- more object types [#4]
+- more object types (#4)
+- python 3.8 tests
 ### Changed
 - default bootstrap_url to rdap.org
 ### Removed
-- python 2.7 and 3.4 support
+- python 2.7 support
+- python 3.4 tests
 
 
 ## 0.5.1
