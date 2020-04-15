@@ -1,4 +1,4 @@
-from builtins import object
+from rdap.exceptions import RdapNotFoundError
 
 
 class RdapObject(object):
@@ -139,6 +139,13 @@ class RdapAsn(RdapObject):
     """
 
     def __init__(self, data, rdapc=None):
+        # check for ASN range, meaning it's delegated and unallocated
+        if data:
+            start = data.get("startAutnum", None)
+            end = data.get("endAutnum", None)
+            if start and end and start != end:
+                raise RdapNotFoundError("AS{} returned a block, so it is not allocated".format(start))
+
         super().__init__(data, rdapc)
 
 

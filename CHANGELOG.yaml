@@ -42,6 +42,7 @@ Unreleased:
   added: []
   changed: []
   deprecated: []
-  fixed: []
+  fixed:
+  - better range check for unallocated ASNs
   removed: []
   security: []
