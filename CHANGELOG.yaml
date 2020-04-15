@@ -33,6 +33,8 @@
   - python 3.8 tests
   changed:
   - default bootstrap_url to rdap.org
+  fixed:
+  - sort lists for consistent tests (#7)
   removed:
   - python 2.7 support
   - python 3.4 tests

@@ -9,6 +9,8 @@
 - black formatting
 - more object types (#4)
 - python 3.8 tests
+### Fixed
+- sort lists for consistent tests (#7)
 ### Changed
 - default bootstrap_url to rdap.org
 ### Removed

@@ -17,4 +17,4 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture
 def rdapc():
-    return RdapClient()
+    return RdapClient({"timeout": 2.5})
