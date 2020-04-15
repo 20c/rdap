@@ -43,7 +43,8 @@
   - better range check for unallocated ASNs
 Unreleased:
   added: []
-  changed: []
+  changed:
+  - improved exception message for unallocated ASNs
   deprecated: []
   fixed: []
   removed: []
