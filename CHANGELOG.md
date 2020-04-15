@@ -4,6 +4,11 @@
 ## Unreleased
 
 
+## 1.0.1
+### Fixed
+- better range check for unallocated ASNs
+
+
 ## 1.0.0
 ### Added
 - black formatting

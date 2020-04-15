@@ -38,11 +38,13 @@
   removed:
   - python 2.7 support
   - python 3.4 tests
+1.0.1:
+  fixed:
+  - better range check for unallocated ASNs
 Unreleased:
   added: []
   changed: []
   deprecated: []
-  fixed:
-  - better range check for unallocated ASNs
+  fixed: []
   removed: []
   security: []
