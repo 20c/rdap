@@ -2,6 +2,9 @@
 
 
 ## Unreleased
+
+
+## 1.0.0
 ### Added
 - black formatting
 - more object types (#4)

@@ -1,16 +1,3 @@
-Unreleased:
-  added:
-  - black formatting
-  - more object types (#4)
-  - python 3.8 tests
-  changed:
-  - default bootstrap_url to rdap.org
-  deprecated: []
-  fixed: []
-  removed:
-  - python 2.7 support
-  - python 3.4 tests
-  security: []
 0.2.0:
   added:
   - moved recurse_roles to config
@@ -39,3 +26,20 @@ Unreleased:
 0.5.1:
   fixed:
   - 'changed MANIFEST file to not include tmp dirs, #3'
+1.0.0:
+  added:
+  - black formatting
+  - more object types (#4)
+  - python 3.8 tests
+  changed:
+  - default bootstrap_url to rdap.org
+  removed:
+  - python 2.7 support
+  - python 3.4 tests
+Unreleased:
+  added: []
+  changed: []
+  deprecated: []
+  fixed: []
+  removed: []
+  security: []
