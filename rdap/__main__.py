@@ -60,7 +60,7 @@ def main(argv=None):
 
     client = rdap.RdapClient(ctx.config)
     output_format = argd.get("output_format")
-    if not output_format:
+    if not output_format or output_format not in ('yaml', 'json', 'text'):
         output_format = ctx.config.get_nested("rdap", "output_format")
 
     codec = munge.get_codec(output_format)()
