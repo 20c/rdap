@@ -14,6 +14,7 @@ from functools import lru_cache
 
 import requests
 from requests.packages.urllib3.util.ssl_ import create_urllib3_context
+from requests.adapters import HTTPAdapter
 
 import rdap
 from rdap.config import Config
