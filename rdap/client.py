@@ -13,11 +13,57 @@ import ipaddress
 from functools import lru_cache
 
 import requests
+from requests.packages.urllib3.util.ssl_ import create_urllib3_context
 
 import rdap
 from rdap.config import Config
 from rdap.objects import RdapAsn, RdapObject, RdapNetwork, RdapDomain, RdapEntity
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
+
+
+class NoDHKexAdapter(HTTPAdapter):
+    """A TransportAdapter that disables DH Key Exchanges globally
+
+    By default, this Adapter will:
+        - Disable DH KEX
+        - Enabled ECC DH
+
+    To disable DH entirely (not recommended):
+        NoDHKexAdapter(permit_ecdh=False)
+
+    Use-case
+    ========
+
+    This is a peculiar thing to do, but is useful for using APIs that
+    use the RDAP protocol. This is because ARIN still does not have a
+    modern (>1024-bit) DH key, causing OpenSSL to hard fail. This can
+    not be "ignored" with something like `verify=False` as there is a
+    hard check in OpenSSL native code that bombs out in the case of a
+    DH key that is not greater than 1024
+
+    When disabling DH and forcing ECDH, rdap.arin.net will work as the
+    EC DH key is of sufficient size. If your system has a reasonably
+    secure configuration, disabling DH and forcing EC DH should not have
+    any security consequences. However, it may have raise some issues
+    with compatibility based on what other RDAP servers are using
+
+    """
+
+    def __init__(self, permit_ecdh=True):
+        print('Overriding HTTPAdapter')
+        self._append_cipher_string = ':!DHE{}'.format(':+ECDHE' if permit_ecdh is True else '')
+        self._custom_cipher_string = requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS + self._append_cipher_string
+        super().__init__()
+
+    def init_poolmanager(self, *args, **kwargs):
+        context = create_urllib3_context(ciphers=self._custom_cipher_string)
+        kwargs['ssl_context'] = context
+        return super().init_poolmanager(*args, **kwargs)
+
+    def proxy_manager_for(self, *args, **kwargs):
+        context = create_urllib3_context(ciphers=self._custom_cipher_string)
+        kwargs['ssl_context'] = context
+        return super().proxy_manager_for(*args, **kwargs)
 
 
 class RdapRequestAuth(requests.auth.AuthBase):
@@ -97,6 +143,10 @@ class RdapClient(object):
         self.timeout = config.get("timeout", 0.5)
 
         self.http = requests.Session()
+        # DH key is too small for modern SSL/TLS libraries on some RDAP
+        # servers, I believe ARIN. This adapter just disables DH ciphers,
+        # it's the cleanest solution I've found for the issue
+        self.http.mount('https://', NoDHKexAdapter())
         self.http.auth = RdapRequestAuth(
             **dict(lacnic_apikey=config.get("lacnic_apikey", None),)
         )
