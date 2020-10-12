@@ -26,7 +26,7 @@ class NoDHKexAdapter(HTTPAdapter):
 
     By default, this Adapter will:
         - Disable DH KEX
-        - Enabled ECC DH
+        - Enable ECC DH
 
     To disable DH entirely (not recommended):
         NoDHKexAdapter(permit_ecdh=False)
