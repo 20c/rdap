@@ -51,7 +51,6 @@ class NoDHKexAdapter(HTTPAdapter):
     """
 
     def __init__(self, permit_ecdh=True):
-        print('Overriding HTTPAdapter')
         self._append_cipher_string = ':!DHE{}'.format(':+ECDHE' if permit_ecdh is True else '')
         self._custom_cipher_string = requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS + self._append_cipher_string
         super().__init__()
