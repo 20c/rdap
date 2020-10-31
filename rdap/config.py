@@ -13,7 +13,7 @@ class Config(munge.Config):
                 "output_format": "yaml",
                 "recurse_roles": ["administrative", "technical"],
                 "lacnic_apikey": None,
-                "timeout": 0.5,
+                "timeout": 2.5,
             },
         },
         "codec": "yaml",
