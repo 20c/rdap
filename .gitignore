@@ -6,6 +6,7 @@
 .pytest_cache/
 .rdap/
 .tox
+.venv
 Ctl/tmp
 coverage.xml
 dist/
