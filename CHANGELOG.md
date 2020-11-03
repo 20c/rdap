@@ -4,6 +4,17 @@
 ## Unreleased
 
 
+## 1.1.0
+### Added
+- python 3.9
+### Fixed
+- ignore not found on nested handle lookups
+### Changed
+- improved exception message for unallocated ASNs
+### Removed
+- python 3.5
+
+
 ## 1.0.1
 ### Fixed
 - better range check for unallocated ASNs
