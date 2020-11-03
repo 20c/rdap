@@ -42,10 +42,13 @@
   fixed:
   - better range check for unallocated ASNs
 Unreleased:
-  added: []
+  added:
+  - python 3.9
   changed:
   - improved exception message for unallocated ASNs
   deprecated: []
-  fixed: []
-  removed: []
+  fixed:
+  - ignore not found on nested handle lookups
+  removed:
+  - python 3.5
   security: []
