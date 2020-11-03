@@ -1,6 +1,6 @@
 import pytest
 
-from rdap.__main__ import main
+from rdap.cli import main
 
 
 def test_usage():
