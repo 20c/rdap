@@ -94,7 +94,7 @@ class RdapClient(object):
 
         self._asn_req = None
         self._history = []
-        self.timeout = config.get("timeout", 0.5)
+        self.timeout = config.get("timeout")
 
         self.http = requests.Session()
         self.http.auth = RdapRequestAuth(

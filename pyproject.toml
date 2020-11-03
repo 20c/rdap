@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "rdap"
+version = "1.0.1.1"
+description = "Registration Data Access Protocol tools"
+authors = ["20C <code@20c.com>"]
+readme = "README.md"
+license = "Apache-2.0"
+
+repository = "https://github.com/20c/rdap"
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console (Text Based)",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries",
+]
+
+
+[tool.poetry.scripts]
+rdap = "rdap.cli:main"
+
+
+[tool.poetry.dependencies]
+python = "^3.6"
+munge = "^1.0.0"
+
+
+[tool.poetry.dev-dependencies]
+codecov = "^2.1.10"
+coverage = "^5.3"
+pytest = "^6.1.2"
+pytest-cov = "^2.10.1"
+pytest-filedata = "^0.4.0"
+tox = "^3.20.1"
+bandit = "^1.6.2"
+
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

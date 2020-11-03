@@ -111,9 +111,13 @@ class RdapObject(object):
             # if role is in settings to recurse, try to do a lookup
             if handle and self._rdapc:
                 if not self._rdapc.recurse_roles.isdisjoint(roles):
-                    rdata = self._rdapc.get_data(handle_url)
-                    vcard = self._parse_vcard(rdata)
-                    emails |= vcard.get("emails", set())
+                    try:
+                        rdata = self._rdapc.get_data(handle_url)
+                        vcard = self._parse_vcard(rdata)
+                        emails |= vcard.get("emails", set())
+                    # skip not found, nic.br LGDP doesn't allow handle lookup
+                    except RdapNotFoundError:
+                        pass
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
