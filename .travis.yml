@@ -13,7 +13,8 @@ before_install:
   - sudo apt-get -qq update
 install:
   - python -m pip install -U pip
-  - pip install -U setuptools tox-travis codecov
+  - pip install -U setuptools poetry
+  - pip install -U tox-travis codecov
 script:
   - tox
 after_success:
