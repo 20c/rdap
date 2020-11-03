@@ -10,7 +10,7 @@ repository = "https://github.com/20c/rdap"
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "Environment :: Console (Text Based)",
+    "Environment :: Console",
     "Topic :: Internet",
     "Topic :: Software Development :: Libraries",
 ]
