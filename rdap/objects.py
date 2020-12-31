@@ -1,7 +1,7 @@
 from rdap.exceptions import RdapNotFoundError
 
 
-class RdapObject(object):
+class RdapObject:
     """
     RDAP base object, allows for lazy parsing
     """
@@ -148,7 +148,7 @@ class RdapAsn(RdapObject):
             start = data.get("startAutnum", None)
             end = data.get("endAutnum", None)
             if start and end and start != end:
-                raise RdapNotFoundError("Query returned a block ({} - {}), AS is reported not allocated".format(start, end))
+                raise RdapNotFoundError(f"Query returned a block ({start} - {end}), AS is reported not allocated")
 
         super().__init__(data, rdapc)
 
