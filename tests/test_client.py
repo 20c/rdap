@@ -29,3 +29,8 @@ def test_lacnic_bad_apikey():
 
 def test_lacnic_no_apikey(rdapc):
     assert rdapc.get_asn(28001).parsed()
+
+
+def test_ignore_recurse_errors():
+    rdapc = client.RdapClient(dict(lacnic_apikey="12345", ignore_recurse_errors=True))
+    rdapc.get_asn(28001).parsed()

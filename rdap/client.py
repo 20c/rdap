@@ -76,6 +76,8 @@ class RdapClient:
         elif isinstance(config, Config):
             config = config.get("rdap")
 
+        self.config = config
+
         self.url = config.get("bootstrap_url", "https://rdap.org/").rstrip("/")
 
         # use setter

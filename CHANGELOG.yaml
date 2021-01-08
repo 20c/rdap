@@ -51,7 +51,8 @@
   removed:
   - python 3.5
 Unreleased:
-  added: []
+  added:
+  - option to ignore recurse errors
   changed: []
   deprecated: []
   fixed: []
