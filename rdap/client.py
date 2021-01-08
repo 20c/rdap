@@ -1,14 +1,8 @@
 import re
 
-# import for either Python 2 or 3
-try:
-    from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
-except ImportError:
-    from urllib.parse import parse_qs, urlsplit, urlunsplit
-    from urllib.parse import urlencode
-
 import ipaddress
 from functools import lru_cache
+from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 
 import requests
 
