@@ -1,6 +1,7 @@
 from __future__ import absolute_import, division, print_function
-from builtins import object, str
+
 import re
+from builtins import object, str
 
 # import for either Python 2 or 3
 try:
@@ -16,8 +17,9 @@ import requests
 
 import rdap
 from rdap.config import Config
-from rdap.objects import RdapAsn, RdapObject, RdapNetwork, RdapDomain, RdapEntity
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
+from rdap.objects import (RdapAsn, RdapDomain, RdapEntity, RdapNetwork,
+                          RdapObject)
 
 
 class RdapRequestAuth(requests.auth.AuthBase):

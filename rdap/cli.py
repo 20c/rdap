@@ -5,6 +5,7 @@ import sys
 
 import munge
 import munge.click
+
 import rdap
 from rdap.config import Config
 

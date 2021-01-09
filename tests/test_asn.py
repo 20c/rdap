@@ -1,8 +1,7 @@
 import pytest
 import pytest_filedata
 
-from rdap import RdapAsn
-from rdap import RdapNotFoundError
+from rdap import RdapAsn, RdapNotFoundError
 
 
 def assert_parsed(data, parsed):

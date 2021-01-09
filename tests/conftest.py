@@ -1,9 +1,9 @@
 import os
+
 import pytest
 import pytest_filedata
 
 from rdap import RdapClient
-
 
 pytest_filedata.setup(os.path.dirname(__file__))
 
