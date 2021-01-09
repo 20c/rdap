@@ -98,7 +98,9 @@ class RdapClient(object):
 
         self.http = requests.Session()
         self.http.auth = RdapRequestAuth(
-            **dict(lacnic_apikey=config.get("lacnic_apikey", None),)
+            **dict(
+                lacnic_apikey=config.get("lacnic_apikey", None),
+            )
         )
 
         self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(

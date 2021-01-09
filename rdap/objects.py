@@ -148,7 +148,11 @@ class RdapAsn(RdapObject):
             start = data.get("startAutnum", None)
             end = data.get("endAutnum", None)
             if start and end and start != end:
-                raise RdapNotFoundError("Query returned a block ({} - {}), AS is reported not allocated".format(start, end))
+                raise RdapNotFoundError(
+                    "Query returned a block ({} - {}), AS is reported not allocated".format(
+                        start, end
+                    )
+                )
 
         super().__init__(data, rdapc)
 
