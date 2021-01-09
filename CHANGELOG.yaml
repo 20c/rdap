@@ -55,5 +55,6 @@ Unreleased:
   changed: []
   deprecated: []
   fixed: []
-  removed: []
+  removed:
+  - python 2 cruft
   security: []

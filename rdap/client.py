@@ -1,16 +1,8 @@
-from __future__ import absolute_import, division, print_function
-from builtins import object, str
 import re
-
-# import for either Python 2 or 3
-try:
-    from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
-except ImportError:
-    from urllib.parse import parse_qs, urlsplit, urlunsplit
-    from urllib.parse import urlencode
 
 import ipaddress
 from functools import lru_cache
+from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 
 import requests
 
@@ -70,7 +62,7 @@ def strip_auth(url):
     return url
 
 
-class RdapClient(object):
+class RdapClient:
     """
     Client to do RDAP queries against defined bootstrap URL.
     """
@@ -161,7 +153,7 @@ class RdapClient(object):
         if "." in qstr:
             return self.get_domain(qstr)
 
-        raise NotImplementedError("unknown query {}".format(query))
+        raise NotImplementedError(f"unknown query {query}")
 
     @lru_cache(maxsize=1024)
     def get_rdap(self, url):
@@ -181,13 +173,13 @@ class RdapClient(object):
         classname = data.get("objectClassName", None)
         if not classname:
             raise NotImplementedError(
-                "query '{}' did not return an objectClassName".format(url)
+                f"query '{url}' did not return an objectClassName"
             )
         if classname in classes:
             return classes[classname](data, self)
         else:
             raise NotImplementedError(
-                "Unknown objectClassName '{}' from '{}'".format(classname, url)
+                f"Unknown objectClassName '{classname}' from '{url}'"
             )
 
     def get_asn(self, asn):
@@ -203,21 +195,21 @@ class RdapClient(object):
         """
         Get a domain object.
         """
-        url = "{}/domain/{}".format(self.url, domain)
+        url = f"{self.url}/domain/{domain}"
         return RdapAsn(self._get(url).json(), self)
 
     def get_ip(self, address):
         """
         Get an IP object.
         """
-        url = "{}/ip/{}".format(self.url, address)
+        url = f"{self.url}/ip/{address}"
         return RdapNetwork(self._get(url).json(), self)
 
     def get_entity(self, handle, base_url):
         """
         get entity information in object form
         """
-        url = "{}/entity/{}".format(base_url, handle)
+        url = f"{base_url}/entity/{handle}"
         return RdapEntity(self._get(url).json(), self)
 
     def get_entity_url(self, handle):
@@ -231,7 +223,7 @@ class RdapClient(object):
         else:
             url = self.url
 
-        url = "{}/entity/{}".format(url, handle)
+        url = f"{url}/entity/{handle}"
         return url
 
     def get_data(self, url):
