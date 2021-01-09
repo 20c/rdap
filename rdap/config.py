@@ -11,6 +11,7 @@ class Config(munge.Config):
             "rdap": {
                 "bootstrap_url": "https://rdap.org/",
                 "output_format": "yaml",
+                "ignore_recurse_errors": False,
                 "recurse_roles": ["administrative", "technical"],
                 "lacnic_apikey": None,
                 "timeout": 5,

@@ -1,4 +1,4 @@
-from rdap.exceptions import RdapNotFoundError
+from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
 class RdapObject:
@@ -115,9 +115,12 @@ class RdapObject:
                         rdata = self._rdapc.get_data(handle_url)
                         vcard = self._parse_vcard(rdata)
                         emails |= vcard.get("emails", set())
-                    # skip not found, nic.br LGDP doesn't allow handle lookup
-                    except RdapNotFoundError:
-                        pass
+
+                    # check for HTTP Errors to ignore
+                    except RdapHTTPError:
+                        if not self._rdapc.config.get("ignore_recurse_errors"):
+                            raise
+
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
