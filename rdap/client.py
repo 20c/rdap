@@ -18,8 +18,7 @@ import requests
 import rdap
 from rdap.config import Config
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
-from rdap.objects import (RdapAsn, RdapDomain, RdapEntity, RdapNetwork,
-                          RdapObject)
+from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork, RdapObject
 
 
 class RdapRequestAuth(requests.auth.AuthBase):
