@@ -1,11 +1,28 @@
+import json
 import os
+
 import pytest
 import pytest_filedata
 
+import rdap
 from rdap import RdapClient
 
 
-pytest_filedata.setup(os.path.dirname(__file__))
+def _this_dir():
+    """
+    returns dirname for location of this file
+    py.test no longer allows fixtures to be called
+    directly so we provide a private function that can be
+    """
+    return os.path.dirname(__file__)
+
+
+@pytest.fixture
+def this_dir():
+    return _this_dir()
+
+
+pytest_filedata.setup(_this_dir())
 
 
 def pytest_generate_tests(metafunc):
@@ -16,5 +33,13 @@ def pytest_generate_tests(metafunc):
 
 
 @pytest.fixture
+def iana_asn():
+    asn_file = os.path.join(_this_dir(), "data/iana/asn.json")
+    with open(asn_file) as fh:
+        data = json.load(fh)
+        return data
+
+
+@pytest.fixture
 def rdapc():
-    return RdapClient({"timeout": 10})
+    return rdap.RdapClient({"timeout": 10})

@@ -1,8 +1,7 @@
 import pytest
 import pytest_filedata
 
-from rdap import RdapAsn
-from rdap import RdapNotFoundError
+from rdap import RdapAsn, RdapNotFoundError
 
 
 def assert_parsed(data, parsed):
@@ -32,6 +31,11 @@ def test_rdap_asn_lookup_no_client(rdapc):
     # force null the client
     asn._rdapc = None
     assert asn.parsed()
+
+
+def test_get_rdap(rdapc):
+    obj = rdapc.get_rdap("https://rdap.arin.net/registry/autnum/63311")
+    assert type(obj) == RdapAsn
 
 
 @pytest_filedata.RequestsData("rdap")  # XXX , real_http=True)

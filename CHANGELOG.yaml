@@ -53,6 +53,7 @@
 Unreleased:
   added:
   - option to ignore recurse errors
+  - option to self bootstrap
   changed: []
   deprecated: []
   fixed: []

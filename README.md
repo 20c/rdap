@@ -54,6 +54,12 @@ The directory should have a `config.yaml` file in it, defaults shown below.
 rdap:
   # URL to bootstrap the initial request off
   bootstrap_url: https://rdap.db.ripe.net/
+  # boolean to use data from bootstrap_data_url instead of a bootstrap server
+  self_bootstrap: False
+  # url to load bootstrap data from
+  bootstrap_data_url: "https://data.iana.org/rdap/"
+  # length of time in hours to keep bootstrap data
+  bootstrap_cache_ttl: 25
   # how to format the output
   output_format: yaml
   # API key for use at rdap.lacnic.net

@@ -121,7 +121,6 @@ class RdapObject:
                         if not self._rdapc.config.get("ignore_recurse_errors"):
                             raise
 
-
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
             try:
@@ -151,7 +150,9 @@ class RdapAsn(RdapObject):
             start = data.get("startAutnum", None)
             end = data.get("endAutnum", None)
             if start and end and start != end:
-                raise RdapNotFoundError(f"Query returned a block ({start} - {end}), AS is reported not allocated")
+                raise RdapNotFoundError(
+                    f"Query returned a block ({start} - {end}), AS is reported not allocated"
+                )
 
         super().__init__(data, rdapc)
 
