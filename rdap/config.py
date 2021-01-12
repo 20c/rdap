@@ -10,6 +10,9 @@ class Config(munge.Config):
         "config": {
             "rdap": {
                 "bootstrap_url": "https://rdap.org/",
+                "self_bootstrap": False,
+                "bootstrap_data_url": "https://data.iana.org/rdap/",
+                "bootstrap_cache_ttl": 25,
                 "output_format": "yaml",
                 "ignore_recurse_errors": False,
                 "recurse_roles": ["administrative", "technical"],

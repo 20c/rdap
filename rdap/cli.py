@@ -3,6 +3,7 @@ import sys
 
 import munge
 import munge.click
+
 import rdap
 from rdap.config import Config
 
@@ -48,6 +49,11 @@ def main(argv=None):
     parser.add_argument(
         "--parse", action="store_true", help="parse data into object before display"
     )
+    parser.add_argument(
+        "--write-bootstrap-data",
+        action="store_true",
+        help="write bootstrap data for type",
+    )
 
     parser.add_argument("query", nargs="+")
     args = parser.parse_args(argv)
@@ -61,6 +67,11 @@ def main(argv=None):
     if not output_format:
         output_format = ctx.config.get_nested("rdap", "output_format")
 
+    if argd.get("write_bootstrap_data"):
+        for each in argd["query"]:
+            client.write_bootstrap_data(each)
+        return 0
+
     codec = munge.get_codec(output_format)()
     for each in argd["query"]:
         obj = client.get(each)
@@ -73,6 +84,8 @@ def main(argv=None):
         print("# Requests")
         for each in client.history:
             print("{} {}".format(*each))
+
+    return 0
 
 
 if __name__ == "__main__":

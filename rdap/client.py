@@ -1,15 +1,18 @@
-import re
-
 import ipaddress
+import json
+import os
+import re
+import time
 from functools import lru_cache
 from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 
 import requests
 
 import rdap
+import rdap.bootstrap
 from rdap.config import Config
-from rdap.objects import RdapAsn, RdapObject, RdapNetwork, RdapDomain, RdapEntity
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
+from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork, RdapObject
 
 
 class RdapRequestAuth(requests.auth.AuthBase):
@@ -64,21 +67,36 @@ def strip_auth(url):
 
 class RdapClient:
     """
-    Client to do RDAP queries against defined bootstrap URL.
+    Client to do RDAP queries.
     """
 
-    def __init__(self, config=None):
+    def __init__(self, config=None, config_dir=None):
         """
+        Initialize an RdapClient.
+
         config is a dict or rdap.config.Config object
+        config_dir is a string pointing to a config directory
         """
-        if not config:
+        if config:
+            if config_dir:
+                raise ValueError("Cannot pass config and config_dir")
+
+            if isinstance(config, Config):
+                self.config_dir = config.meta.get("config_dir", None)
+                config = config.get("rdap")
+
+        elif config_dir:
+            config = Config(read=config_dir).get("rdap")
+            self.config_dir = config_dir
+
+        else:
+            self.config_dir = None
             config = dict()
-        elif isinstance(config, Config):
-            config = config.get("rdap")
 
         self.config = config
 
         self.url = config.get("bootstrap_url", "https://rdap.org/").rstrip("/")
+        self.self_bootstrap = config.get("self_bootstrap")
 
         # use setter
         self._recurse_roles = None
@@ -88,11 +106,14 @@ class RdapClient:
 
         self._asn_req = None
         self._history = []
+        self._asn_tree = None
         self.timeout = config.get("timeout")
 
         self.http = requests.Session()
         self.http.auth = RdapRequestAuth(
-            **dict(lacnic_apikey=config.get("lacnic_apikey", None),)
+            **dict(
+                lacnic_apikey=config.get("lacnic_apikey", None),
+            )
         )
 
         self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(
@@ -114,6 +135,66 @@ class RdapClient:
         if res.status_code == 404:
             raise RdapNotFoundError(msg)
         raise RdapHTTPError(msg)
+
+    def asn_url(self, asn):
+        """Gets the correct url for specified ASN."""
+        if not self.self_bootstrap:
+            return self.url
+
+        if not self._asn_tree:
+            self._asn_tree = rdap.bootstrap.AsnTree(self.get_bootstrap_data("asn"))
+        return self._asn_tree.get_service(asn).url
+
+    def fetch_bootstrap_data(self, typ):
+        "Fetches bootstrap data in json."
+        # TODO - check modified header
+        return self._get(self.config.get("bootstrap_data_url") + f"{typ}.json").json()
+
+    def get_bootstrap_data(self, typ):
+        """Checks for a local cache, fetches bootstrap data and returns it."""
+
+        data_dir = os.path.join(self.config_dir, "bootstrap")
+        data_file = os.path.join(data_dir, f"{typ}.json")
+
+        try:
+            cache_age = time.time() - self.config.get("bootstrap_cache_ttl") * 3600
+            if os.path.getmtime(data_file) > cache_age:
+                with open(data_file) as fh:
+                    return json.load(fh)
+
+        except FileNotFoundError:
+            pass
+
+        data = self.fetch_bootstrap_data(typ)
+
+        # no cache if there's no config_dir
+        if not self.config_dir:
+            return data
+
+        if not os.path.isdir(data_dir):
+            os.mkdir(data_dir)
+
+        with open(data_file, "w") as fh:
+            json.dump(data, fh, separators=(",", ":"))
+        return data
+
+    def write_bootstrap_data(self, typ):
+        """Fetches and writes bootstrap data."""
+
+        if not self.config_dir:
+            raise ValueError("config dir is not set")
+
+        data = self.fetch_bootstrap_data(typ)
+
+        data_dir = os.path.join(self.config_dir, "bootstrap")
+
+        if not os.path.isdir(data_dir):
+            os.mkdir(data_dir)
+
+        data_file = os.path.join(data_dir, f"{typ}.json")
+        print(f"writing {data_file}")
+        with open(data_file, "w") as fh:
+            json.dump(data, fh, separators=(",", ":"))
 
     @property
     def history(self):
@@ -188,7 +269,8 @@ class RdapClient:
         """
         Get an ASN object.
         """
-        url = "{}/autnum/{}".format(self.url, int(asn))
+        asn = int(asn)
+        url = "{}/autnum/{}".format(self.asn_url(asn), asn)
         # save reqest to get url for following entity lookups
         self._asn_req = self._get(url)
         return RdapAsn(self._asn_req.json(), self)
