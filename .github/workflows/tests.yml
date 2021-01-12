@@ -73,5 +73,10 @@ jobs:
       - name: Run tests
         run: |
           source .venv/bin/activate
-          pytest -vv --cov-report=term-missing --cov=rdap tests/
+          pytest -vv --cov-report=term-missing --cov=rdap --cov-report=xml tests/
           coverage report
+    - name: Upload coverage
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: true
