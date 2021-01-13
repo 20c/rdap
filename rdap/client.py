@@ -84,6 +84,8 @@ class RdapClient:
             if isinstance(config, Config):
                 self.config_dir = config.meta.get("config_dir", None)
                 config = config.get("rdap")
+            else:
+                self.config_dir = None
 
         elif config_dir:
             config = Config(read=config_dir).get("rdap")
@@ -97,6 +99,11 @@ class RdapClient:
 
         self.url = config.get("bootstrap_url", "https://rdap.org/").rstrip("/")
         self.self_bootstrap = config.get("self_bootstrap")
+
+        # check for explicit bootstrap dir, otherwise set it to config_dir/bootstrap
+        self.bootstrap_dir = config.get("bootstrap_dir")
+        if not self.bootstrap_dir and self.config_dir:
+            self.bootstrap_dir = os.path.join(self.config_dir, "bootstrap")
 
         # use setter
         self._recurse_roles = None
@@ -148,31 +155,29 @@ class RdapClient:
     def fetch_bootstrap_data(self, typ):
         "Fetches bootstrap data in json."
         # TODO - check modified header
-        return self._get(self.config.get("bootstrap_data_url") + f"{typ}.json").json()
+        return self._get(self.config.get("bootstrap_data_url", "https://data.iana.org/rdap/") + f"{typ}.json").json()
 
     def get_bootstrap_data(self, typ):
         """Checks for a local cache, fetches bootstrap data and returns it."""
 
-        data_dir = os.path.join(self.config_dir, "bootstrap")
-        data_file = os.path.join(data_dir, f"{typ}.json")
-
         try:
+            data_file = os.path.join(self.bootstrap_dir, f"{typ}.json")
             cache_age = time.time() - self.config.get("bootstrap_cache_ttl") * 3600
             if os.path.getmtime(data_file) > cache_age:
                 with open(data_file) as fh:
                     return json.load(fh)
 
-        except FileNotFoundError:
+        except (FileNotFoundError, TypeError):
             pass
 
         data = self.fetch_bootstrap_data(typ)
 
-        # no cache if there's no config_dir
-        if not self.config_dir:
+        # no cache if there's no bootstrap_dir
+        if not self.bootstrap_dir:
             return data
 
-        if not os.path.isdir(data_dir):
-            os.mkdir(data_dir)
+        if not os.path.isdir(self.bootstrap_dir):
+            os.mkdir(self.bootstrap_dir)
 
         with open(data_file, "w") as fh:
             json.dump(data, fh, separators=(",", ":"))
@@ -181,17 +186,15 @@ class RdapClient:
     def write_bootstrap_data(self, typ):
         """Fetches and writes bootstrap data."""
 
-        if not self.config_dir:
-            raise ValueError("config dir is not set")
+        if not self.bootstrap_dir:
+            raise ValueError("bootstrap dir is not set")
 
         data = self.fetch_bootstrap_data(typ)
 
-        data_dir = os.path.join(self.config_dir, "bootstrap")
+        if not os.path.isdir(self.bootstrap_dir):
+            os.mkdir(self.bootstrap_dir)
 
-        if not os.path.isdir(data_dir):
-            os.mkdir(data_dir)
-
-        data_file = os.path.join(data_dir, f"{typ}.json")
+        data_file = os.path.join(self.bootstrap_dir, f"{typ}.json")
         print(f"writing {data_file}")
         with open(data_file, "w") as fh:
             json.dump(data, fh, separators=(",", ":"))

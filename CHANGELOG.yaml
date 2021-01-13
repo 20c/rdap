@@ -54,6 +54,7 @@ Unreleased:
   added:
   - option to ignore recurse errors
   - option to self bootstrap
+  - add config option for bootstrap_dir
   changed: []
   deprecated: []
   fixed: []
