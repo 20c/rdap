@@ -25,6 +25,7 @@ def test_lacnic_bad_apikey():
     rdapc = client.RdapClient(dict(lacnic_apikey="12345"))
     with pytest.raises(RdapHTTPError) as excinfo:
         rdapc.get_asn(28001).parsed()
+    assert "returned 400" in str(excinfo.value)
 
 
 def test_lacnic_no_apikey(rdapc):

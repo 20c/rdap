@@ -19,6 +19,7 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+          # virtualenvs-path: ~/.venv
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v2
@@ -32,7 +33,10 @@ jobs:
       - name: Run linters
         run: |
           source .venv/bin/activate
-          black --version
+          # can't flake . since the .venv is in the pwd
+          # flake8 rdap/
+          # flake8 tests/
+          flake8 .
           black . --check
           isort .
 
