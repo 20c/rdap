@@ -4,6 +4,13 @@
 ## Unreleased
 
 
+## 1.2.1
+### Fixed
+- bootstrap not found errors throw RdapNotFoundError
+### Changed
+- poetry lock
+
+
 ## 1.2.0
 ### Added
 - option to ignore recurse errors

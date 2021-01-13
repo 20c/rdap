@@ -57,12 +57,15 @@
   - add config option for bootstrap_dir
   removed:
   - python 2 cruft
-Unreleased:
-  added: []
+1.2.1:
   changed:
   - poetry lock
-  deprecated: []
   fixed:
   - bootstrap not found errors throw RdapNotFoundError
+Unreleased:
+  added: []
+  changed: []
+  deprecated: []
+  fixed: []
   removed: []
   security: []
