@@ -52,7 +52,7 @@ def main(argv=None):
     parser.add_argument(
         "--write-bootstrap-data",
         action="store_true",
-        help="write bootstrap data for type",
+        help="write bootstrap data for type (as query)",
     )
 
     parser.add_argument("query", nargs="+")
