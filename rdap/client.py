@@ -155,7 +155,10 @@ class RdapClient:
     def fetch_bootstrap_data(self, typ):
         "Fetches bootstrap data in json."
         # TODO - check modified header
-        return self._get(self.config.get("bootstrap_data_url", "https://data.iana.org/rdap/") + f"{typ}.json").json()
+        return self._get(
+            self.config.get("bootstrap_data_url", "https://data.iana.org/rdap/")
+            + f"{typ}.json"
+        ).json()
 
     def get_bootstrap_data(self, typ):
         """Checks for a local cache, fetches bootstrap data and returns it."""
