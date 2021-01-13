@@ -1,17 +1,3 @@
-import json
-
-# python -c 'import json, sys;json.dump(json.load(sys.stdin), sys.stdout)'  < my.json
-
-# def fetch_file(name, bootstrap_from, destination, ttl):
-
-# all logic in the cache get, so parse it and store it how we want to load it
-# might even want to pickle
-
-
-def parse_asn(data):
-    pass
-
-
 from bisect import bisect_left, bisect_right
 
 
@@ -50,11 +36,6 @@ class AsnTree:
             # only get primary URL
             url = service[1][0].rstrip("/")
             for asn_range in service[0]:
-                top = None
-                try:
-                    bottom, top = map(int, asn_range.split("-"))
-                except ValueError:
-                    bottom = int(asn_range)
                 self.insert(url, asn_range)
 
     def insert(self, url, asn_range):

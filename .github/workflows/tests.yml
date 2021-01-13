@@ -32,7 +32,7 @@ jobs:
       - name: Run linters
         run: |
           source .venv/bin/activate
-          black --version
+          flake8 .
           black . --check
           isort .
 

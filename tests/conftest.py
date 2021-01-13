@@ -5,7 +5,6 @@ import pytest
 import pytest_filedata
 
 import rdap
-from rdap import RdapClient
 
 
 def _this_dir():
