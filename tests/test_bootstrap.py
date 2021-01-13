@@ -4,7 +4,7 @@ import shutil
 import pytest
 
 import rdap
-from rdap import bootstrap
+from rdap import bootstrap, RdapNotFoundError
 
 
 def check_asn_service(asn, service):
@@ -31,6 +31,16 @@ def test_asn_tree_lookup_notfound(iana_asn, asn):
     tree = bootstrap.AsnTree(iana_asn)
     with pytest.raises(LookupError):
         check_asn_service(asn, tree.get_service(asn))
+
+
+@pytest.mark.parametrize("asn", [0, 65535, 99999999])
+def test_asn_lookup_notfound(this_dir, asn):
+    config_dir = os.path.join(this_dir, "data", "iana")
+    rdapc = rdap.RdapClient(config_dir=config_dir)
+
+    with pytest.raises(RdapNotFoundError) as excinfo:
+        rdapc.get_asn(asn)
+    assert "No service found for AS" in str(excinfo.value)
 
 
 @pytest.mark.parametrize("asn", [63311])
