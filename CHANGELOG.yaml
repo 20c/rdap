@@ -50,14 +50,17 @@
   - ignore not found on nested handle lookups
   removed:
   - python 3.5
-Unreleased:
+1.2.0:
   added:
   - option to ignore recurse errors
   - option to self bootstrap
   - add config option for bootstrap_dir
+  removed:
+  - python 2 cruft
+Unreleased:
+  added: []
   changed: []
   deprecated: []
   fixed: []
-  removed:
-  - python 2 cruft
+  removed: []
   security: []

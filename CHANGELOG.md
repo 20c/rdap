@@ -4,6 +4,15 @@
 ## Unreleased
 
 
+## 1.2.0
+### Added
+- option to ignore recurse errors
+- option to self bootstrap
+- add config option for bootstrap_dir
+### Removed
+- python 2 cruft
+
+
 ## 1.1.0
 ### Added
 - python 3.9
