@@ -30,8 +30,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --debug               enable extra debug output
-  --home HOME           specify the home directory, by default will check in order: $RDAP_HOME, ./.rdap, /home/grizz/.rdap,
-                        /home/grizz/.config/rdap
+  --home HOME           specify the home directory, by default will check in order: $RDAP_HOME, ./.rdap, /home/$USER/.rdap,
+                        /home/$USER/.config/rdap
   --verbose             enable more verbose output
   --quiet               no output at all
   --version             show version number and exit
