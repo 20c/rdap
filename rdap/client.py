@@ -276,7 +276,12 @@ class RdapClient:
         Get an ASN object.
         """
         asn = int(asn)
-        url = "{}/autnum/{}".format(self.asn_url(asn), asn)
+        try:
+            url = "{}/autnum/{}".format(self.asn_url(asn), asn)
+        # catch bootstrap Lookup errors and report as not found
+        except LookupError as excinfo:
+            raise RdapNotFoundError(str(excinfo))
+
         # save reqest to get url for following entity lookups
         self._asn_req = self._get(url)
         return RdapAsn(self._asn_req.json(), self)
