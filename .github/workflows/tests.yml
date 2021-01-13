@@ -23,7 +23,7 @@ jobs:
         id: cached-poetry-dependencies
         uses: actions/cache@v2
         with:
-          path: .venv
+          path: ../.venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
       # install dependencies if cache does not exist
       - name: Check cache and install dependencies
@@ -31,8 +31,11 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       - name: Run linters
         run: |
-          source .venv/bin/activate
+          source ../.venv/bin/activate
           flake8 .
+          # can't flake . since the .venv is in the pwd
+          flake8 rdap/
+          flake8 tests/
           black . --check
           isort .
 
