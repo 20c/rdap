@@ -35,3 +35,7 @@ def test_lacnic_no_apikey(rdapc):
 def test_ignore_recurse_errors():
     rdapc = client.RdapClient(dict(lacnic_apikey="12345", ignore_recurse_errors=True))
     rdapc.get_asn(28001).parsed()
+
+def test_asdomain_lookup(rdapc):
+    rdapc.get("as63311.net")
+
