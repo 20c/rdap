@@ -66,6 +66,7 @@ Unreleased:
   added: []
   changed: []
   deprecated: []
-  fixed: []
+  fixed:
+  - correctly find domains that start with "as", #24
   removed: []
   security: []

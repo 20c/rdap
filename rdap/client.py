@@ -226,10 +226,6 @@ class RdapClient:
         """
         qstr = query.strip().lower()
 
-        # ASN
-        if qstr.startswith("as"):
-            return self.get_asn(qstr[2:])
-
         # IP address
         try:
             address = ipaddress.ip_interface(str(qstr))
@@ -241,6 +237,10 @@ class RdapClient:
         # domain
         if "." in qstr:
             return self.get_domain(qstr)
+
+        # ASN
+        if qstr.startswith("as"):
+            return self.get_asn(qstr[2:])
 
         raise NotImplementedError(f"unknown query {query}")
 
