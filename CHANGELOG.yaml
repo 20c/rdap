@@ -62,11 +62,13 @@
   - poetry lock
   fixed:
   - bootstrap not found errors throw RdapNotFoundError
+1.2.2:
+  fixed:
+  - correctly find domains that start with "as",
 Unreleased:
   added: []
   changed: []
   deprecated: []
-  fixed:
-  - correctly find domains that start with "as", #24
+  fixed: []
   removed: []
   security: []

@@ -4,6 +4,11 @@
 ## Unreleased
 
 
+## 1.2.2
+### Fixed
+- correctly find domains that start with "as",
+
+
 ## 1.2.1
 ### Fixed
 - bootstrap not found errors throw RdapNotFoundError
