@@ -37,6 +37,7 @@ black = "^20.8b1"
 isort = "^5.7.0"
 flake8 = "^3.8.4"
 ctl = "^1.0.0"
+twine = "^3.3.0"
 
 
 [build-system]
