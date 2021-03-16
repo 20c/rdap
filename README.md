@@ -5,6 +5,8 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/rdap.svg?maxAge=3600)](https://pypi.python.org/pypi/rdap)
 [![Tests](https://github.com/20c/rdap/workflows/tests/badge.svg)](https://github.com/20c/rdap)
 [![Codecov](https://img.shields.io/codecov/c/github/20c/rdap/master.svg?maxAge=3600)](https://codecov.io/github/20c/rdap)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/20c/rdap.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/20c/rdap/context:python)
+
 
 Registration Data Access Protocol tools
 
