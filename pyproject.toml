@@ -23,6 +23,7 @@ rdap = "rdap.cli:main"
 [tool.poetry.dependencies]
 python = "^3.6"
 munge = "^1.0.0"
+requests = "^2.25.1"
 
 
 [tool.poetry.dev-dependencies]
