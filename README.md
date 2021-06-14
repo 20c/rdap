@@ -17,7 +17,7 @@ pip install rdap
 
 ## Usage
 
-```sh
+```
 usage: rdap [-h] [--debug] [--home HOME] [--verbose] [--quiet] [--version] [--output-format OUTPUT_FORMAT] [--show-requests] [--parse]
             [--write-bootstrap-data]
             query [query ...]
