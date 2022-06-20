@@ -27,7 +27,6 @@ class RIRAssignmentLookup:
         - `dict` containing asn and status
         """
 
-        i = 0
         parts = line.split("|")
 
         try:
