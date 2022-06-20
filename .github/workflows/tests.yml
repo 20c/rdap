@@ -12,7 +12,6 @@ jobs:
         uses: 20c/workflows/poetry@v1
       - name: Run linters
         run: |
-          source .venv/bin/activate
           # can't flake . since the .venv is in the pwd
           # flake8 rdap/
           # flake8 tests/
