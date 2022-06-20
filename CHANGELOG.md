@@ -2,6 +2,8 @@
 
 
 ## Unreleased
+### Added
+- rir assignment status lookup
 
 
 ## 1.2.2

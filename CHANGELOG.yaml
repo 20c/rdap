@@ -66,7 +66,8 @@
   fixed:
   - correctly find domains that start with "as",
 Unreleased:
-  added: []
+  added:
+  - rir assignment status lookup
   changed: []
   deprecated: []
   fixed: []
