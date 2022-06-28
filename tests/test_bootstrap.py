@@ -4,7 +4,7 @@ import shutil
 import pytest
 
 import rdap
-from rdap import bootstrap, RdapNotFoundError
+from rdap import RdapNotFoundError, bootstrap
 
 
 def check_asn_service(asn, service):

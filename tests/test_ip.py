@@ -1,5 +1,5 @@
 def sort_data(data):
-    """ Sorts data returned from rdap queries for comparing. """
+    """Sorts data returned from rdap queries for comparing."""
     for entity in data.get("entities", []):
         if "roles" in entity:
             entity["roles"].sort()

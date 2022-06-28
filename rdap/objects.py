@@ -80,7 +80,7 @@ class RdapObject:
         return None
 
     def _parse(self):
-        """ parses data into our format, and use entities for address info ?"""
+        """parses data into our format, and use entities for address info ?"""
         name = self._data.get("name", "")
         # emails done with a set to eat duplicates
         emails = set()
