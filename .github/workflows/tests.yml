@@ -12,12 +12,7 @@ jobs:
         uses: 20c/workflows/poetry@v1
       - name: Run linters
         run: |
-          # can't flake . since the .venv is in the pwd
-          # flake8 rdap/
-          # flake8 tests/
-          poetry run flake8 .
-          poetry run black . --check
-          poetry run isort .
+            poetry run pre-commit run --all-files
 
   test:
     needs: linting
@@ -25,15 +20,18 @@ jobs:
       fail-fast: true
       matrix:
         os: [ "ubuntu-latest", "macos-latest" ]
-        python-version: [ "3.6", "3.7", "3.8", "3.9" ]
+        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
       - name: Install virtualenv from poetry
         uses: 20c/workflows/poetry@v1
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Run tests
         run: |
-          poetry run pytest -vv --cov-report=term-missing --cov=rdap --cov-report=xml tests/
+          poetry run tox
           poetry run coverage report
       # upload coverage stats
       - name: Upload coverage
