@@ -27,29 +27,34 @@ requests = "^2.25.1"
 
 
 [tool.poetry.dev-dependencies]
-codecov = "^2.1.10"
-coverage = "^5.3"
-pytest = "^6.1.2"
-pytest-cov = "^2.10.1"
-pytest-filedata = "^0.4.0"
+# testing
+codecov = ">=2"
+coverage = ">=5"
+pytest = ">=6"
+pytest-django = ">=3.8"
+pytest-cov = "*"
 tox = "^3.20.1"
 tox-gh-actions = "^2.9.1"
-bandit = "^1.6.2"
 
-# lint
-black = { version = ">=20", allow-prereleases = true }
-isort = "^5.7.0"
-flake8 = "^3.8.4"
-mypy = "^0.950"
-pre-commit = "^2.13"
-pyupgrade = "^2.19.4"
+# linting
+black = ">=20"
+isort = ">=5.7"
+flake8 = ">=3.8"
+mypy = ">=0.950"
+pre-commit = ">=2.13"
+pyupgrade = ">=2.19"
 
 # docs
-markdown-include = ">=0.5"
+markdown = "*"
+markdown-include = ">=0.5,<1"
 mkdocs = "^1.2.3"
 
 # ctl
-ctl = "^1"
+ctl = ">=1"
+jinja2 = ">=2"
+tmpl = ">=1"
+# v4 released 2022-03-31
+twine = "^3.3.0"
 
 [tool.poetry.plugins."markdown.extensions"]
 pymdgen = "pymdgen.md:Extension"
