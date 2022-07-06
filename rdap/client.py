@@ -277,7 +277,7 @@ class RdapClient:
         """
         asn = int(asn)
         try:
-            url = "{}/autnum/{}".format(self.asn_url(asn), asn)
+            url = f"{self.asn_url(asn)}/autnum/{asn}"
         # catch bootstrap Lookup errors and report as not found
         except LookupError as excinfo:
             raise RdapNotFoundError(str(excinfo))

@@ -4,6 +4,9 @@
 ## Unreleased
 ### Added
 - rir assignment status lookup
+- python 3.10
+### Removed
+- python 3.6
 
 
 ## 1.2.2
