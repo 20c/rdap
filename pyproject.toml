@@ -44,9 +44,15 @@ mypy = "^0.950"
 pre-commit = "^2.13"
 pyupgrade = "^2.19.4"
 
-#ctl
-ctl = "^1.0.0"
-twine = "^3.3.0"
+# docs
+markdown-include = ">=0.5"
+mkdocs = "^1.2.3"
+
+# ctl
+ctl = "^1"
+
+[tool.poetry.plugins."markdown.extensions"]
+pymdgen = "pymdgen.md:Extension"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
