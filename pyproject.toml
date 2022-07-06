@@ -32,6 +32,7 @@ codecov = ">=2"
 coverage = ">=5"
 pytest = ">=6"
 pytest-django = ">=3.8"
+pytest-filedata = "^0.4.0"
 pytest-cov = "*"
 tox = "^3.20.1"
 tox-gh-actions = "^2.9.1"
@@ -60,5 +61,5 @@ twine = "^3.3.0"
 pymdgen = "pymdgen.md:Extension"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = [ "poetry>=0.12",]
+build-backend = "poetry.masonry.api"
