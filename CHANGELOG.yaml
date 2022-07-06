@@ -68,8 +68,10 @@
 Unreleased:
   added:
   - rir assignment status lookup
+  - python 3.10
   changed: []
   deprecated: []
   fixed: []
-  removed: []
+  removed:
+  - python 3.6
   security: []
