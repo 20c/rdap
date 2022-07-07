@@ -7,6 +7,7 @@ ctl:
     - name: this_repo
       type: git
       config:
+        branch: main
         repo_url: git@github.com:20c/rdap.git
 
     - name: changelog
@@ -21,7 +22,7 @@ ctl:
     - name: version
       type: version
       config:
-        branch_dev: master
-        branch_release: master
+        branch_dev: main
+        branch_release: main
         repositories:
           - this_repo
