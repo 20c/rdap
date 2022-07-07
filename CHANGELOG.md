@@ -2,6 +2,9 @@
 
 
 ## Unreleased
+
+
+## 1.3.0
 ### Added
 - rir assignment status lookup
 - python 3.10

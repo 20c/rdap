@@ -1,31 +1,43 @@
-0.2.0:
+Unreleased:
+  added: []
+  fixed: []
+  changed: []
+  deprecated: []
+  removed: []
+  security: []
+1.3.0:
   added:
-  - moved recurse_roles to config
-  - added support for LACNIC apikeys
-  changed:
-  - RdapNotFoundError now inherits from RdapHTTPError instead of LookupError
-  - updated User-Agent
-  - converted to requests.Session()
-0.2.1:
+  - rir assignment status lookup
+  - python 3.10
+  removed:
+  - python 3.6
+1.2.2:
   fixed:
-  - long_description content type
-0.4.0:
-  added:
-  - add --parse option to display the parsed output
-  - RdapObject::handle
-  - ip address lookup
-  - domain name lookup
+  - correctly find domains that start with "as",
+1.2.1:
   changed:
-  - default CLI to display full data
-  - rename `raw` to `data` on RdapObjects
-0.5.0:
-  added:
-  - add config for request timeout, default to 0.5 seconds
-  changed:
-  - bump pytest-filedata to 0.4.0 for pytest4
-0.5.1:
+  - poetry lock
   fixed:
-  - 'changed MANIFEST file to not include tmp dirs, #3'
+  - bootstrap not found errors throw RdapNotFoundError
+1.2.0:
+  added:
+  - option to ignore recurse errors
+  - option to self bootstrap
+  - add config option for bootstrap_dir
+  removed:
+  - python 2 cruft
+1.1.0:
+  added:
+  - python 3.9
+  changed:
+  - improved exception message for unallocated ASNs
+  fixed:
+  - ignore not found on nested handle lookups
+  removed:
+  - python 3.5
+1.0.1:
+  fixed:
+  - better range check for unallocated ASNs
 1.0.0:
   added:
   - black formatting
@@ -38,40 +50,31 @@
   removed:
   - python 2.7 support
   - python 3.4 tests
-1.0.1:
+0.5.1:
   fixed:
-  - better range check for unallocated ASNs
-1.1.0:
+  - 'changed MANIFEST file to not include tmp dirs, #3'
+0.5.0:
   added:
-  - python 3.9
+  - add config for request timeout, default to 0.5 seconds
   changed:
-  - improved exception message for unallocated ASNs
-  fixed:
-  - ignore not found on nested handle lookups
-  removed:
-  - python 3.5
-1.2.0:
+  - bump pytest-filedata to 0.4.0 for pytest4
+0.4.0:
   added:
-  - option to ignore recurse errors
-  - option to self bootstrap
-  - add config option for bootstrap_dir
-  removed:
-  - python 2 cruft
-1.2.1:
+  - add --parse option to display the parsed output
+  - RdapObject::handle
+  - ip address lookup
+  - domain name lookup
   changed:
-  - poetry lock
+  - default CLI to display full data
+  - rename `raw` to `data` on RdapObjects
+0.2.1:
   fixed:
-  - bootstrap not found errors throw RdapNotFoundError
-1.2.2:
-  fixed:
-  - correctly find domains that start with "as",
-Unreleased:
+  - long_description content type
+0.2.0:
   added:
-  - rir assignment status lookup
-  - python 3.10
-  changed: []
-  deprecated: []
-  fixed: []
-  removed:
-  - python 3.6
-  security: []
+  - moved recurse_roles to config
+  - added support for LACNIC apikeys
+  changed:
+  - RdapNotFoundError now inherits from RdapHTTPError instead of LookupError
+  - updated User-Agent
+  - converted to requests.Session()
