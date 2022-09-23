@@ -1,7 +1,6 @@
 import os
 
 import pytest
-
 from rdap.cli import main
 
 

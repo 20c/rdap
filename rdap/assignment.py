@@ -45,7 +45,7 @@ class RIRAssignmentLookup:
             status = parts[6].strip()
             asns = None
 
-            asns = [{"asn": int(asn)+i, "status": status} for i in range(0, count)]
+            asns = [{"asn": int(asn) + i, "status": status} for i in range(0, count)]
 
             return asns
 

@@ -3,9 +3,9 @@ import sys
 
 import munge
 import munge.click
+from rdap.config import Config
 
 import rdap
-from rdap.config import Config
 
 
 def add_options(parser, options):

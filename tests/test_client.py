@@ -1,7 +1,7 @@
 import pytest
+from rdap.exceptions import RdapHTTPError
 
 from rdap import client
-from rdap.exceptions import RdapHTTPError
 
 
 def test_strip_auth_none():
