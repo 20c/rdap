@@ -27,6 +27,9 @@ def test_lookup():
     # arin
     assert lookup.get_status(63311) == "assigned"
     assert lookup.get_status(63317) == "reserved"
+    assert lookup.get_status(63360) == "assigned"
+    assert lookup.get_status(63361) == "assigned"
+    assert lookup.get_status(63362) is None
 
     # lacnic
     assert lookup.get_status(6193) == "allocated"
