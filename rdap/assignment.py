@@ -21,10 +21,13 @@ class RIRAssignmentLookup:
         Parses a line from a data file and attempts to return the ASN
         and assignment status
 
+        A line can parse multiple asns depending of the value in 5th
+        column.
+
         Returns:
 
         - `None` if no asn and status could be parsed
-        - `dict` containing asn and status
+        - `list<`dict`>` containing asns and status
         """
 
         parts = line.split("|")
@@ -36,7 +39,16 @@ class RIRAssignmentLookup:
             return
 
         try:
-            return {"asn": parts[3], "status": parts[6].strip()}
+
+            asn = parts[3]
+            count = int(parts[4])
+            status = parts[6].strip()
+            asns = None
+
+            asns = [{"asn": int(asn) + i, "status": status} for i in range(0, count)]
+
+            return asns
+
         except IndexError:
             return
 
@@ -79,15 +91,15 @@ class RIRAssignmentLookup:
             for rir_file_path in self._data_files:
                 print(rir_file_path)
                 with open(rir_file_path) as fh:
-                    data = fh.read().splitlines()
-                    for line in data:
-                        data = self.parse_data(line)
+                    for line in fh.read().splitlines():
+                        asns = self.parse_data(line)
 
-                        if not data:
+                        if not asns:
                             continue
 
                         try:
-                            self._data[int(data["asn"])] = data["status"]
+                            for data in asns:
+                                self._data[int(data["asn"])] = data["status"]
                         except (TypeError, ValueError):
                             pass
 
