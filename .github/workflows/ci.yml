@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install virtualenv from poetry
         uses: 20c/workflows/poetry@v1
-      - name: deploy mkdocs gh-pages site
-        run: |
-          poetry run mkdocs gh-deploy --force
+      # need to setup mkdocs config
+      #- name: deploy mkdocs gh-pages site
+      #  run: |
+      #    poetry run mkdocs gh-deploy --force
