@@ -1,11 +1,13 @@
 Unreleased:
   added: []
-  fixed:
-  - rir assignment status lookup missing some asns
+  fixed: []
   changed: []
   deprecated: []
   removed: []
   security: []
+1.3.1:
+  fixed:
+  - rir assignment status lookup missing some asns
 1.3.0:
   added:
   - rir assignment status lookup
