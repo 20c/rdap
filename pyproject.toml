@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rdap"
-version = "1.3.0"
+version = "1.3.1"
 description = "Registration Data Access Protocol tools"
 authors = ["20C <code@20c.com>"]
 readme = "README.md"
