@@ -2,6 +2,8 @@
 
 
 ## Unreleased
+### Fixed
+- rir assignment status lookup missing some asns
 
 
 ## 1.3.0

@@ -1,6 +1,7 @@
 Unreleased:
   added: []
-  fixed: []
+  fixed:
+  - rir assignment status lookup missing some asns
   changed: []
   deprecated: []
   removed: []
