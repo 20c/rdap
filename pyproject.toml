@@ -34,7 +34,6 @@ requests = ">=2.25.1"
 
 [tool.poetry.dev-dependencies]
 # testing
-codecov = ">=2"
 coverage = ">=5"
 pytest = ">=6"
 pytest-django = ">=3.8"
@@ -55,12 +54,6 @@ pyupgrade = ">=2.19"
 markdown = "*"
 markdown-include = ">=0.5,<1"
 mkdocs = ">=1.2.3"
-
-# ctl
-ctl = ">=1"
-jinja2 = ">=2"
-tmpl = ">=1"
-twine = ">=3.3"
 
 [tool.poetry.plugins."markdown.extensions"]
 pymdgen = "pymdgen.md:Extension"
