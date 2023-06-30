@@ -4,6 +4,17 @@
 ## Unreleased
 
 
+## 1.4.0
+### Added
+- python 3.11
+- more recursive tests
+### Fixed
+- entity lookup following redirect for ip lookups #39
+- fixed parsing of norid.no vcards #41
+### Removed
+- python 3.7
+
+
 ## 1.3.1
 ### Fixed
 - rir assignment status lookup missing some asns

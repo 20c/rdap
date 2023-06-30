@@ -1,15 +1,19 @@
 Unreleased:
+  added: []
+  fixed: []
+  changed: []
+  deprecated: []
+  removed: []
+  security: []
+1.4.0:
   added:
   - python 3.11
   - more recursive tests
   fixed:
-  - "entity lookup following redirect for ip lookups #39"
-  - "fixed parsing of norid.no vcards #41"
-  changed: []
-  deprecated: []
+  - 'entity lookup following redirect for ip lookups #39'
+  - 'fixed parsing of norid.no vcards #41'
   removed:
   - python 3.7
-  security: []
 1.3.1:
   fixed:
   - rir assignment status lookup missing some asns
