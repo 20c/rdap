@@ -3,9 +3,8 @@
 
 [![PyPI](https://img.shields.io/pypi/v/rdap.svg?maxAge=3600)](https://pypi.python.org/pypi/rdap)
 [![PyPI](https://img.shields.io/pypi/pyversions/rdap.svg?maxAge=3600)](https://pypi.python.org/pypi/rdap)
-[![Tests](https://github.com/20c/rdap/workflows/tests/badge.svg)](https://github.com/20c/rdap)
+[![tests](https://github.com/20c/rdap/actions/workflows/tests.yml/badge.svg)](https://github.com/20c/rdap/actions/workflows/tests.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/20c/rdap/master.svg?maxAge=3600)](https://codecov.io/github/20c/rdap)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/20c/rdap.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/20c/rdap/context:python)
 
 
 Registration Data Access Protocol tools
@@ -75,7 +74,7 @@ rdap:
 
 ### License
 
-Copyright 2016-2022 20C, LLC
+Copyright 2016-2023 20C, LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this softare except in compliance with the License.
