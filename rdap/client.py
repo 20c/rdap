@@ -273,7 +273,7 @@ class RdapClient:
             )
 
     def _rdap_get(self, query, base_url=None):
-        """ Does an HTTP get for the given url and query.
+        """Does an HTTP get for the given url and query.
         sets _last_req_url for future entity lookups
         """
         if not base_url:
