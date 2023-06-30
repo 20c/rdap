@@ -601,23 +601,24 @@ min-versions = ["babel (==2.9.0)", "click (==7.0)", "colorama (==0.4)", "ghp-imp
 
 [[package]]
 name = "munge"
-version = "1.2.1"
+version = "1.3.0"
 description = "data manipulation library and client"
 optional = false
-python-versions = ">=3.6,<4.0"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "munge-1.2.1-py3-none-any.whl", hash = "sha256:65fb76389b54970beeef6a80b9e1b45cb230d34743cf11565af926ebc8af2627"},
-    {file = "munge-1.2.1.tar.gz", hash = "sha256:3daeb20c2964aa4136c57ebfd422ee7e059eb92fbb0ca1e0c3e392ee9a923853"},
+    {file = "munge-1.3.0-py3-none-any.whl", hash = "sha256:fe24e8fd33b388c70abf296f94814aec596d10eb96c0b95a669a49f71012d1f0"},
+    {file = "munge-1.3.0.tar.gz", hash = "sha256:5417d47b46e4215d561ce7c01e46098787476bb81eb0c70a7b9b20b38eafa0e5"},
 ]
 
 [package.dependencies]
 click = ">=5.1"
-requests = ">=2.6,<3.0"
+PyYAML = {version = ">=5.1", optional = true, markers = "extra == \"yaml\""}
+requests = ">=2.6"
 
 [package.extras]
-toml = ["toml (>=0.10.2,<0.11.0)"]
-tomlkit = ["tomlkit (>=0.7.2,<0.8.0)"]
-yaml = ["PyYAML (>=5.1,<6.0)"]
+toml = ["toml (>=0.10.2)"]
+tomlkit = ["tomlkit (>=0.7.2)"]
+yaml = ["PyYAML (>=5.1)"]
 
 [[package]]
 name = "mypy"
@@ -1194,4 +1195,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "e978b43de4911d1382645d1e857db5d7d93209aa45fde1411d11244292af8f78"
+content-hash = "c7dd7f5801a1c0570aa038343118e1872201f929ea1d527ee09a851d764ad03c"
