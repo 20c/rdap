@@ -152,6 +152,22 @@ class RdapObject:
             org_address=org_address,
         )
 
+    def get_rir(self):
+        """Gets the RIR for the object, if possible"""
+        try:
+            if self._data.get("port43", ""):
+                for rir in ["arin", "apnic", "afrinic", "lacnic", "ripe"]:
+                    if rir in self._data["port43"]:
+                        return rir
+
+            if self._rdapc and self._rdapc.last_req_url:
+                for rir in ["arin", "apnic", "afrinic", "lacnic", "ripe"]:
+                    if rir in self._rdap.last_req_url:
+                        return rir
+
+        except Exception:
+            return None
+
 
 class RdapAsn(RdapObject):
     """

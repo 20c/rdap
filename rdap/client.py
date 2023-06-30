@@ -112,7 +112,7 @@ class RdapClient:
         )
 
         self._last_req = None
-        self._last_req_url = None
+        self.last_req_url = None
         self._history = []
         self._asn_tree = None
         self.timeout = config.get("timeout")
@@ -283,7 +283,7 @@ class RdapClient:
         url = f"{base_url}{query}"
         self._last_req = self._get(url)
         # split query off to get the base url for following entity lookups
-        self._last_req_url = self._last_req.url.rsplit(query, 1)[0]
+        self.last_req_url = self._last_req.url.rsplit(query, 1)[0]
         return self._last_req
 
     def get_asn(self, asn):
@@ -330,8 +330,8 @@ class RdapClient:
         after a bootstrap redirect for registries that don't link 'self'
         """
 
-        if self._last_req_url:
-            url = self._last_req_url
+        if self.last_req_url:
+            url = self.last_req_url
 
         # last ditch effort to use bootstrap
         else:

@@ -1,6 +1,7 @@
 Unreleased:
   added:
   - get ripe org name out of remarks
+  - add get_rir()
   fixed: []
   changed: []
   deprecated: []
