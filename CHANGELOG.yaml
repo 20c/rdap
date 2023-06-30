@@ -3,6 +3,7 @@ Unreleased:
   - python 3.11
   fixed:
   - "entity lookup following redirect for ip lookups #39"
+  - "fixed parsing of norid.no vcards #41"
   changed: []
   deprecated: []
   removed:

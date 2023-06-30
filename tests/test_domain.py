@@ -7,6 +7,7 @@ def test_rdap_domain_lookup():
     query = "norid.no"
     obj = rdapc.get_domain(query)
     assert obj.data
+    assert obj.parsed()
 
     # test get duduction
     assert obj.data == rdapc.get(query).data
