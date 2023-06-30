@@ -111,7 +111,8 @@ class RdapClient:
             config.get("recurse_roles", ["administrative", "technical"])
         )
 
-        self._asn_req = None
+        self._last_req = None
+        self._last_req_url = None
         self._history = []
         self._asn_tree = None
         self.timeout = config.get("timeout")
@@ -271,50 +272,68 @@ class RdapClient:
                 f"Unknown objectClassName '{classname}' from '{url}'"
             )
 
+    def _rdap_get(self, query, base_url=None):
+        """Does an HTTP get for the given url and query.
+        sets _last_req_url for future entity lookups
+        """
+        if not base_url:
+            base_url = self.url
+
+        # FIXME - url join
+        url = f"{base_url}{query}"
+        self._last_req = self._get(url)
+        # split query off to get the base url for following entity lookups
+        self._last_req_url = self._last_req.url.rsplit(query, 1)[0]
+        return self._last_req
+
     def get_asn(self, asn):
         """
         Get an ASN object.
         """
         asn = int(asn)
         try:
-            url = f"{self.asn_url(asn)}/autnum/{asn}"
+            url = self.asn_url(asn)
         # catch bootstrap Lookup errors and report as not found
         except LookupError as excinfo:
             raise RdapNotFoundError(str(excinfo))
 
         # save reqest to get url for following entity lookups
-        self._asn_req = self._get(url)
-        return RdapAsn(self._asn_req.json(), self)
+        query = f"/autnum/{asn}"
+        return RdapAsn(self._rdap_get(query, base_url=url).json(), self)
 
     def get_domain(self, domain):
         """
         Get a domain object.
         """
-        url = f"{self.url}/domain/{domain}"
-        return RdapAsn(self._get(url).json(), self)
+        query = f"/domain/{domain}"
+        return RdapDomain(self._rdap_get(query).json(), self)
 
     def get_ip(self, address):
         """
         Get an IP object.
         """
-        url = f"{self.url}/ip/{address}"
-        return RdapNetwork(self._get(url).json(), self)
+        query = f"/ip/{address}"
+        return RdapNetwork(self._rdap_get(query).json(), self)
 
     def get_entity(self, handle, base_url):
         """
         get entity information in object form
         """
-        url = f"{base_url}/entity/{handle}"
-        return RdapEntity(self._get(url).json(), self)
+        query = f"/entity/{handle}"
+        return RdapEntity(self._rdap_get(query).json(), self)
 
     def get_entity_url(self, handle):
         """
         Get entity url for handle.
 
-        This fucntion must be able to handle doing recursive lookups to the current URL after a bootstrap redirect for registries that don't link 'self'
+        This function must be able to handle doing recursive lookups to the current URL
+        after a bootstrap redirect for registries that don't link 'self'
         """
-        if self._asn_req:
-            url = re.split("/autnum/", self._asn_req.url)[0]
+
+        if self._last_req_url:
+            url = self._last_req_url
+
+        # last ditch effort to use bootstrap
         else:
             url = self.url
 

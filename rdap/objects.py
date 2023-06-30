@@ -68,7 +68,7 @@ class RdapObject:
                     adr = typ[1].get("label", "").strip()
                     if not adr:
                         # rest use the text field
-                        adr = "\n".join(typ[3]).strip()
+                        adr = "\n".join([str(item) for item in typ[3]]).strip()
                     if adr:
                         vcard["adr"] = adr
         return vcard
