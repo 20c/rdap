@@ -1,7 +1,8 @@
 Unreleased:
   added:
   - python 3.11
-  fixed: []
+  fixed:
+  - "entity lookup following redirect for ip lookups #39"
   changed: []
   deprecated: []
   removed:
