@@ -9,7 +9,6 @@ class TestLookup(RIRAssignmentLookup):
 
 
 def test_lookup():
-
     lookup = TestLookup()
     path = os.path.join(os.path.dirname(__file__), "data", "assignment")
     lookup.load_data(path)

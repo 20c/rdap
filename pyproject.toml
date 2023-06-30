@@ -12,10 +12,10 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Internet",
     "Topic :: Software Development",
     "Topic :: Software Development :: Libraries",
@@ -27,20 +27,19 @@ rdap = "rdap.cli:main"
 
 
 [tool.poetry.dependencies]
-python = "^3.7"
-munge = "^1.0.0"
-requests = "^2.25.1"
+python = "^3.8"
+requests = ">=2.25.1"
+munge = {version = ">=1.3", extras = ["yaml"]}
 
 
 [tool.poetry.dev-dependencies]
 # testing
-codecov = ">=2"
 coverage = ">=5"
 pytest = ">=6"
 pytest-django = ">=3.8"
 pytest-filedata = "^0.4.0"
 pytest-cov = "*"
-tox = "^3.20.1"
+tox = ">=3.20"
 tox-gh-actions = "^2.9.1"
 
 # linting
@@ -54,14 +53,7 @@ pyupgrade = ">=2.19"
 # docs
 markdown = "*"
 markdown-include = ">=0.5,<1"
-mkdocs = "^1.2.3"
-
-# ctl
-ctl = ">=1"
-jinja2 = ">=2"
-tmpl = ">=1"
-# v4 released 2022-03-31
-twine = "^3.3.0"
+mkdocs = ">=1.2.3"
 
 [tool.poetry.plugins."markdown.extensions"]
 pymdgen = "pymdgen.md:Extension"
