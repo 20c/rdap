@@ -1,5 +1,6 @@
 Unreleased:
-  added: []
+  added:
+  - get ripe org name out of remarks
   fixed: []
   changed: []
   deprecated: []

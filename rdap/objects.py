@@ -126,7 +126,21 @@ class RdapObject:
             try:
                 for rem in self._data["remarks"]:
                     if rem["title"] == "description":
-                        org_name = rem["description"][0]
+                        if org_name:
+                            org_name += ", "
+                        org_name += rem["description"][0]
+                        break
+            except KeyError:
+                pass
+
+        # RIPE keeps org info in remarks
+        elif "ripe" in self._data.get("port43", ""):
+            try:
+                for rem in self._data["remarks"]:
+                    if rem["description"]:
+                        if org_name:
+                            org_name += ", "
+                        org_name += rem["description"][0]
                         break
             except KeyError:
                 pass
