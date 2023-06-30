@@ -16,7 +16,6 @@ class RIRAssignmentLookup:
     rir_lists = ["afrinic", "apnic", "arin", "lacnic", "ripencc"]
 
     def parse_data(self, line):
-
         """
         Parses a line from a data file and attempts to return the ASN
         and assignment status
@@ -39,7 +38,6 @@ class RIRAssignmentLookup:
             return
 
         try:
-
             asn = parts[3]
             count = int(parts[4])
             status = parts[6].strip()
@@ -53,7 +51,6 @@ class RIRAssignmentLookup:
             return
 
     def load_data(self, data_path=".", cache_days=1):
-
         """
         Reads RIR assignment data into memory
 
@@ -74,7 +71,6 @@ class RIRAssignmentLookup:
         """
 
         if not hasattr(self, "_data_files"):
-
             self._data_files = []
 
             for rir in self.rir_lists:
@@ -85,7 +81,6 @@ class RIRAssignmentLookup:
                 self._data_files.append(rir_file_path)
 
         if not hasattr(self, "_data"):
-
             self._data = {}
 
             for rir_file_path in self._data_files:
@@ -128,7 +123,6 @@ class RIRAssignmentLookup:
                 file.write(response.text)
 
     def get_status(self, asn):
-
         """
         Get RIR assignment status for an ASN
         """
