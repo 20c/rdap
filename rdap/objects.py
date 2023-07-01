@@ -1,6 +1,20 @@
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
+def rir_from_domain(domain):
+    """Gets the RIR from a URL or domain, if possible"""
+    try:
+        for rir in ["arin", "apnic", "afrinic", "lacnic", "ripe"]:
+            if rir in domain:
+                return rir
+
+        if "nic.br" in domain:
+            return "lacnic"
+
+    except Exception:
+        return None
+
+
 class RdapObject:
     """
     RDAP base object, allows for lazy parsing
@@ -155,15 +169,13 @@ class RdapObject:
     def get_rir(self):
         """Gets the RIR for the object, if possible"""
         try:
-            if self._data.get("port43", ""):
-                for rir in ["arin", "apnic", "afrinic", "lacnic", "ripe"]:
-                    if rir in self._data["port43"]:
-                        return rir
+            if "port43" in self._data:
+                if rir := rir_from_domain(self._data.get("port43")):
+                    return rir
 
             if self._rdapc and self._rdapc.last_req_url:
-                for rir in ["arin", "apnic", "afrinic", "lacnic", "ripe"]:
-                    if rir in self._rdap.last_req_url:
-                        return rir
+                if rir := rir_from_domain(self._rdapc.last_req_url):
+                    return rir
 
         except Exception:
             return None

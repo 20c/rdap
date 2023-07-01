@@ -43,4 +43,5 @@ def test_rdap_asn_lookup(rdapc, data_rdap_autnum):
     print(data_rdap_autnum.name)
     # asn = rdap.get_asn(205726)
     asn = rdapc.get_asn(data_rdap_autnum.name)
+    assert asn.get_rir()
     assert_parsed(data_rdap_autnum, asn.parsed())

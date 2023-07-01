@@ -11,6 +11,7 @@ def test_rdap_ip_lookup(rdapc):
     ip = rdapc.get_ip(query)
     assert ip.data
     assert ip.parsed()
+    assert ip.get_rir()
     sort_data(ip.data)
 
     # test get deduction

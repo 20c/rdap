@@ -19,27 +19,25 @@ pip install rdap
 ## Usage
 
 ```
-usage: rdap [-h] [--debug] [--home HOME] [--verbose] [--quiet] [--version] [--output-format OUTPUT_FORMAT] [--show-requests] [--parse]
-            [--write-bootstrap-data]
-            query [query ...]
+usage: rdap [-h] [--debug] [--home HOME] [--verbose] [--quiet] [--version] [--output-format OUTPUT_FORMAT] [--show-requests] [--parse] [--rir] [--write-bootstrap-data] query [query ...]
 
 rdap
 
 positional arguments:
   query
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --debug               enable extra debug output
-  --home HOME           specify the home directory, by default will check in order: $RDAP_HOME, ./.rdap, /home/$USER/.rdap,
-                        /home/$USER/.config/rdap
+  --home HOME           specify the home directory, by default will check in order: $RDAP_HOME, ./.rdap, /home/grizz/.rdap, /home/grizz/.config/rdap
   --verbose             enable more verbose output
   --quiet               no output at all
-  --version             show version number and exit
+  --version             show program's version number and exit
   --output-format OUTPUT_FORMAT
                         output format (yaml, json, text)
   --show-requests       show all requests
   --parse               parse data into object before display
+  --rir                 display rir
   --write-bootstrap-data
                         write bootstrap data for type (as query)
 ```
