@@ -1,13 +1,15 @@
 Unreleased:
-  added:
-  - get ripe org name out of remarks
-  - add get_rir()
-  - add cli `--rir`
+  added: []
   fixed: []
   changed: []
   deprecated: []
   removed: []
   security: []
+1.5.0:
+  added:
+  - get ripe org name out of remarks
+  - add get_rir()
+  - add cli `--rir`
 1.4.0:
   added:
   - python 3.11

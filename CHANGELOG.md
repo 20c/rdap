@@ -4,6 +4,13 @@
 ## Unreleased
 
 
+## 1.5.0
+### Added
+- get ripe org name out of remarks
+- add get_rir()
+- add cli `--rir`
+
+
 ## 1.4.0
 ### Added
 - python 3.11
