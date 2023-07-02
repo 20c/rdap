@@ -49,9 +49,7 @@ def main(argv=None):
     parser.add_argument(
         "--parse", action="store_true", help="parse data into object before display"
     )
-    parser.add_argument(
-        "--rir", action="store_true", help="display rir", default=False
-    )
+    parser.add_argument("--rir", action="store_true", help="display rir", default=False)
     parser.add_argument(
         "--write-bootstrap-data",
         action="store_true",
@@ -85,12 +83,10 @@ def main(argv=None):
         else:
             print(codec.dumps(obj.data))
 
-
     if argd.get("show_requests", False):
         print("# Requests")
         for each in client.history:
             print("{} {}".format(*each))
-
 
     return 0
 
