@@ -1,5 +1,8 @@
 Unreleased:
-  added: []
+  added:
+  - get ripe org name out of remarks
+  - add get_rir()
+  - add cli `--rir`
   fixed: []
   changed: []
   deprecated: []

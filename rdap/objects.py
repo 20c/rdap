@@ -1,6 +1,20 @@
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
 
+def rir_from_domain(domain):
+    """Gets the RIR from a URL or domain, if possible"""
+    try:
+        for rir in ["arin", "apnic", "afrinic", "lacnic", "ripe"]:
+            if rir in domain:
+                return rir
+
+        if "nic.br" in domain:
+            return "lacnic"
+
+    except Exception:
+        return None
+
+
 class RdapObject:
     """
     RDAP base object, allows for lazy parsing
@@ -126,7 +140,21 @@ class RdapObject:
             try:
                 for rem in self._data["remarks"]:
                     if rem["title"] == "description":
-                        org_name = rem["description"][0]
+                        if org_name:
+                            org_name += ", "
+                        org_name += rem["description"][0]
+                        break
+            except KeyError:
+                pass
+
+        # RIPE keeps org info in remarks
+        elif "ripe" in self._data.get("port43", ""):
+            try:
+                for rem in self._data["remarks"]:
+                    if rem["description"]:
+                        if org_name:
+                            org_name += ", "
+                        org_name += rem["description"][0]
                         break
             except KeyError:
                 pass
@@ -137,6 +165,20 @@ class RdapObject:
             org_name=org_name,
             org_address=org_address,
         )
+
+    def get_rir(self):
+        """Gets the RIR for the object, if possible"""
+        try:
+            if "port43" in self._data:
+                if rir := rir_from_domain(self._data.get("port43")):
+                    return rir
+
+            if self._rdapc and self._rdapc.last_req_url:
+                if rir := rir_from_domain(self._rdapc.last_req_url):
+                    return rir
+
+        except Exception:
+            return None
 
 
 class RdapAsn(RdapObject):
