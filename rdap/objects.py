@@ -112,7 +112,7 @@ class RdapObject:
                 handle_url = self._rdapc.get_entity_url(handle)
 
             if "registrant" in roles:
-                if "fn" in vcard:
+                if "fn" in vcard and not vcard["fn"].endswith("-MNT"):
                     org_name = vcard["fn"]
                 if "adr" in vcard:
                     org_address = vcard["adr"]
