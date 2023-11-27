@@ -105,6 +105,7 @@ class RdapObject:
             vcard = self._parse_vcard(ent)
             emails |= vcard.get("emails", set())
             roles = ent.get("roles", [])
+            kind = vcard.get("kind", "")
             handle = ent.get("handle", None)
             # try for link to 'self', if registry doesn't supply it, fall back to creating it.
             handle_url = self._parse_entity_self_link(ent)
@@ -112,7 +113,7 @@ class RdapObject:
                 handle_url = self._rdapc.get_entity_url(handle)
 
             if "registrant" in roles:
-                if "fn" in vcard and not vcard["fn"].endswith("-MNT"):
+                if "fn" in vcard:
                     org_name = vcard["fn"]
                 if "adr" in vcard:
                     org_address = vcard["adr"]
@@ -134,6 +135,8 @@ class RdapObject:
                     except RdapHTTPError:
                         if not self._rdapc.config.get("ignore_recurse_errors"):
                             raise
+            if "org" in kind:
+                break
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
