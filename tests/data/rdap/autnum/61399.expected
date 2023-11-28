@@ -1,1 +1,8 @@
-{"org_address": "", "org_name": "", "emails": ["lir@kg-ix.net"], "name": "KG-IX"}
+{
+  "name": "KG-IX",
+  "emails": [
+    "lir@ix.kg"
+  ],
+  "org_name": "KG-IX LLC",
+  "org_address": "Razzakova st. 55\n720040\nBishkek\nKYRGYZSTAN"
+}

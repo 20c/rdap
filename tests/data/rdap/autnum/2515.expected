@@ -1,1 +1,8 @@
-{"org_address": "", "org_name": "Japan Network Information Center", "emails": [], "name": "JPNIC"}
+{
+  "name": "JPNIC",
+  "emails": [
+    "hostmaster@nic.ad.jp"
+  ],
+  "org_name": "Japan Network Information Center",
+  "org_address": ""
+}
