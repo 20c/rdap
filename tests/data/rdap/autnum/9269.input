@@ -87,92 +87,6 @@
   "entities": [
     {
       "roles": [
-        "registrant"
-      ],
-      "events": [
-        {
-          "eventAction": "registration",
-          "eventDate": "2017-08-21T12:56:42Z"
-        },
-        {
-          "eventAction": "last changed",
-          "eventDate": "2023-09-05T02:14:48Z"
-        }
-      ],
-      "links": [
-        {
-          "value": "https://rdap.apnic.net/autnum/9269",
-          "rel": "self",
-          "href": "https://rdap.apnic.net/entity/ORG-HKBN1-AP",
-          "type": "application/rdap+json"
-        }
-      ],
-      "vcardArray": [
-        "vcard",
-        [
-          [
-            "version",
-            {},
-            "text",
-            "4.0"
-          ],
-          [
-            "fn",
-            {},
-            "text",
-            "Hong Kong Broadband Network Ltd"
-          ],
-          [
-            "kind",
-            {},
-            "text",
-            "org"
-          ],
-          [
-            "adr",
-            {
-              "label": "15/F Trans Asia Centre\n18 Kin Hong Street"
-            },
-            "text",
-            [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
-            ]
-          ],
-          [
-            "tel",
-            {
-              "type": "voice"
-            },
-            "text",
-            "+852-3999-3888"
-          ],
-          [
-            "tel",
-            {
-              "type": "fax"
-            },
-            "text",
-            "+852-8167-7020"
-          ],
-          [
-            "email",
-            {},
-            "text",
-            "nocsn@hkbn.com.hk"
-          ]
-        ]
-      ],
-      "objectClassName": "entity",
-      "handle": "ORG-HKBN1-AP"
-    },
-    {
-      "roles": [
         "abuse"
       ],
       "events": [
@@ -257,6 +171,92 @@
       ],
       "objectClassName": "entity",
       "handle": "IRT-HKBN-HK"
+    },
+    {
+      "roles": [
+        "registrant"
+      ],
+      "events": [
+        {
+          "eventAction": "registration",
+          "eventDate": "2017-08-21T12:56:42Z"
+        },
+        {
+          "eventAction": "last changed",
+          "eventDate": "2023-09-05T02:14:48Z"
+        }
+      ],
+      "links": [
+        {
+          "value": "https://rdap.apnic.net/autnum/9269",
+          "rel": "self",
+          "href": "https://rdap.apnic.net/entity/ORG-HKBN1-AP",
+          "type": "application/rdap+json"
+        }
+      ],
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Hong Kong Broadband Network Ltd"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "org"
+          ],
+          [
+            "adr",
+            {
+              "label": "15/F Trans Asia Centre\n18 Kin Hong Street"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+852-3999-3888"
+          ],
+          [
+            "tel",
+            {
+              "type": "fax"
+            },
+            "text",
+            "+852-8167-7020"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "nocsn@hkbn.com.hk"
+          ]
+        ]
+      ],
+      "objectClassName": "entity",
+      "handle": "ORG-HKBN1-AP"
     },
     {
       "roles": [

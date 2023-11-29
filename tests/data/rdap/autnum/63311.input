@@ -203,9 +203,9 @@
             ]
           ],
           "roles": [
-            "administrative",
+            "technical",
             "abuse",
-            "technical"
+            "administrative"
           ],
           "links": [
             {

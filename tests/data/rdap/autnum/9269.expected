@@ -1,6 +1,8 @@
 {
   "name": "HKBN-AS-AP",
   "emails": [
+    "abuse@hkbn.net",
+    "hostmaster@hkbn.com.hk",
     "nocsn@hkbn.com.hk"
   ],
   "org_name": "Hong Kong Broadband Network Ltd, Hong Kong Broadband Network Ltd.",
