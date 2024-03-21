@@ -1,62 +1,429 @@
 {
-  "handle" : "AS205726",
-  "name" : "Vusam",
-  "type" : "DIRECT ALLOCATION",
-  "entities" : [ {
-    "handle" : "DJVG",
-    "roles" : [ "administrative", "technical" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "RIPE-NCC-END-MNT",
-    "roles" : [ "registrant" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "VUSAM",
-    "roles" : [ "registrant" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "VA33288-RIPE",
-    "vcardArray" : [ "vcard", [ [ "version", { }, "text", "4.0" ], [ "fn", { }, "text", "Vusam Abuse" ], [ "kind", { }, "text", "group" ], [ "adr", {
-      "label" : "Postbus 8160\n1180LD Amstelveen\nthe Netherlands"
-    }, "text", null ], [ "email", { }, "text", "abuse@vusam.com" ] ] ],
-    "roles" : [ "abuse" ],
-    "entities" : [ {
-      "handle" : "VUSAM",
-      "roles" : [ "registrant" ],
-      "objectClassName" : "entity"
-    } ],
-    "objectClassName" : "entity"
-  } ],
-  "links" : [ {
-    "value" : "https://rdap.db.ripe.net/autnum/205726",
-    "rel" : "self",
-    "href" : "https://rdap.db.ripe.net/autnum/205726"
-  }, {
-    "value" : "http://www.ripe.net/data-tools/support/documentation/terms",
-    "rel" : "copyright",
-    "href" : "http://www.ripe.net/data-tools/support/documentation/terms"
-  } ],
-  "events" : [ {
-    "eventAction" : "last changed",
-    "eventDate" : "2017-11-15T13:42:22Z"
-  } ],
-  "rdapConformance" : [ "rdap_level_0" ],
-  "notices" : [ {
-    "title" : "Filtered",
-    "description" : [ "This output has been filtered." ]
-  }, {
-    "title" : "Source",
-    "description" : [ "Objects returned came from source", "RIPE" ]
-  }, {
-    "title" : "Terms and Conditions",
-    "description" : [ "This is the RIPE Database query service. The objects are in RDAP format." ],
-    "links" : [ {
-      "value" : "https://rdap.db.ripe.net/autnum/205726",
-      "rel" : "terms-of-service",
-      "href" : "http://www.ripe.net/db/support/db-terms-conditions.pdf",
-      "type" : "application/pdf"
-    } ]
-  } ],
-  "port43" : "whois.ripe.net",
-  "objectClassName" : "autnum"
+  "handle": "AS205726",
+  "startAutnum": 205726,
+  "endAutnum": 205726,
+  "name": "Vusam",
+  "status": [
+    "active"
+  ],
+  "entities": [
+    {
+      "handle": "DJVG",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Daan van Gorkum"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ],
+          [
+            "adr",
+            {
+              "label": "Postbus 8515\n8934BT Leeuwarden\nthe Netherlands"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+31203080063"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "daan.vangorkum@vusam.com"
+          ]
+        ]
+      ],
+      "roles": [
+        "technical",
+        "administrative"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/205726",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/DJVG"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "ORG-DJVG1-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Daan Jurriaan van Gorkum trading as Vusam V.O.F"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "org"
+          ],
+          [
+            "adr",
+            {
+              "label": "Postbus 8515\n8934BT\nLeeuwarden\nNETHERLANDS"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+31203080063"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "support@vusam.com"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/205726",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/ORG-DJVG1-RIPE"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "RIPE-NCC-END-MNT",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "RIPE-NCC-END-MNT"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ],
+          [
+            "org",
+            {},
+            "text",
+            "ORG-NCC1-RIPE"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/205726",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/RIPE-NCC-END-MNT"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "VUSAM",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "VUSAM"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/205726",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/VUSAM"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "VA33288-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Vusam Abuse"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "Postbus 8515\n8934BT Leeuwarden\nthe Netherlands"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "abuse@vusam.com"
+          ],
+          [
+            "email",
+            {
+              "type": "abuse"
+            },
+            "text",
+            "abuse@vusam.com"
+          ]
+        ]
+      ],
+      "roles": [
+        "abuse"
+      ],
+      "entities": [
+        {
+          "handle": "VUSAM",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "VUSAM"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ]
+            ]
+          ],
+          "roles": [
+            "registrant"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/205726",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/VUSAM"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        }
+      ],
+      "objectClassName": "entity"
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.db.ripe.net/autnum/205726",
+      "rel": "self",
+      "href": "https://rdap.db.ripe.net/autnum/205726"
+    },
+    {
+      "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+      "rel": "copyright",
+      "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+    }
+  ],
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "2017-06-15T08:42:44Z"
+    },
+    {
+      "eventAction": "last changed",
+      "eventDate": "2021-11-10T09:30:40Z"
+    }
+  ],
+  "rdapConformance": [
+    "nro_rdap_profile_asn_flat_0",
+    "cidr0",
+    "rdap_level_0",
+    "nro_rdap_profile_0"
+  ],
+  "notices": [
+    {
+      "title": "Filtered",
+      "description": [
+        "This output has been filtered."
+      ]
+    },
+    {
+      "title": "Whois Inaccuracy Reporting",
+      "description": [
+        "If you see inaccuracies in the results, please visit:"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/205726",
+          "rel": "inaccuracy-report",
+          "href": "https://www.ripe.net/contact-form?topic=ripe_dbm&show_form=true",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "title": "Source",
+      "description": [
+        "Objects returned came from source",
+        "RIPE"
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the RIPE Database query service. The objects are in RDAP format."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/205726",
+          "rel": "terms-of-service",
+          "href": "http://www.ripe.net/db/support/db-terms-conditions.pdf",
+          "type": "application/pdf"
+        }
+      ]
+    }
+  ],
+  "port43": "whois.ripe.net",
+  "objectClassName": "autnum"
 }
