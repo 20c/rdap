@@ -37,10 +37,10 @@ munge = {version = ">=1.3", extras = ["yaml"]}
 coverage = ">=5"
 pytest = ">=6"
 pytest-django = ">=3.8"
-pytest-filedata = "^0.4.0"
+pytest-filedata = ">=0.4.0"
 pytest-cov = "*"
 tox = ">=3.20"
-tox-gh-actions = "^2.9.1"
+tox-gh-actions = ">2.9.1"
 
 # linting
 black = ">=20"
