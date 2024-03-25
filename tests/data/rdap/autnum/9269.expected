@@ -1,1 +1,10 @@
-{"org_address": "", "org_name": "Hong Kong Broadband Network Ltd.", "emails": ["abuse@hkbn.net", "hostmaster@hkbn.com.hk"], "name": "HKBN-AS-AP"}
+{
+  "name": "HKBN-AS-AP",
+  "emails": [
+    "abuse@hkbn.net",
+    "hostmaster@hkbn.com.hk",
+    "nocsn@hkbn.com.hk"
+  ],
+  "org_name": "Hong Kong Broadband Network Ltd, Hong Kong Broadband Network Ltd.",
+  "org_address": "15/F Trans Asia Centre\n18 Kin Hong Street"
+}

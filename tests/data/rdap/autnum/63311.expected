@@ -1,1 +1,8 @@
-{"org_address": "303 W Ohio #1701\nChicago\nIL\n60654\nUNITED STATES", "org_name": "20C, LLC", "emails": ["neteng@20c.com"], "name": "AS-20C"}
+{
+  "name": "20C",
+  "emails": [
+    "neteng@20c.com"
+  ],
+  "org_name": "20C, LLC",
+  "org_address": "303 W Ohio #1701\nChicago\nIL\n60654\nUnited States"
+}

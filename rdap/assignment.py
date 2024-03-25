@@ -5,7 +5,6 @@ import requests
 
 
 class RIRAssignmentLookup:
-
     """
     Fetch RIR assignement status lists from ripe and lookup
     assignment per asn

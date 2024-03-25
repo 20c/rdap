@@ -1,54 +1,215 @@
 {
-  "handle" : "AS2515",
-  "startAutnum" : 2515,
-  "endAutnum" : 2515,
-  "name" : "JPNIC",
-  "country" : "JP",
-  "objectClassName" : "autnum",
-  "entities" : [ {
-    "handle" : "AS5496JP",
-    "roles" : [ "technical" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "EK6175JP",
-    "roles" : [ "technical" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "HH11825JP",
-    "roles" : [ "administrative" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "MO5920JP",
-    "roles" : [ "technical" ],
-    "objectClassName" : "entity"
-  }, {
-    "handle" : "YK11438JP",
-    "roles" : [ "technical" ],
-    "objectClassName" : "entity"
-  } ],
-  "remarks" : [ {
-    "title" : "description",
-    "description" : [ "Japan Network Information Center" ]
-  } ],
-  "links" : [ {
-    "value" : "https://rdap.apnic.net/autnum/2515",
-    "rel" : "self",
-    "href" : "https://rdap.apnic.net/autnum/2515",
-    "type" : "application/rdap+json"
-  } ],
-  "rdapConformance" : [ "rdap_level_0" ],
-  "notices" : [ {
-    "title" : "Source",
-    "description" : [ "Objects returned came from source", "JPNIC" ]
-  }, {
-    "title" : "Terms and Conditions",
-    "description" : [ "This is the APNIC WHOIS Database query service. The objects are in RDAP format." ],
-    "links" : [ {
-      "value" : "https://rdap.apnic.net/autnum/2515",
-      "rel" : "terms-of-service",
-      "href" : "http://www.apnic.net/db/dbcopyright.html",
-      "type" : "text/html"
-    } ]
-  } ],
-  "port43" : "whois.apnic.net"
+  "rdapConformance": [
+    "nro_rdap_profile_0",
+    "nro_rdap_profile_asn_hierarchical_0",
+    "cidr0",
+    "rdap_level_0"
+  ],
+  "notices": [
+    {
+      "title": "Source",
+      "description": [
+        "Objects returned came from source",
+        "JPNIC"
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the APNIC WHOIS Database query service. The objects are in RDAP format.",
+        "This information has been partially mirrored by APNIC from JPNIC. To obtain more specific information, please use the JPNIC WHOIS Gateway at http://www.nic.ad.jp/en/db/whois/en-gateway.html or whois.nic.ad.jp for WHOIS client. (The WHOIS client defaults to Japanese output, use the /e switch for English output)"
+      ],
+      "links": [
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "terms-of-service",
+          "href": "http://www.apnic.net/db/dbcopyright.html",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "title": "Whois Inaccuracy Reporting",
+      "description": [
+        "If you see inaccuracies in the results, please visit: "
+      ],
+      "links": [
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "inaccuracy-report",
+          "href": "https://www.apnic.net/manage-ip/using-whois/abuse-and-spamming/invalid-contact-form",
+          "type": "text/html"
+        }
+      ]
+    }
+  ],
+  "country": "JP",
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2023-06-20T01:29:02Z"
+    }
+  ],
+  "name": "JPNIC",
+  "remarks": [
+    {
+      "description": [
+        "Japan Network Information Center"
+      ],
+      "title": "description"
+    }
+  ],
+  "links": [
+    {
+      "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+      "rel": "self",
+      "href": "https://jpnic.rdap.apnic.net/autnum/2515",
+      "type": "application/rdap+json"
+    },
+    {
+      "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+      "rel": "related",
+      "href": "https://netox.apnic.net/search/AS2515?utm_source=rdap&utm_medium=result&utm_campaign=rdap_result",
+      "type": "text/html"
+    }
+  ],
+  "status": [
+    "active"
+  ],
+  "handle": "AS2515",
+  "endAutnum": 2515,
+  "startAutnum": 2515,
+  "objectClassName": "autnum",
+  "entities": [
+    {
+      "roles": [
+        "administrative",
+        "technical"
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2022-01-05T03:04:02Z"
+        }
+      ],
+      "links": [
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "self",
+          "href": "https://jpnic.rdap.apnic.net/entity/JNIC1-AP",
+          "type": "application/rdap+json"
+        }
+      ],
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Japan Network Information Center"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "Uchikanda OS Bldg 4F, 2-12-6 Uchi-Kanda\nChiyoda-ku, Tokyo 101-0047, Japan"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+81-3-5297-2311"
+          ],
+          [
+            "tel",
+            {
+              "type": "fax"
+            },
+            "text",
+            "+81-3-5297-2312"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "hostmaster@nic.ad.jp"
+          ]
+        ]
+      ],
+      "objectClassName": "entity",
+      "handle": "JNIC1-AP"
+    },
+    {
+      "roles": [
+        "technical"
+      ],
+      "links": [
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "related",
+          "href": "http://whois.nic.ad.jp/cgi-bin/whois_gw?key=YK11438JP/e",
+          "type": "text/html",
+          "hreflang": "en"
+        },
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "related",
+          "href": "http://whois.nic.ad.jp/cgi-bin/whois_gw?key=YK11438JP",
+          "type": "text/html",
+          "hreflang": "jp"
+        }
+      ],
+      "objectClassName": "entity",
+      "handle": "YK11438JP"
+    },
+    {
+      "roles": [
+        "technical"
+      ],
+      "links": [
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "related",
+          "href": "http://whois.nic.ad.jp/cgi-bin/whois_gw?key=EK6175JP/e",
+          "type": "text/html",
+          "hreflang": "en"
+        },
+        {
+          "value": "https://jpnic.rdap.apnic.net/autnum/2515",
+          "rel": "related",
+          "href": "http://whois.nic.ad.jp/cgi-bin/whois_gw?key=EK6175JP",
+          "type": "text/html",
+          "hreflang": "jp"
+        }
+      ],
+      "objectClassName": "entity",
+      "handle": "EK6175JP"
+    }
+  ],
+  "port43": "whois.apnic.net"
 }

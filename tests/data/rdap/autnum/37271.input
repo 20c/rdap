@@ -1,70 +1,368 @@
 {
-  "lang" : "en",
-  "notices" : [ {
-    "title" : "ABOUT",
-    "description" : [ "This is the AfriNIC RDAP server." ],
-    "links" : [ {
-      "value" : "https://rdap.afrinic.net/rdap/autnum/37271",
-      "rel" : "describedby",
-      "href" : "http://www.afrinic.net/en/library/membership-documents/197-database-afrinic-database-reference-manual-",
-      "hreflang" : [ "en" ],
-      "type" : "text/html",
-      "title" : "AFRINIC Database Reference Manual",
-      "media" : "screen"
-    } ]
-  } ],
-  "handle" : "AS37271",
-  "status" : [ "active" ],
-  "port43" : "whois.afrinic.net",
-  "name" : "ORG-WCL1-AFRINIC",
-  "entities" : [ {
-    "lang" : "en",
-    "handle" : "WOL-AFRINIC",
-    "status" : [ "active" ],
-    "port43" : "whois.afrinic.net",
-    "vcardArray" : [ "vcard", [ [ "version", { }, "text", "4.0" ], [ "kind", { }, "text", "group" ], [ "fn", { }, "text", "Workonline NOC" ], [ "tel", {
-      "type" : "work"
-    }, "uri", "tel:+27 21 200 9009" ], [ "email", {
-      "type" : "work"
-    }, "text", "noc@workonline.co.za" ], [ "adr", {
-      "type" : "work"
-    }, "text", [ "30 Waterkant St", "Cape Town", "South Africa", "", "", "", "" ] ] ] ],
-    "objectClassName" : "entity"
-  }, {
-    "lang" : "en",
-    "handle" : "ORG-WCL1-AFRINIC",
-    "status" : [ "active" ],
-    "port43" : "whois.afrinic.net",
-    "vcardArray" : [ "vcard", [ [ "version", { }, "text", "4.0" ], [ "kind", { }, "text", "org" ], [ "fn", { }, "text", "ORG-WCL1-AFRINIC" ], [ "tel", {
-      "type" : "work"
-    }, "uri", "tel:+27 21 200 9000" ], [ "tel", {
-      "type" : "work"
-    }, "uri", "tel:+27 21 200 9009" ], [ "tel", {
-      "type" : "work"
-    }, "uri", "tel:+27761157753" ], [ "email", {
-      "type" : "work"
-    }, "text", "communications@workonline.co.za" ], [ "email", {
-      "type" : "work"
-    }, "text", "robertj@workonline.co.za" ], [ "adr", {
-      "type" : "work"
-    }, "text", [ "30 Waterkant St", "Cape Town 8001", "", "", "", "", "" ] ] ] ],
-    "objectClassName" : "entity"
-  }, {
-    "lang" : "en",
-    "handle" : "RJ2-AFRINIC",
-    "status" : [ "active" ],
-    "port43" : "whois.afrinic.net",
-    "vcardArray" : [ "vcard", [ [ "version", { }, "text", "4.0" ], [ "kind", { }, "text", "individual" ], [ "fn", { }, "text", "Robert Jooste" ], [ "tel", {
-      "type" : "work"
-    }, "uri", "tel:+27761157753" ], [ "email", {
-      "type" : "work"
-    }, "text", "robertj@workonline.co.za" ], [ "adr", {
-      "type" : "work"
-    }, "text", [ "il Palazzo Unit 2, 5 Zenith Drive, Umhlanga Rocks", "Durban", "South Africa", "", "", "", "" ] ] ] ],
-    "objectClassName" : "entity"
-  } ],
-  "startAutnum" : 37271,
-  "endAutnum" : 37271,
-  "objectClassName" : "autnum",
-  "rdapConformance" : [ "rdap_level_0" ]
+  "rdapConformance": [
+    "rdap_level_0",
+    "nro_rdap_profile_0",
+    "nro_rdap_profile_asn_flat_0"
+  ],
+  "notices": [
+    {
+      "title": "ABOUT",
+      "description": [
+        "This is the AfriNIC RDAP server."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "describedby",
+          "href": "https://www.afrinic.net/support/whois-db/reference-manual",
+          "hreflang": [
+            "en"
+          ],
+          "type": "text/html",
+          "title": "AFRINIC Database Reference Manual",
+          "media": "screen"
+        }
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the AFRINIC Database query service. The objects are in RDAP format."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "terms-of-service",
+          "href": "https://afrinic.net/whois/terms",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "title": "Whois Inaccuracy Reporting",
+      "description": [
+        "If you see inaccuracies in the results, please visit: "
+      ],
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "inaccuracy-report",
+          "href": "https://www.afrinic.net/support/whois-db/reference-manual",
+          "type": "text/html",
+          "title": "AFRINIC WHOIS Inaccuracy Report"
+        }
+      ]
+    },
+    {
+      "title": "jCard sunset end",
+      "description": [
+        "2023-12-31T23:59:59Z"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "related",
+          "href": "https://www.ietf.org/id/draft-ietf-regext-rdap-jscontact-12.html",
+          "type": "text/html",
+          "title": "jCard deprecation and replacement with JSContact Card"
+        },
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "alternate",
+          "href": "https://rdap.afrinic.net/rdap/autnum/37271?jscard=1",
+          "type": "application/rdap+json",
+          "title": "JSContact Card version"
+        }
+      ]
+    },
+    {
+      "title": "jCard deprecation end",
+      "description": [
+        "2022-12-31T23:59:59Z"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "related",
+          "href": "https://www.ietf.org/id/draft-ietf-regext-rdap-jscontact-12.html",
+          "type": "text/html",
+          "title": "jCard deprecation and replacement with JSContact Card"
+        },
+        {
+          "value": "https://rdap.afrinic.net/rdap/autnum/37271",
+          "rel": "alternate",
+          "href": "https://rdap.afrinic.net/rdap/autnum/37271?jscard=1",
+          "type": "application/rdap+json",
+          "title": "JSContact Card version"
+        }
+      ]
+    }
+  ],
+  "lang": "en",
+  "links": [
+    {
+      "value": "https://rdap.afrinic.net/rdap/autnum/AS37271",
+      "rel": "self",
+      "href": "https://rdap.afrinic.net/rdap/autnum/AS37271"
+    }
+  ],
+  "handle": "AS37271",
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "2010-10-25T10:14:00Z"
+    },
+    {
+      "eventAction": "last changed",
+      "eventDate": "2022-08-08T10:03:00Z"
+    }
+  ],
+  "status": [
+    "active"
+  ],
+  "port43": "whois.afrinic.net",
+  "name": "ORG-WCL1-AFRINIC",
+  "entities": [
+    {
+      "lang": "en",
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/entity/ORG-WCL1-AFRINIC",
+          "rel": "self",
+          "href": "https://rdap.afrinic.net/rdap/entity/ORG-WCL1-AFRINIC"
+        }
+      ],
+      "handle": "ORG-WCL1-AFRINIC",
+      "status": [
+        "active"
+      ],
+      "port43": "whois.afrinic.net",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "org"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Workonline Communications(Pty) Ltd"
+          ],
+          [
+            "tel",
+            {
+              "type": "work"
+            },
+            "text",
+            "tel:+27-21-200-9000"
+          ],
+          [
+            "tel",
+            {
+              "type": "work"
+            },
+            "text",
+            "tel:+27-21-200-9009"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "noc@workonline.africa"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "abuse@workonline.africa"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "communications@workonline.africa"
+          ],
+          [
+            "adr",
+            {
+              "label": "114 West St\nJohannesburg 2196"
+            },
+            "text",
+            [
+              "114 West St",
+              "Johannesburg 2196",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "lang": "en",
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/entity/PP17-AFRINIC",
+          "rel": "self",
+          "href": "https://rdap.afrinic.net/rdap/entity/PP17-AFRINIC"
+        }
+      ],
+      "handle": "PP17-AFRINIC",
+      "status": [
+        "active"
+      ],
+      "port43": "whois.afrinic.net",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Peter Peele"
+          ],
+          [
+            "tel",
+            {
+              "type": "work"
+            },
+            "text",
+            "tel:+27-82-064-3322"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "peterp@workonline.africa"
+          ],
+          [
+            "adr",
+            {
+              "label": "114 West Street\nSandton\nSouth Africa\nPostal Code 2066"
+            },
+            "text",
+            [
+              "114 West Street",
+              "Sandton",
+              "South Africa",
+              "Postal Code 2066",
+              "",
+              "",
+              ""
+            ]
+          ]
+        ]
+      ],
+      "roles": [
+        "administrative",
+        "technical"
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "lang": "en",
+      "links": [
+        {
+          "value": "https://rdap.afrinic.net/rdap/entity/WOL-AFRINIC",
+          "rel": "self",
+          "href": "https://rdap.afrinic.net/rdap/entity/WOL-AFRINIC"
+        }
+      ],
+      "handle": "WOL-AFRINIC",
+      "status": [
+        "active"
+      ],
+      "port43": "whois.afrinic.net",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Workonline NOC"
+          ],
+          [
+            "tel",
+            {
+              "type": "work"
+            },
+            "text",
+            "tel:+27-21-200-9009"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "noc@workonline.africa"
+          ],
+          [
+            "adr",
+            {
+              "label": "114 West St\nJohannesburg 2196\nSouth Africa"
+            },
+            "text",
+            [
+              "114 West St",
+              "Johannesburg 2196",
+              "South Africa",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ]
+        ]
+      ],
+      "roles": [
+        "administrative",
+        "technical"
+      ],
+      "objectClassName": "entity"
+    }
+  ],
+  "startAutnum": 37271,
+  "endAutnum": 37271,
+  "objectClassName": "autnum"
 }

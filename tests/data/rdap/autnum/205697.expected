@@ -1,1 +1,9 @@
-{"org_address": "", "org_name": "", "emails": ["abuse@alojalia.com", "angel@alojalia.com"], "name": "ALOJALIA"}
+{
+  "name": "ALOJALIA",
+  "emails": [
+    "alejandro@alojalia.com",
+    "angel@alojalia.com"
+  ],
+  "org_name": "ALOJALIA CLOUD S.L., ================================",
+  "org_address": "Avd. Federico Anaya, 52 3C\n37004\nSalamanca\nSPAIN"
+}
