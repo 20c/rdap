@@ -101,6 +101,7 @@ class RdapObject:
         org_name = ""
         org_address = ""
         org_name_final = False
+        org_address_final = False
 
         for ent in self._data.get("entities", []):
             vcard = self._parse_vcard(ent)
@@ -118,8 +119,10 @@ class RdapObject:
                     org_name = vcard["fn"]
                     if "org" in kind:
                         org_name_final = True
-                if "adr" in vcard:
+                if "adr" in vcard and not org_address_final:
                     org_address = vcard["adr"]
+                    if "org" in kind:
+                        org_address_final = True
 
             # check nested entities
             for nent in ent.get("entities", []):
