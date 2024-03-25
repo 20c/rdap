@@ -2,6 +2,8 @@
 
 
 ## Unreleased
+### Fixed
+- issue introduced in 1.5.1 that could cause some contact points to be lost
 
 
 ## 1.5.1
