@@ -116,6 +116,8 @@ class RdapObject:
             if "registrant" in roles:
                 if "fn" in vcard and not org_name_final:
                     org_name = vcard["fn"]
+                    if "org" in kind:
+                        org_name_final = True
                 if "adr" in vcard:
                     org_address = vcard["adr"]
 
@@ -136,8 +138,6 @@ class RdapObject:
                     except RdapHTTPError:
                         if not self._rdapc.config.get("ignore_recurse_errors"):
                             raise
-            if "org" in kind and org_name:
-                org_name_final = True
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
