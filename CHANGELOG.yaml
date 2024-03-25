@@ -1,6 +1,7 @@
 Unreleased:
   added: []
-  fixed: []
+  fixed:
+  - fixes problem where ASN lookup would sometimes return incorrect organization names through maintainer object entities.
   changed: []
   deprecated: []
   removed: []
