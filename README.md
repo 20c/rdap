@@ -72,7 +72,7 @@ rdap:
 
 ### License
 
-Copyright 2016-2023 20C, LLC
+Copyright 2016-2024 20C, LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this softare except in compliance with the License.
