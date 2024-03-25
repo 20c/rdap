@@ -3,7 +3,7 @@
 
 ## Unreleased
 ### Fixed
-- fixes problem where ASN lookup would sometimes return incorrect organization names through maintainer object entities.
+- fixes problem where ASN lookup would sometimes return incorrect organization names through maintainer objects.
 
 
 ## 1.5.0
