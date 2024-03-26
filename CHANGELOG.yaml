@@ -1,6 +1,7 @@
 Unreleased:
   added: []
-  fixed: []
+  fixed:
+  - issue introduced in 1.5.1 that could cause some contact points to be lost
   changed: []
   deprecated: []
   removed: []

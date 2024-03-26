@@ -100,6 +100,8 @@ class RdapObject:
         emails = set()
         org_name = ""
         org_address = ""
+        org_name_final = False
+        org_address_final = False
 
         for ent in self._data.get("entities", []):
             vcard = self._parse_vcard(ent)
@@ -113,10 +115,14 @@ class RdapObject:
                 handle_url = self._rdapc.get_entity_url(handle)
 
             if "registrant" in roles:
-                if "fn" in vcard:
+                if "fn" in vcard and not org_name_final:
                     org_name = vcard["fn"]
-                if "adr" in vcard:
+                    if "org" in kind:
+                        org_name_final = True
+                if "adr" in vcard and not org_address_final:
                     org_address = vcard["adr"]
+                    if "org" in kind:
+                        org_address_final = True
 
             # check nested entities
             for nent in ent.get("entities", []):
@@ -135,8 +141,6 @@ class RdapObject:
                     except RdapHTTPError:
                         if not self._rdapc.config.get("ignore_recurse_errors"):
                             raise
-            if "org" in kind:
-                break
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
