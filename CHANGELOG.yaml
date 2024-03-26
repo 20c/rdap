@@ -1,11 +1,13 @@
 Unreleased:
   added: []
-  fixed:
-  - issue introduced in 1.5.1 that could cause some contact points to be lost
+  fixed: []
   changed: []
   deprecated: []
   removed: []
   security: []
+1.5.2:
+  fixed:
+  - issue introduced in 1.5.1 that could cause some contact points to be lost
 1.5.1:
   fixed:
   - fixes problem where ASN lookup would sometimes return incorrect organization names
