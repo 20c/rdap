@@ -30,7 +30,7 @@ rdap = "rdap.cli:main"
 python = "^3.8"
 requests = ">=2.25.1"
 munge = {version = ">=1.3", extras = ["yaml"]}
-pydantic = ">2.8.2"
+pydantic = ">=2.8.2"
 
 [tool.poetry.dev-dependencies]
 # testing
