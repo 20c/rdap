@@ -2,7 +2,7 @@
 Pydantic schemas for normalized RDAP data
 """
 
-import datetime
+from datetime import datetime
 import pydantic
 import enum
 import ipaddress
@@ -118,7 +118,7 @@ class IPNetwork(pydantic.BaseModel):
     version: IP_VERSION
     name: str
     type: str
-    STATUS: STATUS
+    status: STATUS
     parent: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)

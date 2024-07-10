@@ -1,6 +1,6 @@
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 
-from rdap.schema.source import autnum_model
+from rdap.normalize import normalize
 
 def rir_from_domain(domain):
     """Gets the RIR from a URL or domain, if possible"""
@@ -206,10 +206,9 @@ class RdapAsn(RdapObject):
 
         super().__init__(data, rdapc)
 
-
     @property
-    def model(self):
-        return autnum_model(self.get_rir())(**self._data)
+    def normalized(self):
+        normalize(self._data, self.get_rir(), "autnum")
 
 class RdapNetwork(RdapObject):
     def __init__(self, data, rdapc=None):

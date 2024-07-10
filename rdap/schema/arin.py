@@ -34,32 +34,6 @@ class VCardValue(BaseModel):
     # Types associated with the vCard value (e.g., "work", "voice" for telephone)
     type: list[str] | None = None
 
-class VCardEntry(BaseModel):
-    """Represents a single entry in a vCard."""
-    # The name of the vCard property (e.g., "version", "fn", "adr")
-    name: str
-    # Metadata associated with the entry
-    meta: dict = Field(default_factory=dict)
-    # The value of the vCard property
-    value: str | list[str] | VCardValue
-
-class VCard(BaseModel):
-    """Represents a vCard (contact information) in the RDAP response."""
-    version: VCardEntry
-    # Formatted Name
-    fn: VCardEntry
-    # Address
-    adr: VCardEntry | None = None
-    # Kind of object (e.g., individual, org, group)
-    kind: VCardEntry | None = None
-    email: VCardEntry | None = None
-    # Telephone
-    tel: VCardEntry | None = None
-    # Name components
-    n: VCardEntry | None = None
-    # Organization
-    org: VCardEntry | None = None
-
 class Remark(BaseModel):
     """Represents a remark or comment in the RDAP response."""
     # The title of the remark
@@ -72,7 +46,7 @@ class Entity(BaseModel):
     # A unique identifier for the entity
     handle: str
     # Contact information in vCard format
-    vcardArray: list[str | list[VCardEntry] | list[Any]] = Field(default_factory=list)
+    vcardArray: list[str | list[list[str | dict | list]]] = Field(default_factory=list)
     # Roles of the entity (e.g., registrant, technical, administrative)
     roles: list[str]
     # Links related to the entity
@@ -182,4 +156,5 @@ class AutNum(BaseModel):
     # Status of the AS number
     status: list[str] = Field(default_factory=list)
 
-Entity.update_forward_refs()
+
+Entity.model_rebuild()

@@ -49,6 +49,9 @@ def main(argv=None):
     parser.add_argument(
         "--parse", action="store_true", help="parse data into object before display"
     )
+    parser.add_argument(
+        "--normalize", action="store_true", help="normalize data before display"
+    )
     parser.add_argument("--rir", action="store_true", help="display rir", default=False)
     parser.add_argument(
         "--write-bootstrap-data",
@@ -80,6 +83,8 @@ def main(argv=None):
             print(f"rir: {obj.get_rir()}")
         if argd.get("parse", False):
             print(codec.dumps(obj.parsed()))
+        elif argd.get("normalize", False):
+            obj.normalized
         else:
             print(codec.dumps(obj.data))
 
