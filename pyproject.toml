@@ -31,6 +31,7 @@ python = "^3.8"
 requests = ">=2.25.1"
 munge = {version = ">=1.3", extras = ["yaml"]}
 pydantic = ">=2.8.2"
+googlemaps = ">=4.10"
 
 [tool.poetry.dev-dependencies]
 # testing

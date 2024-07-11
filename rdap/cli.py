@@ -6,6 +6,7 @@ import munge.click
 
 import rdap
 from rdap.config import Config
+from rdap.context import RdapRequestContext
 
 
 def add_options(parser, options):
@@ -78,15 +79,16 @@ def main(argv=None):
 
     codec = munge.get_codec(output_format)()
     for each in argd["query"]:
-        obj = client.get(each)
-        if argd.get("rir", False):
-            print(f"rir: {obj.get_rir()}")
-        if argd.get("parse", False):
-            print(codec.dumps(obj.parsed()))
-        elif argd.get("normalize", False):
-            obj.normalized
-        else:
-            print(codec.dumps(obj.data))
+        with RdapRequestContext():
+            obj = client.get(each)
+            if argd.get("rir", False):
+                print(f"rir: {obj.get_rir()}")
+            if argd.get("parse", False):
+                print(codec.dumps(obj.parsed()))
+            elif argd.get("normalize", False):
+                obj.normalized
+            else:
+                print(codec.dumps(obj.data))
 
     if argd.get("show_requests", False):
         print("# Requests")

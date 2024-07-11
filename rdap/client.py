@@ -10,6 +10,7 @@ import requests
 
 import rdap
 import rdap.bootstrap
+from rdap.context import RdapRequestContext
 from rdap.config import Config
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork
@@ -129,20 +130,21 @@ class RdapClient:
         )
 
     def _get(self, url):
-        res = self.http.get(url, timeout=self.timeout)
-        for redir in res.history:
-            self._history.append((strip_auth(redir.url), redir.status_code))
-        self._history.append((strip_auth(res.url), res.status_code))
+        with RdapRequestContext(url):
+            res = self.http.get(url, timeout=self.timeout)
+            for redir in res.history:
+                self._history.append((strip_auth(redir.url), redir.status_code))
+            self._history.append((strip_auth(res.url), res.status_code))
 
-        if res.status_code == 200:
-            return res
+            if res.status_code == 200:
+                return res
 
-        msg = "RDAP lookup to {} returned {}".format(
-            strip_auth(res.url), res.status_code
-        )
-        if res.status_code == 404:
-            raise RdapNotFoundError(msg)
-        raise RdapHTTPError(msg)
+            msg = "RDAP lookup to {} returned {}".format(
+                strip_auth(res.url), res.status_code
+            )
+            if res.status_code == 404:
+                raise RdapNotFoundError(msg)
+            raise RdapHTTPError(msg)
 
     def asn_url(self, asn):
         """Gets the correct url for specified ASN."""

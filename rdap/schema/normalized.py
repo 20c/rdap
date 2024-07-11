@@ -3,6 +3,7 @@ Pydantic schemas for normalized RDAP data
 """
 
 from datetime import datetime
+from typing import Any
 import pydantic
 import enum
 import ipaddress
@@ -40,6 +41,11 @@ class ROLE(str, enum.Enum):
     admin = "admin"
     policy = "policy"
     technical = "technical"
+    registrant = "registrant"
+
+NORMALIZED_ROLES = {
+    "administrative": "admin"
+}
 
 class DNSSEC(str, enum.Enum):
     secure = "secure"
@@ -70,12 +76,30 @@ class Contact(pydantic.BaseModel):
     """
     Describes a point of contact
     """
-    created: datetime
-    updated: datetime
+    #created: datetime
+    #updated: datetime
     name: str
     roles: list[ROLE] = pydantic.Field(default_factory=list)
     phone: str | None = None
     email: str | None = None
+
+    @pydantic.model_validator(mode="before")
+    @classmethod
+    def normalize_roles(cls, data: Any) -> Any:
+        
+        roles = []
+
+        for role in data.get("roles", []):
+            role = NORMALIZED_ROLES.get(role, role)
+            roles.append(role)
+        
+        data["roles"] = roles
+
+        return data
+
+
+    def __hash__(self):
+        return f"{self.name}-{self.email}-{self.phone}: {self.roles}".__hash__()
 
 class Source(pydantic.BaseModel):
     """
@@ -105,7 +129,7 @@ class Network(pydantic.BaseModel):
     asn: int
     name: str
     organization: Organization
-    location: Location
+    location: Location | None = None
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)
 
@@ -114,6 +138,8 @@ class IPNetwork(pydantic.BaseModel):
     """
     Describes an IP network
     """
+    created: datetime
+    updated: datetime
     prefix: ipaddress.IPv4Network | ipaddress.IPv6Network
     version: IP_VERSION
     name: str
@@ -127,6 +153,8 @@ class Entity(pydantic.BaseModel):
     """
     Describes an entity
     """
+    created: datetime
+    updated: datetime
     name: str
     organization: Organization
     location: Location
@@ -143,6 +171,8 @@ class Domain(pydantic.BaseModel):
     """
     Describes a domain
     """
+    created: datetime
+    updated: datetime
     name: str
     handle: str
     dns_sec: DNSSEC
