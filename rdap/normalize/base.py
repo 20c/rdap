@@ -167,6 +167,8 @@ def recurse_contacts(entity: schema.Entity, contacts: list[Contact], roles: list
                     ])
             # check for HTTP Errors to ignore
             except RdapHTTPError:
+                # TODO: Do we ever want to raise on broken links?
+                # Probably not.
                 pass
 
 
@@ -263,6 +265,18 @@ def parent_prefix(ip_network: schema.IPNetwork) -> ipaddress.IPv4Network | ipadd
 
 
 def secure_dns(domain: schema.Domain) -> DNSSEC:
+    """
+    Will determine if the domain has secure DNS
+
+    This is determined by the `secureDNS` object
+
+    If `delegationSigned` or `zeroSigned` is True, will return secure
+
+    If both are False, will return insecure
+
+    If secureDNS is not present, or both are None, will return unknown
+    """
+
     if not domain.secureDNS:
         return DNSSEC.unknown
 
@@ -276,6 +290,10 @@ def secure_dns(domain: schema.Domain) -> DNSSEC:
 
 
 def nameservers(domain: schema.Domain) -> list[Nameserver]:
+    """
+    Returns normalized nameservers from a domain object
+    """
+
     nameservers = []
 
     for nameserver in domain.nameservers:
