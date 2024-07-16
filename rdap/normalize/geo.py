@@ -20,7 +20,14 @@ class Timeout(Exception):
 class NotFound(KeyError):
     pass
 
+class GoogleKeyNotSet(Exception):
+    pass
+
 def get_client(key:str = GOOGLE_MAPS_API_KEY):
+
+    if not key:
+        raise GoogleKeyNotSet("Google Maps API Key not set")
+
     return googlemaps.Client(key)
 
 
@@ -59,7 +66,17 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
     Takes a formatted address and returns a normalized location object
     """
 
-    result = lookup(formatted_address, client)
+    try:
+        result = lookup(formatted_address, client)
+    except GoogleKeyNotSet:
+
+        # If a google maps key is not set, return a location object with
+        # only the address field set
+
+        return Location(
+            updated = date or datetime.now(),
+            address = formatted_address,
+        )
 
     city = None
     postal_code = None

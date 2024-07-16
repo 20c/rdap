@@ -44,7 +44,9 @@ class ROLE(str, enum.Enum):
     registrant = "registrant"
 
 NORMALIZED_ROLES = {
-    "administrative": "admin"
+    "administrative": "admin",
+    "noc": "technical",
+    "registrar": "registrant"
 }
 
 class DNSSEC(str, enum.Enum):
@@ -64,10 +66,10 @@ class Location(pydantic.BaseModel):
     Describes a location
     """
     updated: datetime
-    country: str
-    city: str
-    postal_code: str
-    address: str
+    country: str | None = None
+    city: str | None = None
+    postal_code: str | None = None
+    address: str | None = None
     geo: GeoLocation | None = None
     floor: str | None = None
     suite: str | None = None
@@ -94,6 +96,10 @@ class Contact(pydantic.BaseModel):
             roles.append(role)
         
         data["roles"] = roles
+
+        # drop duplicates
+
+        data["roles"] = list(set(data["roles"]))
 
         return data
 
@@ -156,8 +162,8 @@ class Entity(pydantic.BaseModel):
     created: datetime
     updated: datetime
     name: str
-    organization: Organization
-    location: Location
+    organization: Organization | None = None
+    location: Location | None = None
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)
 

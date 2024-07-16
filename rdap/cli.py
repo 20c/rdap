@@ -79,14 +79,14 @@ def main(argv=None):
 
     codec = munge.get_codec(output_format)()
     for each in argd["query"]:
-        with RdapRequestContext():
+        with RdapRequestContext(client=client):
             obj = client.get(each)
             if argd.get("rir", False):
                 print(f"rir: {obj.get_rir()}")
             if argd.get("parse", False):
                 print(codec.dumps(obj.parsed()))
             elif argd.get("normalize", False):
-                obj.normalized
+                print(codec.dumps(obj.normalized))
             else:
                 print(codec.dumps(obj.data))
 

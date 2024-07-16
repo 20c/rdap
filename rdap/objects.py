@@ -207,20 +207,29 @@ class RdapAsn(RdapObject):
         super().__init__(data, rdapc)
 
     @property
-    def normalized(self):
-        normalize(self._data, self.get_rir(), "autnum")
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "autnum")
 
 class RdapNetwork(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
 
-
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "ip")
 
 class RdapDomain(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
 
-
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "domain")
+    
 class RdapEntity(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
+
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "entity")

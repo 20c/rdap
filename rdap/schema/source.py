@@ -1,4 +1,4 @@
-import rdap.schema.arin as arin
+import rdap.schema.rdap as rdap
 
 __all__ = [
     "SCHEMAS_BY_RIR",
@@ -9,7 +9,12 @@ __all__ = [
 ]
 
 SCHEMAS_BY_RIR = {
-    "arin": arin,
+    "arin": rdap,
+    "ripe": rdap,
+    "apnic": rdap,
+    "afrinic": rdap,
+    "lacnic": rdap,
+    None: rdap,
 }
 
 def ip_network_model(rir:str):

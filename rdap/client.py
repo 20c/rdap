@@ -130,11 +130,13 @@ class RdapClient:
         )
 
     def _get(self, url):
-        with RdapRequestContext(url):
+        with RdapRequestContext(url) as ctx:
             res = self.http.get(url, timeout=self.timeout)
             for redir in res.history:
                 self._history.append((strip_auth(redir.url), redir.status_code))
             self._history.append((strip_auth(res.url), res.status_code))
+
+            ctx.push_url(strip_auth(res.url))
 
             if res.status_code == 200:
                 return res
@@ -245,6 +247,8 @@ class RdapClient:
         if qstr.startswith("as"):
             return self.get_asn(qstr[2:])
 
+        return self.get_entity(qstr, self.url)
+
         raise NotImplementedError(f"unknown query {query}")
 
     @lru_cache(maxsize=1024)
@@ -317,7 +321,7 @@ class RdapClient:
         query = f"/ip/{address}"
         return RdapNetwork(self._rdap_get(query).json(), self)
 
-    def get_entity(self, handle, base_url):
+    def get_entity(self, handle, base_url = None):
         """
         get entity information in object form
         """

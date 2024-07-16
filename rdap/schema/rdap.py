@@ -5,11 +5,11 @@ from typing import Any
 class Link(BaseModel):
     """Represents a hyperlink in the RDAP response."""
     # The label or description of the link
-    value: str
+    value: str | None = None
     # The relationship of the link to the current object
-    rel: str
+    rel: str | None = None
     # The MIME type of the target resource
-    type: str
+    type: str | None = None
     # The URL of the link
     href: str
 
@@ -27,7 +27,7 @@ class Notice(BaseModel):
     # A list of text lines comprising the notice
     description: list[str]
     # Optional links related to the notice
-    links: list[Link] | None = None
+    links: list[Link] = Field(default_factory=list)
 
 class VCardValue(BaseModel):
     """Represents additional properties for vCard values."""
@@ -44,25 +44,34 @@ class Remark(BaseModel):
 class Entity(BaseModel):
     """Represents an entity (organization, individual, or role) in the RDAP response."""
     # A unique identifier for the entity
-    handle: str
+    handle: str = Field(default_factory=str)
     # Contact information in vCard format
     vcardArray: list[str | list[list[str | dict | list]]] = Field(default_factory=list)
     # Roles of the entity (e.g., registrant, technical, administrative)
-    roles: list[str]
+    roles: list[str] = Field(default_factory=list)
     # Links related to the entity
-    links: list[Link]
+    links: list[Link] = Field(default_factory=list)
     # Events associated with the entity
-    events: list[Event]
+    events: list[Event] = Field(default_factory=list)
     # Status of the entity
-    status: list[str] | None = None
+    status: list[str] = Field(default_factory=list)
     # WHOIS server for the entity
-    port43: str
+    port43: str = Field(default_factory=str)
     # Type of the object (always "entity" for Entity)
     objectClassName: str
     # Additional remarks about the entity
-    remarks: list[Remark] | None = None
+    remarks: list[Remark] = Field(default_factory=list)
     # Nested entities (e.g., contacts within an organization)
-    entities: list['Entity'] | None = None
+    entities: list['Entity'] = Field(default_factory=list)
+
+
+    @property
+    def self_link(self) -> str | None:
+        """Returns the href of the link where rel == 'self'"""
+        for link in self.links:
+            if link.rel == 'self':
+                return link.href
+        return None
 
 
 class IPNetwork(BaseModel):
@@ -86,13 +95,13 @@ class IPNetwork(BaseModel):
     # Handle of the parent network
     parentHandle: str
     # Additional remarks about the network
-    remarks: list[Remark] | None = None
+    remarks: list[Remark] = Field(default_factory=list)
     # Events associated with the network
-    events: list[Event]
+    events: list[Event]= Field(default_factory=list)
     # Links related to the network
-    links: list[Link]
+    links: list[Link]= Field(default_factory=list)
     # Entities associated with the network
-    entities: list[Entity]
+    entities: list[Entity]= Field(default_factory=list)
     # WHOIS server for the network
     port43: str
     # Status of the network
@@ -100,9 +109,37 @@ class IPNetwork(BaseModel):
     # Type of the object (always "ip network" for IPNetwork)
     objectClassName: str
     # CIDR notation for the network
-    cidr0_cidrs: list[dict]
+    cidr0_cidrs: list[dict]= Field(default_factory=list)
     # Origin AS numbers for the network
-    arin_originas0_originautnums: list
+    arin_originas0_originautnums: list = Field(default_factory=list)
+
+class DSData(BaseModel):
+    """Represents DS data for secure DNS in the RDAP response."""
+    # Key tag for the DS record
+    keyTag: int
+    # Algorithm number for the DS record
+    algorithm: int
+    # Digest type for the DS record
+    digestType: int
+    # Digest value for the DS record
+    digest: str
+
+class SecureDNS(BaseModel):
+    # true if there are DS records in the parent, false otherwise.
+    delegationSigned: bool | None = None
+    # if the zone has been signed, false otherwise.
+    zeroSigned: bool | None = None
+    # DS data for secure DNS
+    dsData: list[DSData] = Field(default_factory=list)
+
+class Nameserver(BaseModel):
+    objectClassName: str
+    ldhName: str
+    unicodeName: str | None = None
+    ipAddresses: dict[str, list[str]] = Field(default_factory=dict)
+    remarks: list[Remark] = Field(default_factory=list)
+    port43: str | None = None
+    events: list[Event] = Field(default_factory=list)
 
 class Domain(BaseModel):
     """Represents a domain name in the RDAP response."""
@@ -115,17 +152,21 @@ class Domain(BaseModel):
     # The domain name in LDH (Letter Digit Hyphen) format
     ldhName: str
     # Events associated with the domain
-    events: list[Event]
+    events: list[Event] = Field(default_factory=list)
     # Links related to the domain
-    links: list[Link]
+    links: list[Link] = Field(default_factory=list)
     # Entities associated with the domain
-    entities: list[Entity]
+    entities: list[Entity] = Field(default_factory=list)
     # WHOIS server for the domain
-    port43: str
+    port43: str = Field(default_factory=str)
     # Network information for the domain
-    network: IPNetwork
+    network: IPNetwork | None = None
     # Type of the object (always "domain" for Domain)
     objectClassName: str
+
+    secureDNS: SecureDNS | None = None
+
+    nameservers: list[Nameserver] = Field(default_factory=list)
 
 class AutNum(BaseModel):
     """Represents an Autonomous System Number in the RDAP response."""
