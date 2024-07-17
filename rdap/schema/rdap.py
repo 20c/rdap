@@ -92,17 +92,17 @@ class IPNetwork(BaseModel):
     # Notices related to the IP network
     notices: list[Notice] = Field(default_factory=list)
     # A unique identifier for the IP network
-    handle: str
+    handle: str | None = None
     # The first IP address in the network range
-    startAddress: str
+    startAddress: str | None = None
     # The last IP address in the network range
-    endAddress: str
+    endAddress: str | None = None
     # IP version (v4 or v6)
-    ipVersion: str
+    ipVersion: str | None = None
     # Name of the network
-    name: str
+    name: str | None = None
     # Type of the network allocation
-    type: str
+    type: str | None = None
     # Handle of the parent network
     parentHandle: str | None = None
     # Additional remarks about the network
@@ -114,9 +114,9 @@ class IPNetwork(BaseModel):
     # Entities associated with the network
     entities: list[Entity]= Field(default_factory=list)
     # WHOIS server for the network
-    port43: str
+    port43: str | None = None
     # Status of the network
-    status: list[str]
+    status: list[str] = Field(default_factory=list)
     # Type of the object (always "ip network" for IPNetwork)
     objectClassName: str
     # CIDR notation for the network

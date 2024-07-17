@@ -36,6 +36,11 @@ class STATUS(str, enum.Enum):
     active = "active"
     inactive = "inactive"
 
+NORMALIZED_STATUS = {
+    "administrative": "active",
+    "validated": "active",
+}
+
 class ROLE(str, enum.Enum):
     abuse = "abuse"
     admin = "admin"
@@ -78,8 +83,8 @@ class Contact(pydantic.BaseModel):
     """
     Describes a point of contact
     """
-    #created: datetime | None = None
-    #updated: datetime | None = None
+    created: datetime | None = None
+    updated: datetime | None = None
     name: str
     roles: list[ROLE] = pydantic.Field(default_factory=list)
     phone: str | None = None
@@ -149,11 +154,22 @@ class IPNetwork(pydantic.BaseModel):
     prefix: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
     version: IP_VERSION | None = None
     name: str
-    type: str
+    type: str | None = None
     status: STATUS
     parent: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)
+
+    @pydantic.model_validator(mode="before")
+    @classmethod
+    def normalize_status(cls, data: Any) -> Any:
+
+        status = data.get("status")
+
+        if status:
+            data["status"] = NORMALIZED_STATUS.get(status, status)
+
+        return data
 
 class Entity(pydantic.BaseModel):
     """

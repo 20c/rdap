@@ -79,7 +79,8 @@ class Handler:
 
             contact = Contact(
                 name = "",
-                roles = getattr(entity, "roles", []) or []
+                roles = getattr(entity, "roles", []) or [],
+                **self.dates(entity.events)
             )
             for vcard_entry in vcard:
                 if vcard_entry[0] == "fn":
