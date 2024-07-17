@@ -2,8 +2,6 @@ from contextvars import ContextVar
 import pydantic
 from datetime import datetime
 
-from rdap.schema.rdap import Entity, AutNum, IPNetwork, Domain
-
 __all__ = [
     "rdap_request",
     "RdapRequestContext",
@@ -20,10 +18,10 @@ class RdapRequestState(pydantic.BaseModel):
     sources: list[RdapSource] = pydantic.Field(default_factory=list)
     client: object | None = None #RdapClient
 
-    def update_source(self, entity:Entity | AutNum | IPNetwork | Domain):
-        self.sources[-1].handle = entity.handle
-        self.sources[-1].created = entity.events[-1].eventDate
-        self.sources[-1].updated = entity.events[0].eventDate
+    def update_source(self, handle:str, created:datetime | None, updated:datetime | None):
+        self.sources[-1].handle = handle
+        self.sources[-1].created = created
+        self.sources[-1].updated = updated
 
 # context that holds the currently requested rdap url
 

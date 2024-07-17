@@ -65,7 +65,7 @@ class Location(pydantic.BaseModel):
     """
     Describes a location
     """
-    updated: datetime
+    updated: datetime | None = None
     country: str | None = None
     city: str | None = None
     postal_code: str | None = None
@@ -78,8 +78,8 @@ class Contact(pydantic.BaseModel):
     """
     Describes a point of contact
     """
-    #created: datetime
-    #updated: datetime
+    #created: datetime | None = None
+    #updated: datetime | None = None
     name: str
     roles: list[ROLE] = pydantic.Field(default_factory=list)
     phone: str | None = None
@@ -113,10 +113,10 @@ class Source(pydantic.BaseModel):
 
     Will contain where the data was fetched from and when
     """
-    created: datetime
-    updated: datetime
+    created: datetime | None = None
+    updated: datetime | None = None
     handle: str
-    urls: list[str]
+    urls: list[str] = pydantic.Field(default_factory=list)
     description: str | None = None
 
 
@@ -130,8 +130,8 @@ class Network(pydantic.BaseModel):
     """
     Describes a network
     """
-    created: datetime
-    updated: datetime
+    created: datetime | None = None
+    updated: datetime | None = None
     asn: int
     name: str
     organization: Organization
@@ -144,10 +144,10 @@ class IPNetwork(pydantic.BaseModel):
     """
     Describes an IP network
     """
-    created: datetime
-    updated: datetime
-    prefix: ipaddress.IPv4Network | ipaddress.IPv6Network
-    version: IP_VERSION
+    created: datetime | None = None
+    updated: datetime | None = None
+    prefix: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
+    version: IP_VERSION | None = None
     name: str
     type: str
     status: STATUS
@@ -159,8 +159,8 @@ class Entity(pydantic.BaseModel):
     """
     Describes an entity
     """
-    created: datetime
-    updated: datetime
+    created: datetime | None = None
+    updated: datetime | None = None
     name: str
     organization: Organization | None = None
     location: Location | None = None
@@ -177,8 +177,8 @@ class Domain(pydantic.BaseModel):
     """
     Describes a domain
     """
-    created: datetime
-    updated: datetime
+    created: datetime | None = None
+    updated: datetime | None = None
     name: str
     handle: str
     dns_sec: DNSSEC

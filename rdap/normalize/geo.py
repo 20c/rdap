@@ -68,7 +68,7 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
 
     try:
         result = lookup(formatted_address, client)
-    except GoogleKeyNotSet:
+    except (GoogleKeyNotSet, NotFound):
 
         # If a google maps key is not set, return a location object with
         # only the address field set
@@ -85,19 +85,20 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
     suite = None
 
     for component in result.get("address_components", []):
-        if "country" in component.get("types", []):
+        types = component.get("types", [])
+        if "country" in types:
             country = component.get("short_name")
         
-        if "postal_code" in component.get("types", []):
+        if "postal_code" in types:
             postal_code = component.get("long_name")
 
-        if "locality" in component.get("types", []):
+        if "locality" in types or "postal_town" in types:
             city = component.get("long_name")
 
-        if "floor" in component.get("types", []):
+        if "floor" in types:
             floor = component.get("long_name")
 
-        if "subpremise" in component.get("types", []):
+        if "subpremise" in types:
             suite = component.get("long_name")
          
         

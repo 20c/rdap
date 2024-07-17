@@ -5,9 +5,18 @@ Contains a set of functions to parse various rdap data properties
 import json
 
 import rdap.normalize.base as base
+import rdap.normalize.afrinic as afrinic
+import rdap.normalize.apnic as apnic
+import rdap.normalize.arin as arin
+import rdap.normalize.lacnic as lacnic
+import rdap.normalize.ripe as ripe
+
 import rdap.normalize.geo as geo
 
 import rdap.schema.normalized as schema 
+
+import rdap.schema.rdap as rdap_schema
+
 from rdap.schema.source import (
     autnum_model,
     entity_model,
@@ -20,16 +29,21 @@ from rdap.context import rdap_request, RdapRequestState
 
 __all__ = [
     "normalize",
+    "normalize_autnum",
+    "normalize_entity",
+    "normalize_ip",
+    "normalize_domain",
+    "get_sources",
 ]
 
 HANDLERS = {
-    "arin": base,
-    "ripe": base,
-    "apnic": base,
-    "afrinic": base,
-    "lacnic": base,
-    # domains are weird.
-    None: base
+    "arin": arin.Handler(),
+    "ripe": ripe.Handler(),
+    "apnic": apnic.Handler(),
+    "afrinic": afrinic.Handler(),
+    "lacnic": lacnic.Handler(),
+    # other (verisign for domains etc.)
+    None: base.Handler()
 }
 
 def get_sources(
@@ -90,19 +104,22 @@ def normalize_autnum(data: dict, rir: str) -> dict:
 
     rdap_autnum = autnum_model(rir)(**data)
 
-    current_rdap_request.update_source(rdap_autnum)
+    current_rdap_request.update_source(
+        rdap_autnum.handle,
+        **handler.dates(rdap_autnum.events)
+    )
 
     org_name = handler.org_name(rdap_autnum)
     org = schema.Organization(name=org_name)
     address = handler.address(rdap_autnum)
 
+
     net = schema.Network(
-        created = rdap_autnum.events[-1].eventDate,
-        updated = rdap_autnum.events[0].eventDate,
         name = rdap_autnum.name,
         organization = org,
         asn = rdap_autnum.startAutnum,
         contacts = handler.contacts(rdap_autnum),
+        **handler.dates(rdap_autnum.events)
     )
 
     location = geo.normalize(address, net.updated) 
@@ -128,21 +145,23 @@ def normalize_ip(data: dict, rir: str) -> dict:
 
     rdap_ip_network = ip_network_model(rir)(**data)
 
-    current_rdap_request.update_source(rdap_ip_network)
+    current_rdap_request.update_source(
+        rdap_ip_network.handle,
+        **handler.dates(rdap_ip_network.events)
+    )
 
     prefix = handler.prefix(rdap_ip_network)
 
     net = schema.IPNetwork(
-        created = rdap_ip_network.events[-1].eventDate,
-        updated = rdap_ip_network.events[0].eventDate,
         name = rdap_ip_network.name,
         prefix = prefix,
         parent=  handler.parent_prefix(rdap_ip_network),
-        version = prefix.version, 
+        version = handler.ip_version(rdap_ip_network),
         type = rdap_ip_network.type,
         # TODO: What happens if more than one status is in there?
         status = rdap_ip_network.status[0] if rdap_ip_network.status else None,
         contacts = handler.contacts(rdap_ip_network),
+        **handler.dates(rdap_ip_network.events)
     )
 
     if current_rdap_request:
@@ -164,16 +183,17 @@ def normalize_domain(data: dict, rir: str) -> dict:
 
     rdap_domain = domain_model(rir)(**data)
 
-    current_rdap_request.update_source(rdap_domain)
+    current_rdap_request.update_source(
+        rdap_domain.handle, **handler.dates(rdap_domain.events)
+    )
 
     net = schema.Domain(
-        created = rdap_domain.events[-1].eventDate,
-        updated = rdap_domain.events[0].eventDate,
         name = rdap_domain.ldhName,
         handle = rdap_domain.handle,
         dns_sec = handler.secure_dns(rdap_domain),
         contacts = handler.contacts(rdap_domain),
         nameservers = handler.nameservers(rdap_domain),
+        **handler.dates(rdap_domain.events)
     )
 
     if current_rdap_request:
@@ -196,7 +216,9 @@ def normalize_entity(data: dict, rir: str) -> dict:
 
     rdap_entity = entity_model(rir)(**data)
 
-    current_rdap_request.update_source(rdap_entity)
+    current_rdap_request.update_source(
+        rdap_entity.handle, **handler.dates(rdap_entity.events)
+    )
 
     org_name = handler.org_name_from_entity(rdap_entity)
 
@@ -208,11 +230,10 @@ def normalize_entity(data: dict, rir: str) -> dict:
     address = handler.address_from_entity(rdap_entity)
 
     entity = schema.Entity(
-        created = rdap_entity.events[-1].eventDate,
-        updated = rdap_entity.events[0].eventDate,
         name = rdap_entity.handle,
         organization = org,
         contacts = handler.contacts_from_entity(rdap_entity),
+        **handler.dates(rdap_entity.events)
     )
 
     location = geo.normalize(address, entity.updated) 

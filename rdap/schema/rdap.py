@@ -2,6 +2,17 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Any
 
+__all__ = [
+    'Link',
+    'Event',
+    'Notice',
+    'VCardValue',
+    'Remark',
+    'Entity',
+    'IPNetwork',
+
+]
+
 class Link(BaseModel):
     """Represents a hyperlink in the RDAP response."""
     # The label or description of the link
@@ -37,9 +48,9 @@ class VCardValue(BaseModel):
 class Remark(BaseModel):
     """Represents a remark or comment in the RDAP response."""
     # The title of the remark
-    title: str
+    title: str | None = None
     # A list of text lines comprising the remark
-    description: list[str]
+    description: list[str] = Field(default_factory=list)
 
 class Entity(BaseModel):
     """Represents an entity (organization, individual, or role) in the RDAP response."""
@@ -93,7 +104,7 @@ class IPNetwork(BaseModel):
     # Type of the network allocation
     type: str
     # Handle of the parent network
-    parentHandle: str
+    parentHandle: str | None = None
     # Additional remarks about the network
     remarks: list[Remark] = Field(default_factory=list)
     # Events associated with the network
@@ -196,6 +207,8 @@ class AutNum(BaseModel):
     entities: list[Entity] = Field(default_factory=list)
     # Status of the AS number
     status: list[str] = Field(default_factory=list)
-
+    
+    # Remarks about the AS number
+    remarks: list[Remark] = Field(default_factory=list)
 
 Entity.model_rebuild()
