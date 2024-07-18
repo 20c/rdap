@@ -22,21 +22,21 @@ class Link(BaseModel):
     # The MIME type of the target resource
     type: str | None = None
     # The URL of the link
-    href: str
+    href: str | None = None
 
 class Event(BaseModel):
     """Represents a timestamped event in the lifecycle of an RDAP object."""
     # The type of event (e.g., "registration", "last changed")
-    eventAction: str
+    eventAction: str | None = None
     # The date and time of the event
-    eventDate: datetime
+    eventDate: datetime | None = None
 
 class Notice(BaseModel):
     """Represents a notice or message in the RDAP response."""
     # The title of the notice
-    title: str
+    title: str | None = None
     # A list of text lines comprising the notice
-    description: list[str]
+    description: list[str] = Field(default_factory=list)
     # Optional links related to the notice
     links: list[Link] = Field(default_factory=list)
 
@@ -118,7 +118,7 @@ class IPNetwork(BaseModel):
     # Status of the network
     status: list[str] = Field(default_factory=list)
     # Type of the object (always "ip network" for IPNetwork)
-    objectClassName: str
+    objectClassName: str | None = None
     # CIDR notation for the network
     cidr0_cidrs: list[dict]= Field(default_factory=list)
     # Origin AS numbers for the network
@@ -127,13 +127,13 @@ class IPNetwork(BaseModel):
 class DSData(BaseModel):
     """Represents DS data for secure DNS in the RDAP response."""
     # Key tag for the DS record
-    keyTag: int
+    keyTag: int | None = None
     # Algorithm number for the DS record
-    algorithm: int
+    algorithm: int | None = None
     # Digest type for the DS record
-    digestType: int
+    digestType: int | None = None
     # Digest value for the DS record
-    digest: str
+    digest: str | None = None
 
 class SecureDNS(BaseModel):
     # true if there are DS records in the parent, false otherwise.
@@ -144,8 +144,8 @@ class SecureDNS(BaseModel):
     dsData: list[DSData] = Field(default_factory=list)
 
 class Nameserver(BaseModel):
-    objectClassName: str
-    ldhName: str
+    objectClassName: str | None = None
+    ldhName: str | None = None
     unicodeName: str | None = None
     ipAddresses: dict[str, list[str]] = Field(default_factory=dict)
     remarks: list[Remark] = Field(default_factory=list)
@@ -159,9 +159,9 @@ class Domain(BaseModel):
     # Notices related to the domain
     notices: list[Notice] = Field(default_factory=list)
     # A unique identifier for the domain
-    handle: str
+    handle: str | None = None
     # The domain name in LDH (Letter Digit Hyphen) format
-    ldhName: str
+    ldhName: str | None = None
     # Events associated with the domain
     events: list[Event] = Field(default_factory=list)
     # Links related to the domain
@@ -173,7 +173,7 @@ class Domain(BaseModel):
     # Network information for the domain
     network: IPNetwork | None = None
     # Type of the object (always "domain" for Domain)
-    objectClassName: str
+    objectClassName: str | None = None
 
     secureDNS: SecureDNS | None = None
 
@@ -186,18 +186,18 @@ class AutNum(BaseModel):
     # Notices related to the AS number
     notices: list[Notice] = Field(default_factory=list)
     # A unique identifier for the AS number
-    handle: str
+    handle: str | None = None
     # The starting AS number in the range
-    startAutnum: int
+    startAutnum: int | None = None
     # The ending AS number in the range (same as startAutnum for single AS)
-    endAutnum: int
+    endAutnum: int | None = None
     # Name of the AS
-    name: str
+    name: str | None = None
     # WHOIS server for the AS number
-    port43: str
+    port43: str | None = None
 
     # Type of the object (always "autnum" for AutNum)
-    objectClassName: str
+    objectClassName: str | None = None
 
     # Events associated with the AS number
     events: list[Event] = Field(default_factory=list)

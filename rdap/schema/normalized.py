@@ -153,7 +153,7 @@ class IPNetwork(pydantic.BaseModel):
     updated: datetime | None = None
     prefix: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
     version: IP_VERSION | None = None
-    name: str
+    name: str | None = None
     type: str | None = None
     status: STATUS
     parent: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
