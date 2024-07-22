@@ -5,13 +5,15 @@ Rdap data parsers for ARIN data
 import ipaddress
 
 import phonenumbers
-
+from datetime import datetime
 from rdap.exceptions import RdapHTTPError
 from rdap.schema.normalized import (
     Contact,
+    Location,
     Nameserver,
     DNSSEC
 )
+import rdap.normalize.geo as geo
 
 from rdap.context import rdap_request, RdapRequestState, RdapRequestContext
 
@@ -23,7 +25,7 @@ __all__ = [
 
 class Handler:
 
-    def address_from_entity(self, entity: schema.Entity) -> str | None:
+    def locations_from_entity(self, entity: schema.Entity) -> list[str]:
         """
         Will parse an address from an entity
 
@@ -33,14 +35,30 @@ class Handler:
         # looking for vcardArray with ["adr", {"label": address}, "text"] to
         # establish the address entry
 
+        locations = []
+
+        dates = self.dates(entity.events)
+
+        updated = dates["updated"]
+
         for vcard in entity.vcardArray[1:]:
             for vcard_entry in vcard:
                 if vcard_entry[0] == "adr":
-                    return vcard_entry[1].get("label")
+                    address = vcard_entry[1].get("label")
+                    locations.append(geo.normalize(address, updated))
 
-        return None
+        if entity.entities:
+            for _entity in entity.entities:
+                locations.extend(
+                    self.locations_from_entity(_entity)
+                )
 
-    def address(self, entity: schema.AutNum | schema.IPNetwork | schema.Domain) -> str | None:
+        # remove dupes
+        locations = list(set(locations))
+
+        return locations
+
+    def locations(self, entity: schema.AutNum | schema.IPNetwork | schema.Domain) -> list[str]:
         """
         Will parse an address from an object
 
@@ -48,12 +66,15 @@ class Handler:
         can be found, will return None
         """
 
-        for _entity in entity.entities:
-            address = self.address_from_entity(_entity)
-            if address:
-                return address
+        locations = []
 
-        return None
+        for _entity in entity.entities:
+            locations.extend(self.locations_from_entity(_entity))
+
+        # remove dupes
+        locations = list(set(locations))
+
+        return locations
 
     def contacts_from_entity(self, entity: schema.Entity, deep:bool = True) -> list[Contact]:
 
@@ -167,18 +188,10 @@ class Handler:
                 handle_url = client.get_entity_url(entity.handle)
 
             if not client.recurse_roles.isdisjoint(roles):
-                try:
-                    with RdapRequestContext(url=handle_url, client=client):
-                        r_entity = client.get_entity(entity.handle)
-                        r_entity = r_entity.normalized
-                        contacts.extend([
-                            Contact(**contact) for contact in r_entity["contacts"]
-                        ])
-                # check for HTTP Errors to ignore
-                except RdapHTTPError:
-                    # TODO: Do we ever want to raise on broken links?
-                    # Probably not.
-                    pass
+                with RdapRequestContext(url=handle_url, client=client) as ctx:
+                    contacts.extend([
+                        Contact(**contact) for contact in ctx.get("entity", entity.handle)["contacts"]
+                    ])
 
 
     def org_name_from_entity(self, entity: schema.Entity) -> str | None:
@@ -353,9 +366,19 @@ class Handler:
 
         for event in events:
             if event.eventAction == "registration":
-                created = event.eventDate
+                created: datetime = event.eventDate
             if event.eventAction == "last changed":
-                updated = event.eventDate
+                updated: datetime = event.eventDate
+
+
+        # set utc timezone if no timezone is present
+        # created and du
+
+        if created and not created.tzinfo:
+            created = created.replace(tzinfo=datetime.timezone.utc)
+        
+        if updated and not updated.tzinfo:
+            updated = updated.replace(tzinfo=datetime.timezone.utc)
 
         return {
             "created": created,

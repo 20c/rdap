@@ -79,6 +79,9 @@ class Location(pydantic.BaseModel):
     floor: str | None = None
     suite: str | None = None
 
+    def __hash__(self):
+        return f"{self.address}-{self.city}-{self.country}-{self.postal_code}-{self.floor}-{self.suite}".__hash__()
+
 class Contact(pydantic.BaseModel):
     """
     Describes a point of contact
@@ -140,7 +143,7 @@ class Network(pydantic.BaseModel):
     asn: int
     name: str
     organization: Organization
-    location: Location | None = None
+    locations: list[Location] = pydantic.Field(default_factory=list)
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)
 
@@ -179,7 +182,7 @@ class Entity(pydantic.BaseModel):
     updated: datetime | None = None
     name: str
     organization: Organization | None = None
-    location: Location | None = None
+    locations: list[Location] = pydantic.Field(default_factory=list)
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)
 

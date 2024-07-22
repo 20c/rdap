@@ -111,7 +111,6 @@ def normalize_autnum(data: dict, rir: str) -> dict:
 
     org_name = handler.org_name(rdap_autnum)
     org = schema.Organization(name=org_name)
-    address = handler.address(rdap_autnum)
 
 
     net = schema.Network(
@@ -119,12 +118,9 @@ def normalize_autnum(data: dict, rir: str) -> dict:
         organization = org,
         asn = rdap_autnum.startAutnum,
         contacts = handler.contacts(rdap_autnum),
+        locations = handler.locations(rdap_autnum),
         **handler.dates(rdap_autnum.events)
     )
-
-    location = geo.normalize(address, net.updated) 
-    if location:
-        net.location = location
 
     if current_rdap_request:
         net.sources = get_sources(current_rdap_request, rdap_autnum.handle, net)
@@ -227,18 +223,13 @@ def normalize_entity(data: dict, rir: str) -> dict:
     else:
         org = None
 
-    address = handler.address_from_entity(rdap_entity)
-
     entity = schema.Entity(
         name = rdap_entity.handle,
         organization = org,
         contacts = handler.contacts_from_entity(rdap_entity),
+        locations = handler.locations_from_entity(rdap_entity),
         **handler.dates(rdap_entity.events)
     )
-
-    location = geo.normalize(address, entity.updated) 
-    if location:
-        entity.location = location
 
     if current_rdap_request:
         entity.sources = get_sources(current_rdap_request, rdap_entity.handle, entity)

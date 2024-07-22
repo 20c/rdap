@@ -8,6 +8,7 @@ import googlemaps
 
 from datetime import datetime
 from rdap.schema.normalized import Location, GeoLocation
+from rdap.context import rdap_request, RdapRequestState
 
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
@@ -37,7 +38,12 @@ def lookup(formatted_address:str, client = None) -> dict:
     location.
     """
 
-    # TODO: cache results
+    request: RdapRequestState = rdap_request.get()
+
+    key = f"geo:{formatted_address}"
+
+    if key in request.entities:
+        return request.entities[key]
 
     if not client:
         client = get_client()
@@ -58,6 +64,10 @@ def lookup(formatted_address:str, client = None) -> dict:
     if not result:
         raise NotFound()
 
+    # cache to avoid duplicate lookups during the same
+    # request context
+    request.entities[key] = result[0]
+
     return result[0]
 
 def normalize(formatted_address:str, date:datetime = None, client=None) -> Location:
@@ -74,7 +84,7 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
         # only the address field set
 
         return Location(
-            updated = date or datetime.now(),
+            updated = date,
             address = formatted_address,
         )
 
@@ -103,7 +113,7 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
          
         
     return Location(
-        updated = date or datetime.now(),
+        updated = date,
         country = country,
         city = city,
         postal_code = postal_code,

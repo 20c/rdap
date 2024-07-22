@@ -1,6 +1,7 @@
 from contextvars import ContextVar
 import pydantic
 from datetime import datetime
+from rdap.exceptions import RdapHTTPError
 
 __all__ = [
     "rdap_request",
@@ -17,6 +18,8 @@ class RdapSource(pydantic.BaseModel):
 class RdapRequestState(pydantic.BaseModel):
     sources: list[RdapSource] = pydantic.Field(default_factory=list)
     client: object | None = None #RdapClient
+
+    entities: dict = pydantic.Field(default_factory=dict)
 
     def update_source(self, handle:str, created:datetime | None, updated:datetime | None):
         self.sources[-1].handle = handle
@@ -61,3 +64,23 @@ class RdapRequestContext:
     def push_url(self, url:str):
         state = rdap_request.get()
         state.sources[-1].urls.append(url)
+
+    def get(self, typ:str, handle:str):
+        state = rdap_request.get()
+        client = state.client
+
+        if typ not in ["entity", "ip", "domain", "autnum"]:
+            raise ValueError(f"Invalid type: {typ}")
+
+        if state.entities.get(handle):
+            return state.entities[handle]
+        try:
+            get = getattr(client, f"get_{typ}")
+            r_entity = get(handle).normalized
+            state.entities[handle] = r_entity
+            return r_entity
+        except RdapHTTPError:
+            state.entities[handle] = {}
+            return {}
+
+
