@@ -1,0 +1,584 @@
+{
+    "rdapConformance": [
+        "nro_rdap_profile_0", 
+        "rdap_level_0", 
+        "cidr0", 
+        "arin_originas0"
+    ], 
+    "notices": [
+        {
+            "title": "Terms of Service", 
+            "description": [
+                "By using the ARIN RDAP/Whois service, you are agreeing to the RDAP/Whois Terms of Use"
+            ], 
+            "links": [
+                {
+                    "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                    "rel": "terms-of-service", 
+                    "type": "text/html", 
+                    "href": "https://www.arin.net/resources/registry/whois/tou/"
+                }
+            ]
+        }, 
+        {
+            "title": "Whois Inaccuracy Reporting", 
+            "description": [
+                "If you see inaccuracies in the results, please visit: "
+            ], 
+            "links": [
+                {
+                    "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                    "rel": "inaccuracy-report", 
+                    "type": "text/html", 
+                    "href": "https://www.arin.net/resources/registry/whois/inaccuracy_reporting/"
+                }
+            ]
+        }, 
+        {
+            "title": "Copyright Notice", 
+            "description": [
+                "Copyright 1997-2024, American Registry for Internet Numbers, Ltd."
+            ], 
+            "links": []
+        }
+    ], 
+    "handle": "NET-206-41-110-0-1", 
+    "startAddress": "206.41.110.0", 
+    "endAddress": "206.41.110.255", 
+    "ipVersion": "v4", 
+    "name": "CHIX", 
+    "type": "DIRECT ALLOCATION", 
+    "parentHandle": "NET-206-0-0-0-0", 
+    "remarks": [
+        {
+            "title": "Registration Comments", 
+            "description": [
+                "https://unitedix.net/"
+            ]
+        }
+    ], 
+    "events": [
+        {
+            "eventAction": "last changed", 
+            "eventDate": "2021-12-14T20:28:45-05:00"
+        }, 
+        {
+            "eventAction": "registration", 
+            "eventDate": "2014-10-17T18:32:20-04:00"
+        }
+    ], 
+    "links": [
+        {
+            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+            "rel": "self", 
+            "type": "application/rdap+json", 
+            "href": "https://rdap.arin.net/registry/ip/206.41.110.0"
+        }, 
+        {
+            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+            "rel": "alternate", 
+            "type": "application/xml", 
+            "href": "https://whois.arin.net/rest/net/NET-206-41-110-0-1"
+        }
+    ], 
+    "entities": [
+        {
+            "handle": "UIEL", 
+            "vcardArray": [
+                "vcard", 
+                [
+                    [
+                        "version", 
+                        {}, 
+                        "text", 
+                        "4.0"
+                    ], 
+                    [
+                        "fn", 
+                        {}, 
+                        "text", 
+                        "United-IX"
+                    ], 
+                    [
+                        "adr", 
+                        {
+                            "label": "603 Discovery Dr\nWest Chicago\nIL\n60185\nUnited States"
+                        }, 
+                        "text", 
+                        [
+                            "", 
+                            "", 
+                            "", 
+                            "", 
+                            "", 
+                            "", 
+                            ""
+                        ]
+                    ], 
+                    [
+                        "kind", 
+                        {}, 
+                        "text", 
+                        "org"
+                    ]
+                ]
+            ], 
+            "roles": [
+                "registrant"
+            ], 
+            "links": [
+                {
+                    "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                    "rel": "self", 
+                    "type": "application/rdap+json", 
+                    "href": "https://rdap.arin.net/registry/entity/UIEL"
+                }, 
+                {
+                    "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                    "rel": "alternate", 
+                    "type": "application/xml", 
+                    "href": "https://whois.arin.net/rest/org/UIEL"
+                }
+            ], 
+            "events": [
+                {
+                    "eventAction": "last changed", 
+                    "eventDate": "2024-06-04T14:12:37-04:00"
+                }, 
+                {
+                    "eventAction": "registration", 
+                    "eventDate": "2014-07-11T10:33:06-04:00"
+                }
+            ], 
+            "status": [], 
+            "port43": "whois.arin.net", 
+            "objectClassName": "entity", 
+            "remarks": [], 
+            "entities": [
+                {
+                    "handle": "UIE-ARIN", 
+                    "vcardArray": [
+                        "vcard", 
+                        [
+                            [
+                                "version", 
+                                {}, 
+                                "text", 
+                                "4.0"
+                            ], 
+                            [
+                                "adr", 
+                                {
+                                    "label": "603 Discovery Dr\nWest Chicago\nIL\n60185\nUnited States"
+                                }, 
+                                "text", 
+                                [
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    ""
+                                ]
+                            ], 
+                            [
+                                "fn", 
+                                {}, 
+                                "text", 
+                                "United IX Engineers"
+                            ], 
+                            [
+                                "org", 
+                                {}, 
+                                "text", 
+                                "United IX Engineers"
+                            ], 
+                            [
+                                "kind", 
+                                {}, 
+                                "text", 
+                                "group"
+                            ], 
+                            [
+                                "email", 
+                                {}, 
+                                "text", 
+                                "neteng@unitedix.net"
+                            ], 
+                            [
+                                "tel", 
+                                {
+                                    "type": [
+                                        "work", 
+                                        "voice"
+                                    ]
+                                }, 
+                                "text", 
+                                "+1-877-432-2656"
+                            ]
+                        ]
+                    ], 
+                    "roles": [
+                        "abuse", 
+                        "noc", 
+                        "technical"
+                    ], 
+                    "links": [
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "self", 
+                            "type": "application/rdap+json", 
+                            "href": "https://rdap.arin.net/registry/entity/UIE-ARIN"
+                        }, 
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "alternate", 
+                            "type": "application/xml", 
+                            "href": "https://whois.arin.net/rest/poc/UIE-ARIN"
+                        }
+                    ], 
+                    "events": [
+                        {
+                            "eventAction": "last changed", 
+                            "eventDate": "2023-09-05T13:27:59-04:00"
+                        }, 
+                        {
+                            "eventAction": "registration", 
+                            "eventDate": "2014-11-19T00:39:22-05:00"
+                        }
+                    ], 
+                    "status": [
+                        "validated"
+                    ], 
+                    "port43": "whois.arin.net", 
+                    "objectClassName": "entity", 
+                    "remarks": [], 
+                    "entities": []
+                }, 
+                {
+                    "handle": "HAZEN16-ARIN", 
+                    "vcardArray": [
+                        "vcard", 
+                        [
+                            [
+                                "version", 
+                                {}, 
+                                "text", 
+                                "4.0"
+                            ], 
+                            [
+                                "adr", 
+                                {
+                                    "label": "421 W Church St\nJacksonville\nFL\n32202\nUnited States"
+                                }, 
+                                "text", 
+                                [
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    ""
+                                ]
+                            ], 
+                            [
+                                "fn", 
+                                {}, 
+                                "text", 
+                                "Jordan Hazen"
+                            ], 
+                            [
+                                "n", 
+                                {}, 
+                                "text", 
+                                [
+                                    "Hazen", 
+                                    "Jordan", 
+                                    "", 
+                                    "", 
+                                    ""
+                                ]
+                            ], 
+                            [
+                                "kind", 
+                                {}, 
+                                "text", 
+                                "individual"
+                            ], 
+                            [
+                                "email", 
+                                {}, 
+                                "text", 
+                                "jhazen@sbaedge.com"
+                            ], 
+                            [
+                                "tel", 
+                                {
+                                    "type": [
+                                        "work", 
+                                        "voice"
+                                    ]
+                                }, 
+                                "text", 
+                                "+1-904-549-7540"
+                            ]
+                        ]
+                    ], 
+                    "roles": [
+                        "technical"
+                    ], 
+                    "links": [
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "self", 
+                            "type": "application/rdap+json", 
+                            "href": "https://rdap.arin.net/registry/entity/HAZEN16-ARIN"
+                        }, 
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "alternate", 
+                            "type": "application/xml", 
+                            "href": "https://whois.arin.net/rest/poc/HAZEN16-ARIN"
+                        }
+                    ], 
+                    "events": [
+                        {
+                            "eventAction": "last changed", 
+                            "eventDate": "2024-06-04T14:09:08-04:00"
+                        }, 
+                        {
+                            "eventAction": "registration", 
+                            "eventDate": "2022-07-06T18:47:31-04:00"
+                        }
+                    ], 
+                    "status": [
+                        "validated"
+                    ], 
+                    "port43": "whois.arin.net", 
+                    "objectClassName": "entity", 
+                    "remarks": [], 
+                    "entities": []
+                }, 
+                {
+                    "handle": "KUKAN5-ARIN", 
+                    "vcardArray": [
+                        "vcard", 
+                        [
+                            [
+                                "version", 
+                                {}, 
+                                "text", 
+                                "4.0"
+                            ], 
+                            [
+                                "adr", 
+                                {
+                                    "label": "603 Discovery Dr.\nWest Chicago\nIL\n60185\nUnited States"
+                                }, 
+                                "text", 
+                                [
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    ""
+                                ]
+                            ], 
+                            [
+                                "fn", 
+                                {}, 
+                                "text", 
+                                "Vitalii Kukanov"
+                            ], 
+                            [
+                                "n", 
+                                {}, 
+                                "text", 
+                                [
+                                    "Kukanov", 
+                                    "Vitalii", 
+                                    "", 
+                                    "", 
+                                    ""
+                                ]
+                            ], 
+                            [
+                                "kind", 
+                                {}, 
+                                "text", 
+                                "individual"
+                            ], 
+                            [
+                                "email", 
+                                {}, 
+                                "text", 
+                                "vkukanov@sbaedge.com"
+                            ], 
+                            [
+                                "tel", 
+                                {
+                                    "type": [
+                                        "work", 
+                                        "voice"
+                                    ]
+                                }, 
+                                "text", 
+                                "+1-877-432-2656"
+                            ]
+                        ]
+                    ], 
+                    "roles": [
+                        "technical"
+                    ], 
+                    "links": [
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "self", 
+                            "type": "application/rdap+json", 
+                            "href": "https://rdap.arin.net/registry/entity/KUKAN5-ARIN"
+                        }, 
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "alternate", 
+                            "type": "application/xml", 
+                            "href": "https://whois.arin.net/rest/poc/KUKAN5-ARIN"
+                        }
+                    ], 
+                    "events": [
+                        {
+                            "eventAction": "last changed", 
+                            "eventDate": "2024-05-30T10:42:04-04:00"
+                        }, 
+                        {
+                            "eventAction": "registration", 
+                            "eventDate": "2024-05-30T10:27:44-04:00"
+                        }
+                    ], 
+                    "status": [
+                        "validated"
+                    ], 
+                    "port43": "whois.arin.net", 
+                    "objectClassName": "entity", 
+                    "remarks": [], 
+                    "entities": []
+                }, 
+                {
+                    "handle": "NETWO9391-ARIN", 
+                    "vcardArray": [
+                        "vcard", 
+                        [
+                            [
+                                "version", 
+                                {}, 
+                                "text", 
+                                "4.0"
+                            ], 
+                            [
+                                "adr", 
+                                {
+                                    "label": "8051 Congress Ave\nBoca Raton\nFL\n33487\nUnited States"
+                                }, 
+                                "text", 
+                                [
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    ""
+                                ]
+                            ], 
+                            [
+                                "fn", 
+                                {}, 
+                                "text", 
+                                "Network Operations"
+                            ], 
+                            [
+                                "org", 
+                                {}, 
+                                "text", 
+                                "Network Operations"
+                            ], 
+                            [
+                                "kind", 
+                                {}, 
+                                "text", 
+                                "group"
+                            ], 
+                            [
+                                "email", 
+                                {}, 
+                                "text", 
+                                "netops@sbaedge.com"
+                            ], 
+                            [
+                                "tel", 
+                                {
+                                    "type": [
+                                        "work", 
+                                        "voice"
+                                    ]
+                                }, 
+                                "text", 
+                                "+1-877-432-2656;ext201"
+                            ]
+                        ]
+                    ], 
+                    "roles": [
+                        "administrative", 
+                        "technical"
+                    ], 
+                    "links": [
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "self", 
+                            "type": "application/rdap+json", 
+                            "href": "https://rdap.arin.net/registry/entity/NETWO9391-ARIN"
+                        }, 
+                        {
+                            "value": "https://rdap.arin.net/registry/ip/206.41.110.0", 
+                            "rel": "alternate", 
+                            "type": "application/xml", 
+                            "href": "https://whois.arin.net/rest/poc/NETWO9391-ARIN"
+                        }
+                    ], 
+                    "events": [
+                        {
+                            "eventAction": "last changed", 
+                            "eventDate": "2024-01-23T08:35:36-05:00"
+                        }, 
+                        {
+                            "eventAction": "registration", 
+                            "eventDate": "2021-01-22T13:10:25-05:00"
+                        }
+                    ], 
+                    "status": [
+                        "validated"
+                    ], 
+                    "port43": "whois.arin.net", 
+                    "objectClassName": "entity", 
+                    "remarks": [], 
+                    "entities": []
+                }
+            ]
+        }
+    ], 
+    "port43": "whois.arin.net", 
+    "status": [
+        "active"
+    ], 
+    "objectClassName": "ip network", 
+    "cidr0_cidrs": [
+        {
+            "v4prefix": "206.41.110.0", 
+            "length": 24
+        }
+    ], 
+    "arin_originas0_originautnums": []
+}

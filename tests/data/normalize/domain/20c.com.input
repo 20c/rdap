@@ -1,0 +1,31 @@
+{
+    "name": "20C.COM", 
+    "handle": "123664426_DOMAIN_COM-VRSN", 
+    "dns_sec": "insecure", 
+    "contacts": [], 
+    "nameservers": [
+        {
+            "host": "NS-1468.AWSDNS-55.ORG"
+        }, 
+        {
+            "host": "NS-1771.AWSDNS-29.CO.UK"
+        }, 
+        {
+            "host": "NS-327.AWSDNS-40.COM"
+        }, 
+        {
+            "host": "NS-545.AWSDNS-04.NET"
+        }
+    ], 
+    "sources": [
+        {
+            "handle": "123664426_DOMAIN_COM-VRSN", 
+            "urls": [
+                "https://rdap.org/domain/20c.com", 
+                "https://rdap.verisign.com/com/v1/domain/20c.com"
+            ], 
+            "created": "2004-06-28T18:28:14Z", 
+            "updated": "2024-06-25T03:31:37Z"
+        }
+    ]
+}

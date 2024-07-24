@@ -1,0 +1,116 @@
+{
+  "created": "2014-10-17T18:32:20-04:00",
+  "updated": "2021-12-14T20:28:45-05:00",
+  "prefix": "206.41.110.0/24",
+  "version": 4,
+  "name": "CHIX",
+  "type": "DIRECT ALLOCATION",
+  "status": "active",
+  "parent": "206.0.0.0/8",
+  "contacts": [
+    {
+      "created": "2022-07-06T18:47:31-04:00",
+      "updated": "2024-06-04T14:09:08-04:00",
+      "name": "Jordan Hazen",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+1 904-549-7540",
+      "email": "jhazen@sbaedge.com"
+    },
+    {
+      "created": "2021-01-22T13:10:25-05:00",
+      "updated": "2024-01-23T08:35:36-05:00",
+      "name": "Network Operations",
+      "roles": [
+        "admin",
+        "technical"
+      ],
+      "phone": null,
+      "email": "netops@sbaedge.com"
+    },
+    {
+      "created": "2014-11-19T00:39:22-05:00",
+      "updated": "2023-09-05T13:27:59-04:00",
+      "name": "United IX Engineers",
+      "roles": [
+        "abuse",
+        "technical"
+      ],
+      "phone": "+1 877-432-2656",
+      "email": "neteng@unitedix.net"
+    },
+    {
+      "created": "2024-05-30T10:27:44-04:00",
+      "updated": "2024-05-30T10:42:04-04:00",
+      "name": "Vitalii Kukanov",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+1 877-432-2656",
+      "email": "vkukanov@sbaedge.com"
+    }
+  ],
+  "sources": [
+    {
+      "created": "2014-11-17T14:28:43-05:00",
+      "updated": "2018-10-24T22:58:16-04:00",
+      "handle": "AS63311",
+      "urls": [
+        "https://rdap.org/autnum/63311",
+        "https://rdap.org/autnum/63311"
+      ],
+      "description": null
+    },
+    {
+      "created": "2003-06-23T14:40:34Z",
+      "updated": "2023-11-27T23:02:44Z",
+      "handle": "AS8283",
+      "urls": [
+        "https://rdap.org/autnum/8283",
+        "https://rdap.org/autnum/8283"
+      ],
+      "description": null
+    },
+    {
+      "created": null,
+      "updated": "2017-09-21T23:55:48Z",
+      "handle": "CLUE1-RIPE",
+      "urls": [
+        "https://rdap.org/entity/CLUE1-RIPE",
+        "https://rdap.org/entity/CLUE1-RIPE"
+      ],
+      "description": null
+    },
+    {
+      "created": null,
+      "updated": "2017-06-13T22:21:32Z",
+      "handle": "DJVG",
+      "urls": [
+        "https://rdap.org/entity/DJVG",
+        "https://rdap.org/entity/DJVG"
+      ],
+      "description": null
+    },
+    {
+      "created": "2004-06-28T18:28:14Z",
+      "updated": "2024-06-25T03:31:37Z",
+      "handle": "123664426_DOMAIN_COM-VRSN",
+      "urls": [
+        "https://rdap.org/domain/20c.com",
+        "https://rdap.org/domain/20c.com"
+      ],
+      "description": null
+    },
+    {
+      "created": "2014-10-17T18:32:20-04:00",
+      "updated": "2021-12-14T20:28:45-05:00",
+      "handle": "NET-206-41-110-0-1",
+      "urls": [
+        "https://rdap.org/ip/206.41.110.0",
+        "https://rdap.org/ip/206.41.110.0"
+      ],
+      "description": null
+    }
+  ]
+}

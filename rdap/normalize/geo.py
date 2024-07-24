@@ -78,11 +78,11 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
 
     try:
         result = lookup(formatted_address, client)
-    except (GoogleKeyNotSet, NotFound):
+    except (GoogleKeyNotSet, NotFound) as exc:
 
         # If a google maps key is not set, return a location object with
         # only the address field set
-
+        print("EXC", exc)
         return Location(
             updated = date,
             address = formatted_address,
@@ -94,8 +94,12 @@ def normalize(formatted_address:str, date:datetime = None, client=None) -> Locat
     floor = None
     suite = None
 
+    address_components = result.get("address_components", [])
+    print("Address components:", address_components)
+
     for component in result.get("address_components", []):
         types = component.get("types", [])
+        print("Component:", component)
         if "country" in types:
             country = component.get("short_name")
         

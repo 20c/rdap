@@ -1,0 +1,250 @@
+{
+  "rdapConformance": [
+    "nro_rdap_profile_0",
+    "rdap_level_0",
+    "nro_rdap_profile_asn_flat_0"
+  ],
+  "notices": [
+    {
+      "title": "Terms of Service",
+      "description": [
+        "By using the ARIN RDAP/Whois service, you are agreeing to the RDAP/Whois Terms of Use"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/autnum/63311",
+          "rel": "terms-of-service",
+          "type": "text/html",
+          "href": "https://www.arin.net/resources/registry/whois/tou/"
+        }
+      ]
+    },
+    {
+      "title": "Whois Inaccuracy Reporting",
+      "description": [
+        "If you see inaccuracies in the results, please visit: "
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/autnum/63311",
+          "rel": "inaccuracy-report",
+          "type": "text/html",
+          "href": "https://www.arin.net/resources/registry/whois/inaccuracy_reporting/"
+        }
+      ]
+    },
+    {
+      "title": "Copyright Notice",
+      "description": [
+        "Copyright 1997-2023, American Registry for Internet Numbers, Ltd."
+      ]
+    }
+  ],
+  "handle": "AS63311",
+  "startAutnum": 63311,
+  "endAutnum": 63311,
+  "name": "20C",
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2018-10-24T22:58:16-04:00"
+    },
+    {
+      "eventAction": "registration",
+      "eventDate": "2014-11-17T14:28:43-05:00"
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.arin.net/registry/autnum/63311",
+      "rel": "self",
+      "type": "application/rdap+json",
+      "href": "https://rdap.arin.net/registry/autnum/63311"
+    },
+    {
+      "value": "https://rdap.arin.net/registry/autnum/63311",
+      "rel": "alternate",
+      "type": "application/xml",
+      "href": "https://whois.arin.net/rest/asn/AS63311"
+    }
+  ],
+  "entities": [
+    {
+      "handle": "CL-672",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "20C, LLC"
+          ],
+          [
+            "adr",
+            {
+              "label": "303 W Ohio #1701\nChicago\nIL\n60654\nUnited States"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "org"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/autnum/63311",
+          "rel": "self",
+          "type": "application/rdap+json",
+          "href": "https://rdap.arin.net/registry/entity/CL-672"
+        },
+        {
+          "value": "https://rdap.arin.net/registry/autnum/63311",
+          "rel": "alternate",
+          "type": "application/xml",
+          "href": "https://whois.arin.net/rest/org/CL-672"
+        }
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2014-08-05T15:21:11-04:00"
+        },
+        {
+          "eventAction": "registration",
+          "eventDate": "2014-08-05T15:21:11-04:00"
+        }
+      ],
+      "entities": [
+        {
+          "handle": "NETWO7047-ARIN",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "adr",
+                {
+                  "label": "603 Discovery Dr\nWest Chicago\nIL\n60185\nUnited States"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Network Engineers"
+              ],
+              [
+                "org",
+                {},
+                "text",
+                "Network Engineers"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "group"
+              ],
+              [
+                "email",
+                {},
+                "text",
+                "neteng@20c.com"
+              ],
+              [
+                "tel",
+                {
+                  "type": [
+                    "work",
+                    "voice"
+                  ]
+                },
+                "text",
+                "+1-978-636-0020"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical",
+            "abuse",
+            "administrative"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.arin.net/registry/autnum/63311",
+              "rel": "self",
+              "type": "application/rdap+json",
+              "href": "https://rdap.arin.net/registry/entity/NETWO7047-ARIN"
+            },
+            {
+              "value": "https://rdap.arin.net/registry/autnum/63311",
+              "rel": "alternate",
+              "type": "application/xml",
+              "href": "https://whois.arin.net/rest/poc/NETWO7047-ARIN"
+            }
+          ],
+          "events": [
+            {
+              "eventAction": "last changed",
+              "eventDate": "2023-08-02T14:15:09-04:00"
+            },
+            {
+              "eventAction": "registration",
+              "eventDate": "2014-07-03T23:22:49-04:00"
+            }
+          ],
+          "status": [
+            "validated"
+          ],
+          "port43": "whois.arin.net",
+          "objectClassName": "entity"
+        }
+      ],
+      "port43": "whois.arin.net",
+      "objectClassName": "entity"
+    }
+  ],
+  "port43": "whois.arin.net",
+  "status": [
+    "active"
+  ],
+  "objectClassName": "autnum"
+}

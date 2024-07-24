@@ -74,6 +74,9 @@ class Handler:
         # remove dupes
         locations = list(set(locations))
 
+        # sort by address
+        locations.sort(key=lambda x: x.address)
+
         return locations
 
     def contacts_from_entity(self, entity: schema.Entity, deep:bool = True) -> list[Contact]:
@@ -159,6 +162,9 @@ class Handler:
 
         combined_contacts = {}
 
+        # sort by name and email
+        contacts = sorted(contacts, key=lambda x: (x.name, x.email))
+
         for _contact in contacts:
             key = f"{_contact.name}"
 
@@ -171,7 +177,12 @@ class Handler:
             else:
                 combined_contacts[key] = _contact
 
+        
         contacts = list(combined_contacts.values())
+
+        # sort roles
+        for contact in contacts:
+            contact.roles = sorted(list(set(contact.roles)))
 
         return contacts
 

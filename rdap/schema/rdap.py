@@ -57,7 +57,7 @@ class Entity(BaseModel):
     # A unique identifier for the entity
     handle: str = Field(default_factory=str)
     # Contact information in vCard format
-    vcardArray: list[str | list[list[str | dict | list]]] = Field(default_factory=list)
+    vcardArray: list[str | list[list[str | dict | list | None]]] = Field(default_factory=list)
     # Roles of the entity (e.g., registrant, technical, administrative)
     roles: list[str] = Field(default_factory=list)
     # Links related to the entity
