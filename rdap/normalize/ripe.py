@@ -9,13 +9,15 @@ __all__ = [
     "Handler",
 ]
 
-class Handler(base.Handler):
 
+class Handler(base.Handler):
     """
     RIPE sometimes puts org name into the remarks
     """
 
-    def org_name(self, entity: schema.AutNum | schema.IPNetwork | schema.Domain) -> str | None:
+    def org_name(
+        self, entity: schema.AutNum | schema.IPNetwork | schema.Domain
+    ) -> str | None:
         """
         If super() return None or equal to entity.name try checking
         remarks for an entry where title == "description"

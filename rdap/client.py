@@ -10,8 +10,8 @@ import requests
 
 import rdap
 import rdap.bootstrap
-from rdap.context import RdapRequestContext
 from rdap.config import Config
+from rdap.context import RdapRequestContext
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork
 
@@ -321,7 +321,7 @@ class RdapClient:
         query = f"/ip/{address}"
         return RdapNetwork(self._rdap_get(query).json(), self)
 
-    def get_entity(self, handle, base_url = None):
+    def get_entity(self, handle, base_url=None):
         """
         get entity information in object form
         """

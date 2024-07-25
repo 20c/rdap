@@ -17,7 +17,8 @@ SCHEMAS_BY_RIR = {
     None: rdap,
 }
 
-def ip_network_model(rir:str) -> rdap.IPNetwork:
+
+def ip_network_model(rir: str) -> rdap.IPNetwork:
     """
     Returns pydantic model for IPNetwork for the given RIR
 
@@ -27,7 +28,8 @@ def ip_network_model(rir:str) -> rdap.IPNetwork:
     """
     return SCHEMAS_BY_RIR[rir].IPNetwork
 
-def domain_model(rir:str) -> rdap.Domain:
+
+def domain_model(rir: str) -> rdap.Domain:
     """
     Returns pydantic model for Domain for the given RIR
 
@@ -37,7 +39,8 @@ def domain_model(rir:str) -> rdap.Domain:
     """
     return SCHEMAS_BY_RIR[rir].Domain
 
-def autnum_model(rir:str) -> rdap.AutNum:
+
+def autnum_model(rir: str) -> rdap.AutNum:
     """
     Returns pydantic model for AutNum for the given RIR
 
@@ -47,7 +50,8 @@ def autnum_model(rir:str) -> rdap.AutNum:
     """
     return SCHEMAS_BY_RIR[rir].AutNum
 
-def entity_model(rir:str) -> rdap.Entity:
+
+def entity_model(rir: str) -> rdap.Entity:
     """
     Returns pydantic model for Entity for the given RIR
 

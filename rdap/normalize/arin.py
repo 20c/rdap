@@ -8,8 +8,10 @@ __all__ = [
     "Handler",
 ]
 
+
 class Handler(base.Handler):
     """
     No known ARIN specific normalizations.
     """
+
     pass

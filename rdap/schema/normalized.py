@@ -2,11 +2,12 @@
 Pydantic schemas for normalized RDAP data
 """
 
-from datetime import datetime
-from typing import Any
-import pydantic
 import enum
 import ipaddress
+from datetime import datetime
+from typing import Any
+
+import pydantic
 
 __all__ = [
     "IP_VERSION",
@@ -22,24 +23,29 @@ __all__ = [
     "IPNetwork",
     "Entity",
     "Nameserver",
-    "Domain"
+    "Domain",
 ]
+
 
 class IP_VERSION(int, enum.Enum):
     """
     Enum for IP version
     """
+
     ipv4 = 4
     ipv6 = 6
+
 
 class STATUS(str, enum.Enum):
     active = "active"
     inactive = "inactive"
 
+
 NORMALIZED_STATUS = {
     "administrative": "active",
     "validated": "active",
 }
+
 
 class ROLE(str, enum.Enum):
     abuse = "abuse"
@@ -48,28 +54,34 @@ class ROLE(str, enum.Enum):
     technical = "technical"
     registrant = "registrant"
 
+
 NORMALIZED_ROLES = {
     "administrative": "admin",
     "noc": "technical",
-    "registrar": "registrant"
+    "registrar": "registrant",
 }
+
 
 class DNSSEC(str, enum.Enum):
     secure = "secure"
     insecure = "insecure"
     unknown = "unknown"
 
+
 class GeoLocation(pydantic.BaseModel):
     """
     Describes geographic coordinates
     """
+
     latitude: float
     longitude: float
+
 
 class Location(pydantic.BaseModel):
     """
     Describes a location
     """
+
     updated: datetime | None = None
     country: str | None = None
     city: str | None = None
@@ -82,10 +94,12 @@ class Location(pydantic.BaseModel):
     def __hash__(self):
         return f"{self.address}-{self.city}-{self.country}-{self.postal_code}-{self.floor}-{self.suite}".__hash__()
 
+
 class Contact(pydantic.BaseModel):
     """
     Describes a point of contact
     """
+
     created: datetime | None = None
     updated: datetime | None = None
     name: str
@@ -96,13 +110,13 @@ class Contact(pydantic.BaseModel):
     @pydantic.model_validator(mode="before")
     @classmethod
     def normalize_roles(cls, data: Any) -> Any:
-        
+
         roles = []
 
         for role in data.get("roles", []):
             role = NORMALIZED_ROLES.get(role, role)
             roles.append(role)
-        
+
         data["roles"] = roles
 
         # drop duplicates
@@ -111,9 +125,9 @@ class Contact(pydantic.BaseModel):
 
         return data
 
-
     def __hash__(self):
         return f"{self.name}-{self.email}-{self.phone}: {self.roles}".__hash__()
+
 
 class Source(pydantic.BaseModel):
     """
@@ -121,6 +135,7 @@ class Source(pydantic.BaseModel):
 
     Will contain where the data was fetched from and when
     """
+
     created: datetime | None = None
     updated: datetime | None = None
     handle: str
@@ -132,12 +147,15 @@ class Organization(pydantic.BaseModel):
     """
     Describes an organization
     """
+
     name: str
+
 
 class Network(pydantic.BaseModel):
     """
     Describes a network
     """
+
     created: datetime | None = None
     updated: datetime | None = None
     asn: int
@@ -152,6 +170,7 @@ class IPNetwork(pydantic.BaseModel):
     """
     Describes an IP network
     """
+
     created: datetime | None = None
     updated: datetime | None = None
     prefix: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
@@ -174,10 +193,12 @@ class IPNetwork(pydantic.BaseModel):
 
         return data
 
+
 class Entity(pydantic.BaseModel):
     """
     Describes an entity
     """
+
     created: datetime | None = None
     updated: datetime | None = None
     name: str
@@ -186,16 +207,20 @@ class Entity(pydantic.BaseModel):
     contacts: list[Contact] = pydantic.Field(default_factory=list)
     sources: list[Source] = pydantic.Field(default_factory=list)
 
+
 class Nameserver(pydantic.BaseModel):
     """
     Describes a nameserver
     """
+
     host: str
+
 
 class Domain(pydantic.BaseModel):
     """
     Describes a domain
     """
+
     created: datetime | None = None
     updated: datetime | None = None
     name: str

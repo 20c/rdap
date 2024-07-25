@@ -3,23 +3,19 @@ Rdap data parsers for ARIN data
 """
 
 import ipaddress
+from datetime import datetime
 
 import phonenumbers
-from datetime import datetime
-from rdap.schema.normalized import (
-    Contact,
-    Nameserver,
-    DNSSEC
-)
+
 import rdap.normalize.geo as geo
-
-from rdap.context import rdap_request, RdapRequestState, RdapRequestContext
-
 import rdap.schema.rdap as schema
+from rdap.context import RdapRequestContext, RdapRequestState, rdap_request
+from rdap.schema.normalized import DNSSEC, Contact, Nameserver
 
 __all__ = [
     "Handler",
 ]
+
 
 class Handler:
 
@@ -47,16 +43,16 @@ class Handler:
 
         if entity.entities:
             for _entity in entity.entities:
-                locations.extend(
-                    self.locations_from_entity(_entity)
-                )
+                locations.extend(self.locations_from_entity(_entity))
 
         # remove dupes
         locations = list(set(locations))
 
         return locations
 
-    def locations(self, entity: schema.AutNum | schema.IPNetwork | schema.Domain) -> list[str]:
+    def locations(
+        self, entity: schema.AutNum | schema.IPNetwork | schema.Domain
+    ) -> list[str]:
         """
         Will parse an address from an object
 
@@ -77,8 +73,9 @@ class Handler:
 
         return locations
 
-    def contacts_from_entity(self, entity: schema.Entity, deep:bool = True) -> list[Contact]:
-
+    def contacts_from_entity(
+        self, entity: schema.Entity, deep: bool = True
+    ) -> list[Contact]:
         """
         Will parse contacts from an entity
 
@@ -100,9 +97,9 @@ class Handler:
         for vcard in entity.vcardArray[1:]:
 
             contact = Contact(
-                name = "",
-                roles = getattr(entity, "roles", []) or [],
-                **self.dates(entity.events)
+                name="",
+                roles=getattr(entity, "roles", []) or [],
+                **self.dates(entity.events),
             )
             for vcard_entry in vcard:
                 if vcard_entry[0] == "fn":
@@ -114,8 +111,7 @@ class Handler:
                     try:
                         phone_number = phonenumbers.parse(contact.phone, None)
                         contact.phone = phonenumbers.format_number(
-                            phone_number, 
-                            phonenumbers.PhoneNumberFormat.INTERNATIONAL
+                            phone_number, phonenumbers.PhoneNumberFormat.INTERNATIONAL
                         )
                     except phonenumbers.phonenumberutil.NumberParseException:
                         # TODO: setting to allow for invalid phone numbers?
@@ -135,8 +131,11 @@ class Handler:
 
         return contacts
 
-    def contacts(self, entity: schema.AutNum | schema.IPNetwork | schema.Domain, deep:bool = True) -> list[Contact]:
-
+    def contacts(
+        self,
+        entity: schema.AutNum | schema.IPNetwork | schema.Domain,
+        deep: bool = True,
+    ) -> list[Contact]:
         """
         Will parse contacts from an object
 
@@ -168,14 +167,21 @@ class Handler:
 
             if key in combined_contacts:
                 combined_contacts[key].roles.extend(_contact.roles)
-                if not combined_contacts[key].email and _contact.email and _contact.phone == combined_contacts[key].phone:
+                if (
+                    not combined_contacts[key].email
+                    and _contact.email
+                    and _contact.phone == combined_contacts[key].phone
+                ):
                     combined_contacts[key].email = _contact.email
-                if not combined_contacts[key].phone and _contact.phone and _contact.email == combined_contacts[key].email:
+                if (
+                    not combined_contacts[key].phone
+                    and _contact.phone
+                    and _contact.email == combined_contacts[key].email
+                ):
                     combined_contacts[key].phone = _contact.phone
             else:
                 combined_contacts[key] = _contact
 
-        
         contacts = list(combined_contacts.values())
 
         # sort roles
@@ -184,8 +190,10 @@ class Handler:
 
         return contacts
 
-    def recurse_contacts(self, entity: schema.Entity, contacts: list[Contact], roles: list[str]) -> list[Contact]:
-        
+    def recurse_contacts(
+        self, entity: schema.Entity, contacts: list[Contact], roles: list[str]
+    ) -> list[Contact]:
+
         request_state: RdapRequestState = rdap_request.get()
         client = request_state.client
 
@@ -198,10 +206,12 @@ class Handler:
 
             if not client.recurse_roles.isdisjoint(roles):
                 with RdapRequestContext(url=handle_url, client=client) as ctx:
-                    contacts.extend([
-                        Contact(**contact) for contact in ctx.get("entity", entity.handle)["contacts"]
-                    ])
-
+                    contacts.extend(
+                        [
+                            Contact(**contact)
+                            for contact in ctx.get("entity", entity.handle)["contacts"]
+                        ]
+                    )
 
     def org_name_from_entity(self, entity: schema.Entity) -> str | None:
         """
@@ -224,13 +234,15 @@ class Handler:
                     kind_is_org = True
                 if vcard_entry[0] == "fn":
                     org_name = vcard_entry[3]
-        
+
         if kind_is_org and org_name:
             return org_name
 
         return None
 
-    def org_name(self, entity: schema.AutNum | schema.IPNetwork | schema.Domain) -> str | None:
+    def org_name(
+        self, entity: schema.AutNum | schema.IPNetwork | schema.Domain
+    ) -> str | None:
         """
         Will parse an org name from an object
 
@@ -245,8 +257,9 @@ class Handler:
 
         return entity.name or None
 
-
-    def prefix(self, ip_network: schema.IPNetwork) -> ipaddress.IPv4Network | ipaddress.IPv6Network:
+    def prefix(
+        self, ip_network: schema.IPNetwork
+    ) -> ipaddress.IPv4Network | ipaddress.IPv6Network:
         """
         Will return the CIDR of an IPNetwork object
         "cidr0_cidrs" : [ {
@@ -271,7 +284,7 @@ class Handler:
 
         if "v4prefix" in cidr:
             return ipaddress.IPv4Network(f"{cidr['v4prefix']}/{cidr['length']}")
-        
+
         if "v6prefix" in cidr:
             return ipaddress.IPv6Network(f"{cidr['v6prefix']}/{cidr['length']}")
 
@@ -296,7 +309,9 @@ class Handler:
 
         return None
 
-    def parent_prefix(self, ip_network: schema.IPNetwork) -> ipaddress.IPv4Network | ipaddress.IPv6Network | None:
+    def parent_prefix(
+        self, ip_network: schema.IPNetwork
+    ) -> ipaddress.IPv4Network | ipaddress.IPv6Network | None:
         """
         Parent network prefix from `parentHandle`
 
@@ -307,25 +322,24 @@ class Handler:
             return None
 
         # Extract the IP address part from the parentHandle
-        ip_parts = ip_network.parentHandle.split('-')[1:-1]
-        
+        ip_parts = ip_network.parentHandle.split("-")[1:-1]
+
         # Reconstruct the IP address string
-        ip_str = '.'.join(ip_parts)
-        
+        ip_str = ".".join(ip_parts)
+
         # Determine the appropriate prefix length based on the number of non-zero octets
-        non_zero_octets = sum(1 for part in ip_parts if part != '0')
+        non_zero_octets = sum(1 for part in ip_parts if part != "0")
         prefix_length = non_zero_octets * 8
-        
+
         # Construct the CIDR notation
         cidr = f"{ip_str}/{prefix_length}"
-        
+
         try:
             # Attempt to create an IP network object
             return ipaddress.ip_network(cidr, strict=False)
         except ValueError:
             # If the IP address is invalid, return None
             return None
-
 
     def secure_dns(self, domain: schema.Domain) -> DNSSEC:
         """
@@ -343,14 +357,16 @@ class Handler:
         if not domain.secureDNS:
             return DNSSEC.unknown
 
-        if domain.secureDNS.delegationSigned is None and domain.secureDNS.zeroSigned is None:
+        if (
+            domain.secureDNS.delegationSigned is None
+            and domain.secureDNS.zeroSigned is None
+        ):
             return DNSSEC.unknown
 
         if domain.secureDNS.delegationSigned or domain.secureDNS.zeroSigned:
             return DNSSEC.secure
 
         return DNSSEC.insecure
-
 
     def nameservers(self, domain: schema.Domain) -> list[Nameserver]:
         """
@@ -365,7 +381,6 @@ class Handler:
         return nameservers
 
     def dates(self, events: list[schema.Event]) -> dict[str, str]:
-
         """
         Return the created and updated dates from the events
         """
@@ -379,17 +394,13 @@ class Handler:
             if event.eventAction == "last changed":
                 updated: datetime = event.eventDate
 
-
         # set utc timezone if no timezone is present
         # created and du
 
         if created and not created.tzinfo:
             created = created.replace(tzinfo=datetime.timezone.utc)
-        
+
         if updated and not updated.tzinfo:
             updated = updated.replace(tzinfo=datetime.timezone.utc)
 
-        return {
-            "created": created,
-            "updated": updated
-        }
+        return {"created": created, "updated": updated}

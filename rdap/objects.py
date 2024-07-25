@@ -1,6 +1,6 @@
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
-
 from rdap.normalize import normalize
+
 
 def rir_from_domain(domain):
     """Gets the RIR from a URL or domain, if possible"""
@@ -210,6 +210,7 @@ class RdapAsn(RdapObject):
     def normalized(self) -> dict:
         return normalize(self._data, self.get_rir(), "autnum")
 
+
 class RdapNetwork(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
@@ -218,6 +219,7 @@ class RdapNetwork(RdapObject):
     def normalized(self) -> dict:
         return normalize(self._data, self.get_rir(), "ip")
 
+
 class RdapDomain(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
@@ -225,7 +227,8 @@ class RdapDomain(RdapObject):
     @property
     def normalized(self) -> dict:
         return normalize(self._data, self.get_rir(), "domain")
-    
+
+
 class RdapEntity(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
