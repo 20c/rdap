@@ -6,10 +6,8 @@ import ipaddress
 
 import phonenumbers
 from datetime import datetime
-from rdap.exceptions import RdapHTTPError
 from rdap.schema.normalized import (
     Contact,
-    Location,
     Nameserver,
     DNSSEC
 )

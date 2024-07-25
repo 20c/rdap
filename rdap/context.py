@@ -1,3 +1,7 @@
+"""
+Contact management for RDAP requests.
+"""
+
 from contextvars import ContextVar
 import pydantic
 from datetime import datetime
@@ -10,18 +14,43 @@ __all__ = [
 ]
 
 class RdapSource(pydantic.BaseModel):
+    """
+    Describes a source of RDAP data.
+    """
+
+    # urls requested for this source
     urls: list[str] = pydantic.Field(default_factory=list)
+
+    # rdap object handle
     handle: str | None = None
+
+    # source creation date (if available)
     created: datetime | None = None
+
+    # source last update date (if available)
     updated: datetime | None = None
 
 class RdapRequestState(pydantic.BaseModel):
-    sources: list[RdapSource] = pydantic.Field(default_factory=list)
-    client: object | None = None #RdapClient
+    """
+    Describe the current rdap request, tracking sources queried
+    and entities retrieved.
+    """
 
+    # list of sources for the current request
+    sources: list[RdapSource] = pydantic.Field(default_factory=list)
+
+    # reference to the rdap client instance
+    client: object | None = None
+
+    # cache of entities (to avoid duplicate requests to the same entity
+    # within the current request context)
     entities: dict = pydantic.Field(default_factory=dict)
 
     def update_source(self, handle:str, created:datetime | None, updated:datetime | None):
+        """
+        Update the current source with the handle and dates.
+        """
+
         self.sources[-1].handle = handle
         self.sources[-1].created = created
         self.sources[-1].updated = updated
@@ -34,6 +63,14 @@ rdap_request = ContextVar("rdap_request", default=RdapRequestState())
 # can be nested
 
 class RdapRequestContext:
+
+    """
+    Opens a request context
+
+    If no state is present, a new state is created.
+
+    If a state is present, a new source is added to the state.
+    """
 
     def __init__(self, url:str = None, client:object = None):
         self.url = url

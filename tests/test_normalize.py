@@ -29,8 +29,8 @@ def test_rdap_asn_lookup(rdapc, data_normalize_autnum):
         mock_lookup.side_effect = dynamic_mock_address
         asn = rdapc.get_asn(data_normalize_autnum.name)
         # uncomment to write expected data
-        with open(f"tests/data/normalize/autnum/{data_normalize_autnum.name}.expected", "w") as f:
-            f.write(json.dumps(asn.normalized, indent=2))
+        #with open(f"tests/data/normalize/autnum/{data_normalize_autnum.name}.expected", "w") as f:
+        #    f.write(json.dumps(asn.normalized, indent=2))
         
         assert json.dumps(data_normalize_autnum.expected, indent=2) == json.dumps(asn.normalized, indent=2)
 
@@ -58,8 +58,8 @@ def test_rdap_domain_lookup(rdapc, data_normalize_domain):
 def test_rdap_ip_lookup(rdapc, data_normalize_ip):
     entity = rdapc.get_ip(data_normalize_ip.name)
     # uncomment to write expected data
-    with open(f"tests/data/normalize/ip/{data_normalize_ip.name}.expected", "w") as f:
-        f.write(json.dumps(entity.normalized, indent=2))
+    #with open(f"tests/data/normalize/ip/{data_normalize_ip.name}.expected", "w") as f:
+    #    f.write(json.dumps(entity.normalized, indent=2))
     
     assert json.dumps(data_normalize_ip.expected, indent=2) == json.dumps(entity.normalized, indent=2)
 
