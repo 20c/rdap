@@ -88,7 +88,6 @@ def normalize(formatted_address: str, date: datetime = None, client=None) -> Loc
 
         # If a google maps key is not set, return a location object with
         # only the address field set
-        print("EXC", exc)
         return Location(
             updated=date,
             address=formatted_address,
