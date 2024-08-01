@@ -160,7 +160,7 @@ class Handler:
         combined_contacts = {}
 
         # sort by name and email
-        contacts = sorted(contacts, key=lambda x: (x.name, x.email))
+        contacts = sorted(contacts, key=lambda x: (x.name or "", x.email or ""))
 
         for _contact in contacts:
             key = f"{_contact.name}"
