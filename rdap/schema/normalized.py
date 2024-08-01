@@ -59,6 +59,8 @@ NORMALIZED_ROLES = {
     "administrative": "admin",
     "noc": "technical",
     "registrar": "registrant",
+    "routing": "technical",
+    "dns": "technical",
 }
 
 
