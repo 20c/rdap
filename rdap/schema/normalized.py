@@ -53,6 +53,8 @@ class ROLE(str, enum.Enum):
     policy = "policy"
     technical = "technical"
     registrant = "registrant"
+    billing = "billing"
+    sponsor = "sponsor"
 
 
 NORMALIZED_ROLES = {
@@ -62,6 +64,9 @@ NORMALIZED_ROLES = {
     "routing": "technical",
     "dns": "technical",
 }
+
+
+VALID_ROLES = [str(r) for r in ROLE]
 
 
 class DNSSEC(str, enum.Enum):
@@ -122,8 +127,10 @@ class Contact(pydantic.BaseModel):
         data["roles"] = roles
 
         # drop duplicates
-
         data["roles"] = list(set(data["roles"]))
+
+        # drop any invalid roles
+        data["roles"] = [role for role in data["roles"] if f"ROLE.{role}" in VALID_ROLES]
 
         return data
 
