@@ -209,7 +209,7 @@ class Handler:
                     contacts.extend(
                         [
                             Contact(**contact)
-                            for contact in ctx.get("entity", entity.handle)["contacts"]
+                            for contact in ctx.get("entity", entity.handle).get("contacts", [])
                         ]
                     )
 
