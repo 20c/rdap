@@ -11,7 +11,7 @@ client = rdap.RdapClient()
 # asn
 as63311 = client.get_asn(63311)
 
-# domain 
+# domain
 domain = client.get_domain('example.com')
 
 # ip

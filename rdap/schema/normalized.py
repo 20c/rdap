@@ -130,7 +130,9 @@ class Contact(pydantic.BaseModel):
         data["roles"] = list(set(data["roles"]))
 
         # drop any invalid roles
-        data["roles"] = [role for role in data["roles"] if f"ROLE.{role}" in VALID_ROLES]
+        data["roles"] = [
+            role for role in data["roles"] if f"ROLE.{role}" in VALID_ROLES
+        ]
 
         return data
 
