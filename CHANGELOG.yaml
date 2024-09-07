@@ -5,6 +5,9 @@ Unreleased:
   deprecated: []
   removed: []
   security: []
+1.6.0:
+  added:
+  - add regctl normalization schema
 1.5.2:
   fixed:
   - issue introduced in 1.5.1 that could cause some contact points to be lost

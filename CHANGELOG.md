@@ -4,6 +4,11 @@
 ## Unreleased
 
 
+## 1.6.0
+### Added
+- add regctl normalization schema
+
+
 ## 1.5.2
 ### Fixed
 - issue introduced in 1.5.1 that could cause some contact points to be lost
