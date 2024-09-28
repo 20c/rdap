@@ -1,0 +1,63 @@
+{
+  "created": "2014-11-17T14:28:43-05:00",
+  "updated": "2018-10-24T22:58:16-04:00",
+  "asn": 63311,
+  "name": "20C",
+  "organization": {
+    "name": "20C, LLC"
+  },
+  "locations": [
+    {
+      "updated": "2014-08-05T15:21:11-04:00",
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "303 W Ohio #1701\nChicago\nIL\n60654\nUnited States",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": "2023-08-02T14:15:09-04:00",
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "603 Discovery Dr\nWest Chicago\nIL\n60185\nUnited States",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    }
+  ],
+  "contacts": [
+    {
+      "created": "2014-07-03T23:22:49-04:00",
+      "updated": "2023-08-02T14:15:09-04:00",
+      "name": "Network Engineers",
+      "roles": [
+        "abuse",
+        "admin",
+        "technical"
+      ],
+      "phone": "+1 978-636-0020",
+      "email": "neteng@20c.com"
+    }
+  ],
+  "sources": [
+    {
+      "created": "2014-11-17T14:28:43-05:00",
+      "updated": "2018-10-24T22:58:16-04:00",
+      "handle": "AS63311",
+      "urls": [
+        "https://rdap.org/autnum/63311",
+        "https://rdap.org/autnum/63311"
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "created": "2004-06-28T18:28:14Z",
+  "updated": "2024-06-25T03:31:37Z",
+  "name": "20C.COM",
+  "handle": "123664426_DOMAIN_COM-VRSN",
+  "dns_sec": "insecure",
+  "nameservers": [
+    {
+      "host": "NS-1468.AWSDNS-55.ORG"
+    },
+    {
+      "host": "NS-1771.AWSDNS-29.CO.UK"
+    },
+    {
+      "host": "NS-327.AWSDNS-40.COM"
+    },
+    {
+      "host": "NS-545.AWSDNS-04.NET"
+    }
+  ],
+  "contacts": [],
+  "sources": [
+    {
+      "created": "2014-11-17T14:28:43-05:00",
+      "updated": "2018-10-24T22:58:16-04:00",
+      "handle": "AS63311",
+      "urls": [
+        "https://rdap.org/autnum/63311",
+        "https://rdap.org/autnum/63311"
+      ],
+      "description": null
+    },
+    {
+      "created": "2003-06-23T14:40:34Z",
+      "updated": "2023-11-27T23:02:44Z",
+      "handle": "AS8283",
+      "urls": [
+        "https://rdap.org/autnum/8283",
+        "https://rdap.org/autnum/8283"
+      ],
+      "description": null
+    },
+    {
+      "created": null,
+      "updated": "2017-09-21T23:55:48Z",
+      "handle": "CLUE1-RIPE",
+      "urls": [
+        "https://rdap.org/entity/CLUE1-RIPE",
+        "https://rdap.org/entity/CLUE1-RIPE"
+      ],
+      "description": null
+    },
+    {
+      "created": null,
+      "updated": "2017-06-13T22:21:32Z",
+      "handle": "DJVG",
+      "urls": [
+        "https://rdap.org/entity/DJVG",
+        "https://rdap.org/entity/DJVG"
+      ],
+      "description": null
+    },
+    {
+      "created": "2004-06-28T18:28:14Z",
+      "updated": "2024-06-25T03:31:37Z",
+      "handle": "123664426_DOMAIN_COM-VRSN",
+      "urls": [
+        "https://rdap.org/domain/20c.com",
+        "https://rdap.org/domain/20c.com"
+      ],
+      "description": null
+    }
+  ]
+}

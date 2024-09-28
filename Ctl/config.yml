@@ -20,7 +20,7 @@ ctl:
         sign: true
 
     - name: version
-      type: version
+      type: semver2
       config:
         branch_dev: main
         branch_release: main

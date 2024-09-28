@@ -1,0 +1,63 @@
+{
+  "created": null,
+  "updated": "2017-09-21T23:55:48Z",
+  "name": "CLUE1-RIPE",
+  "organization": null,
+  "locations": [
+    {
+      "updated": "2017-09-21T23:55:48Z",
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Frans Duwaerstraat 34\n1318AC Almere\nNetherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    }
+  ],
+  "contacts": [
+    {
+      "created": null,
+      "updated": "2017-09-21T23:55:48Z",
+      "name": "Netwerkvereniging Coloclue",
+      "roles": [],
+      "phone": "+31 6 51387718",
+      "email": "routers@coloclue.net"
+    }
+  ],
+  "sources": [
+    {
+      "created": "2014-11-17T14:28:43-05:00",
+      "updated": "2018-10-24T22:58:16-04:00",
+      "handle": "AS63311",
+      "urls": [
+        "https://rdap.org/autnum/63311",
+        "https://rdap.org/autnum/63311"
+      ],
+      "description": null
+    },
+    {
+      "created": "2003-06-23T14:40:34Z",
+      "updated": "2023-11-27T23:02:44Z",
+      "handle": "AS8283",
+      "urls": [
+        "https://rdap.org/autnum/8283",
+        "https://rdap.org/autnum/8283"
+      ],
+      "description": null
+    },
+    {
+      "created": null,
+      "updated": "2017-09-21T23:55:48Z",
+      "handle": "CLUE1-RIPE",
+      "urls": [
+        "https://rdap.org/entity/CLUE1-RIPE",
+        "https://rdap.org/entity/CLUE1-RIPE"
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,1468 @@
+{
+  "handle": "AS8283",
+  "startAutnum": 8283,
+  "endAutnum": 8283,
+  "name": "COLOCLUE-AS",
+  "status": [
+    "active"
+  ],
+  "entities": [
+    {
+      "handle": "CLUE1-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Netwerkvereniging Coloclue"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "Frans Duwaerstraat 34\n1318AC Almere\nNetherlands"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+31651387718"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "ops@coloclue.net"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "routers@coloclue.net"
+          ],
+          [
+            "email",
+            {
+              "type": "abuse"
+            },
+            "text",
+            "abuse@coloclue.net"
+          ]
+        ]
+      ],
+      "roles": [
+        "technical",
+        "administrative"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/8283",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/CLUE1-RIPE"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "COLOCLUE-MNT",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "coloclue-mnt"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/8283",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/COLOCLUE-MNT"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "ORG-NC22-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Netwerkvereniging Coloclue"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "org"
+          ],
+          [
+            "adr",
+            {
+              "label": "Frans Duwaerstraat 34\n1318 AC\nAlmere\nNETHERLANDS"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+31651387718"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "ops@coloclue.net"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/8283",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/ORG-NC22-RIPE"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "RIPE-NCC-END-MNT",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "RIPE-NCC-END-MNT"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ],
+          [
+            "org",
+            {},
+            "text",
+            "ORG-NCC1-RIPE"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/8283",
+          "rel": "self",
+          "href": "https://rdap.db.ripe.net/entity/RIPE-NCC-END-MNT"
+        },
+        {
+          "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+          "rel": "copyright",
+          "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+        }
+      ],
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "CLUE1-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Netwerkvereniging Coloclue"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "Frans Duwaerstraat 34\n1318AC Almere\nNetherlands"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+31651387718"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "ops@coloclue.net"
+          ],
+          [
+            "email",
+            {
+              "type": "email"
+            },
+            "text",
+            "routers@coloclue.net"
+          ],
+          [
+            "email",
+            {
+              "type": "abuse"
+            },
+            "text",
+            "abuse@coloclue.net"
+          ]
+        ]
+      ],
+      "roles": [
+        "abuse"
+      ],
+      "entities": [
+        {
+          "handle": "BCKR1-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Jasper Backer"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Kanaalstraat 89-BS"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31683708052"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/BCKR1-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "COLOCLUE-MNT",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "coloclue-mnt"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ]
+            ]
+          ],
+          "roles": [
+            "registrant"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/COLOCLUE-MNT"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "JVI-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Jurrian van Iersel"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Wandeling 8\n4301 JT Zierikzee\nNetherlands"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31 85 8768785"
+              ],
+              [
+                "email",
+                {
+                  "type": "email"
+                },
+                "text",
+                "ripe@jurrian.vaniersel.net"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/JVI-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "LUJE-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Jelle Luteijn"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "NETHERLANDS"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31"
+              ],
+              [
+                "email",
+                {
+                  "type": "email"
+                },
+                "text",
+                "hostmaster@luje.net"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical",
+            "administrative"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/LUJE-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "MS44437-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Mark Scholten"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Purmer 60, 8244AT Lelystad"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31(0)642408602"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/MS44437-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "MWTS1-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Menno Wouter Thomas Spaans"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Maasstraat 16\n1442RV Purmerend\nNetherlands"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31 6 24206858"
+              ],
+              [
+                "email",
+                {
+                  "type": "email"
+                },
+                "text",
+                "menno@someones.net"
+              ]
+            ]
+          ],
+          "roles": [
+            "administrative"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/MWTS1-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "NMR5-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Niels Raijer"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Kruier 1\n1567LA Assendelft\nNetherlands"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31 6 54918205"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/NMR5-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "PDW-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Paul de Weerd"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Frans Duwaerstraat 34\n1318 AC ALMERE\nThe Netherlands"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31651387718"
+              ],
+              [
+                "email",
+                {
+                  "type": "email"
+                },
+                "text",
+                "weerd@weirdnet.nl"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical",
+            "administrative"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/PDW-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "RAK24-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Rogier Krieger"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "BytePark\nGruttostraat 63\nNL-2665 EL Bleiswijk\nThe Netherlands"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31 15 212 8820"
+              ],
+              [
+                "email",
+                {
+                  "type": "email"
+                },
+                "text",
+                "hostmaster@bytepark.net"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/RAK24-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "TDB189-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Tim de Boer"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Wamberg 26-1\n1083CV\nAmsterdam\nNETHERLANDS"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31640282615"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/TDB189-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "TIJN-RIPE",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Tijn Buijs"
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Bijsterveld 1\n4902 ZN Oosterhout\nThe Netherlands"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "tel",
+                {
+                  "type": "voice"
+                },
+                "text",
+                "+31613962562"
+              ],
+              [
+                "email",
+                {
+                  "type": "email"
+                },
+                "text",
+                "contact@cybertinus.nl"
+              ]
+            ]
+          ],
+          "roles": [
+            "technical",
+            "administrative"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.db.ripe.net/autnum/8283",
+              "rel": "self",
+              "href": "https://rdap.db.ripe.net/entity/TIJN-RIPE"
+            },
+            {
+              "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+              "rel": "copyright",
+              "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+            }
+          ],
+          "objectClassName": "entity"
+        }
+      ],
+      "objectClassName": "entity"
+    }
+  ],
+  "remarks": [
+    {
+      "description": [
+        "Netwerkvereniging Coloclue, Amsterdam, Netherlands",
+        "-----------------------------------------------------",
+        "Transit",
+        "Atom86",
+        "",
+        "True",
+        "Fiberring",
+        "Fusix Networks",
+        "Peering",
+        "AMS-IX Office",
+        "AMS-IX Route Servers",
+        "NL-IX Route Servers",
+        "OTEGLOBE",
+        "TalkTalk",
+        "Hurricane Electric",
+        "InterBox Internet",
+        "OpenCarrier",
+        "BIT",
+        "TNG",
+        "Opteamax",
+        "IP-Max SA",
+        "MaxiTEL",
+        "MCKAYCOM Ltd",
+        "Packet Clearing House",
+        "Liquid Telecom",
+        "MANDA",
+        "Colocenter.nl",
+        "Interconnect Services B.V.",
+        "OpenPeering",
+        "Solcon",
+        "Eurofiber",
+        "OpenDNS",
+        "Akamai",
+        "Previder",
+        "RIPE NCC RIS Project",
+        "Netflix",
+        "PT Comunicacoes S.A.",
+        "NTT",
+        "Not Surfnet",
+        "Breedband Nederland",
+        "Leaseweb",
+        "Init7",
+        "Apple Inc",
+        "Duocast",
+        "Iunxi",
+        "Tuxis Internet Engineering",
+        "DELTA Fiber Nederland BV",
+        "NORDUNet",
+        "Aire Networks del Mediterraneo S.L.U.",
+        "CESNET z.s.p.o.",
+        "Internet Systems Consortium, F-Root Operator",
+        "Telenor",
+        "T-mobile thuis",
+        "Emirates Telecommunications Corporation",
+        "Gelderland Internet Exchange",
+        "Jaguar Network",
+        "IP-Only",
+        "A2B Internet",
+        "Netnod",
+        "TransIP",
+        "Iceland Telecom Ltd.",
+        "Viatel Ltd",
+        "IT-Ernity Internet Services B.V.",
+        "MTS",
+        "Redraw Internet",
+        "Amazon",
+        "GTT",
+        "BT",
+        "Core Backbone GmbH",
+        "Booking.com",
+        "PCCW Global",
+        "Job Snijders",
+        "BGPMUX / PEERING TestBed",
+        "AS112 Project (Hosted by RIPE NCC at AMS-IX)",
+        "Claranet Ltd.",
+        "Microsoft",
+        "Nextlayer.at",
+        "Serverius",
+        "Wikimedia Foundation",
+        "Hostserver.de",
+        "Automattic Inc.",
+        "AFNIC",
+        "OVH",
+        "I3D",
+        "Vodafone Group",
+        "SOCO Network Solutions GmbH",
+        "Zayo France",
+        "Cloudflare",
+        "Facebook",
+        "Liberty Global",
+        "Zayo / Abovenet",
+        "Deutsche Telekom",
+        "TeliaSonera International Carrier",
+        "ColocationIX",
+        "NFOrce Entertainment B.V.",
+        "Knipp Medien und Kommunikation GmbH",
+        "Qonnected B.V.",
+        "Computerline Group",
+        "GlobalConnect Group",
+        "Micron21",
+        "Sprint",
+        "Twitch / Justin.tv",
+        "Global Network Management",
+        "SURF",
+        "NovoServe",
+        "Yahoo",
+        "PCextreme",
+        "Belgacom International Carrier Services (aka BICS)",
+        "Google",
+        "Zain Group",
+        "SIG-Telecom",
+        "Bandwidth Technologies",
+        "Vivor",
+        "Tata",
+        "Tele2 SWIPNet",
+        "Weservit B.V.",
+        "Fastly inc.",
+        "PeakFactory",
+        "Telecom Italia Sparkle",
+        "packet.net",
+        "Telxius",
+        "Asteroid Route Collector",
+        "Asteroid MLP Route Server",
+        "Twitter",
+        "SPEED-IX route server peers",
+        "Freifunk Nordwest e.V",
+        "e-utp.net",
+        "Belcloud",
+        "BlackGATE BV",
+        "T-2 d.o.o.",
+        "Canadian Internet Registration Authority",
+        "Dropbox Inc",
+        "Accenture BV",
+        "myLoc managed IT AG",
+        "Redhosting B.V.",
+        "Chronos",
+        "Servperso-Systems",
+        "Stichting Nationale Beheersorganisatie Internet Providers (NBIP)",
+        "Hetzner Online GmbH",
+        "Valve Corporation",
+        "Parknet F.M.B.A.",
+        "CLOUDITY Network",
+        "AltusHost B.V.",
+        "Mythic Beasts Ltd",
+        "CS Net",
+        "Cynthia Maja Revstrom",
+        "Stichting EventInfra",
+        "TRIX",
+        "EdgeCast Networks Inc",
+        "Prolocation B.V.",
+        "Speakup",
+        "Seacom",
+        "SAM Office B.V.",
+        "OSN Online Service Nuernberg GmbH",
+        "Tencent Holdings Ltd.",
+        "Green Mini host BV",
+        "WD6.net B.V.",
+        "Meanie",
+        "ADES / NetLogics",
+        "Nederlandse Publieke Omroep - NPO",
+        "Alpine North",
+        "Greenhost",
+        "Freedom Internet",
+        "Unithost Internet BV",
+        "Nedap NV",
+        "Serverion B.V.",
+        "Frys-IX Route Servers",
+        "IPng Networks GmbH",
+        "DE-CIX Frankfurt Route Servers",
+        "France-IX Paris Route Servers",
+        "SwissIX Route Servers",
+        "communityrack.org",
+        "Cato Networks Ltd",
+        "HostIn",
+        "equada network GmbH",
+        "NetActuate Inc.",
+        "Solutions4xs",
+        "Kviknet.dk ApS",
+        "NIKHEF",
+        "China Telecom",
+        "IONOS SE",
+        "Earthlink Telecommunications Equipment Trading & Services DMCC",
+        "OpenFiber",
+        "ESEVEN DevOps",
+        "LOCIX NL Route Servers",
+        "Sentia Labs",
+        "Gandi",
+        "Xyphen IT",
+        "NetOne NL",
+        "LUJE.net",
+        "INTERIX Route Servers",
+        "Ursin Filli",
+        "Apple Communications Ltd.",
+        "Sipartech SAS",
+        "Nick Bouwhuis",
+        "CBWS",
+        "Peering with Coloclue",
+        "Coloclue is present at the following exchanges:",
+        "AMS-IX: 80.249.211.161 / 2001:7f8:1::a500:8283:1",
+        "Asteroid Amsterdam: 185.1.94.15 / 2001:7f8:b6::205b:1",
+        "DE-CIX Frankfurt: 80.80.197.51 / 2001:7b8::205b:0:1",
+        "France-IX Paris: 37.49.238.29 / 2001:7b8:54::2:29",
+        "Frys-IX: 185.1.203.140 / 2001:7b8:10f::205b:140",
+        "Frys-IX: 185.1.203.187 / 2001:7f8:10f::205b:187",
+        "NL-IX: 193.239.117.111 / 2001:7f8:13::a500:8283:1",
+        "NL-IX: 193.239.117.203 / 2001:7f8:13::a500:8283:2",
+        "Speed-IX: 185.1.222.16 / 2001:7f8:b7::a500:8283:1",
+        "SwissIX: 91.206.53.24 / 2001:7b8:24::118",
+        "There are two methods:",
+        "Modern way:",
+        "- Send a pull request on github:",
+        "http://github.com/coloclue/peering",
+        "- Modify peers.yaml",
+        "- Wait for Travis' OK signal",
+        "- Peering establishes automatically!",
+        "Old-fashioned way:",
+        "- Send an email to routers@coloclue.net",
+        "- Please do include your as-set or route-set",
+        "- Wait for AS8283 engineer to update peers.yaml",
+        "Abuse issues should be reported to abuse@coloclue.net",
+        "Abuse related e-mail to any other address(es)",
+        "will *not* be read",
+        "Routing Policy",
+        "- All peering sessions are strictly filtered based on IRR data",
+        "- RPKI INVALID prefixes are rejected",
+        "BGP Communities and Traffic Engineering",
+        "=======================================",
+        "The following BGP Community scheme draws inspiration from:",
+        "draft-ietf-grow-large-communities-usage",
+        "https://tools.ietf.org/html/draft-ietf-grow-large-communities-usage",
+        "INFORMATIONAL COMMUNITIES:",
+        "==========================",
+        "RFC 1997 | Large | Meaning (Informational)",
+        "----------|-------------|-------------------------------------",
+        "8283:1 | 8283:0:1 | peering routes",
+        "8283:2 | 8283:0:2 | downstream routes",
+        "----------+-------------+-------------------------------------",
+        "8283:101 | 8283:5:1 | Accepted from peer because of valid IRR entry",
+        "8283:102 | 8283:5:2 | Accepted from peer because of valid ROA",
+        "8283:104 | 8283:5:4 | Accepted while RPKI invalid because it is added to our whitelist",
+        "8283:10 | 8283:6:10 | received from TRUE",
+        "8283:11 | 8283:6:11 | received from Atom86",
+        "8283:14 | 8283:6:14 | received from FiberRing",
+        "8283:15 | 8283:6:15 | received from Fusix",
+        "- | 8283:8:26 | received via AMS-IX",
+        "- | 8283:8:64 | received via NL-IX",
+        "- | 8283:8:1812 | received via Asteroid",
+        "- | 8283:8:1842 | received via SpeedIX",
+        "- | 8283:8:3512 | received via Frys-IX",
+        "- | 8283:8:31 | received via DE-CIX",
+        "- | 8283:8:359 | received via France-IX",
+        "- | 8283:8:60 | received via SwissIX",
+        "- | 8283:8:2601 | received via LocIX Netherlands",
+        "| Rejection Reasons",
+        "- | 8283:7:1 | More specifics covering AS8283 space are considered hijacks",
+        "- | 8283:7:2 | Somewhere in the AS_PATH a Bogon ASN is present (0, 23456, 64496..65534, 4200000000+)",
+        "- | 8283:7:3 | The prefix is Bogon garbage (rfc1918, rfc4291 etc)",
+        "- | 8283:7:4 | The prefix is an RPKI Invalid and as such rejected",
+        "- | 8283:7:5 | The route's prefix length is unacceptable (too small or too large)",
+        "- | 8283:7:6 | There is no IRR object that covers this route announcement",
+        "- | 8283:7:7 | Coloclue member is not authorized to announce this route",
+        "ACTION COMMUNITIES:",
+        "===================",
+        "RFC 1997 | Large | Meaning (Action)",
+        "8283:50 | 8283:1:50 | Set LOCAL_PREF to 50 (default is 100)",
+        "8283:150 | 8283:1:150 | Set LOCAL_PREF to 150 (default is 100)",
+        "8283:202 | 8283:2:0 | Prepend 8283 once to all eBGP peers",
+        "- | 8283:2:nnn | Prepend 8283 once to peer AS nnn",
+        "8283:203 | 8283:3:0 | Prepend 8283 twice to all eBGP peers",
+        "- | 8283:3:nnn | Prepend 8283 twice to peer AS nnn",
+        "8283:204 | 8283:4:0 | Do not export to eBGP peers",
+        "- | 8283:4:nnn | Do not export to peer AS nnn",
+        "65535:0 | - | G-SHUT [draft-ietf-grow-bgp-gshut]",
+        "65535:666 | - | BLACKHOLE [RFC 7999]",
+        "MEMBERS ONLY:",
+        "=============",
+        "----------+------------+-------------------------------------",
+        "8283:50 | 8283:1:50 | Set LOCAL_PREF to 50 (default is 500)",
+        "| *** WARNING: default is 100 for other routes, so your prefixes may be become unreachable!",
+        "8283:450 | 8283:1:450 | Set LOCAL_PREF to 450 (default is 500)",
+        "8283:550 | 8283:1:550 | Set LOCAL_PREF to 550 (default is 500)",
+        "8283:301 | 8283:301:0 | Do not export to other Coloclue members",
+        "8283:302 | 8283:302:0 | Do not export to transit providers",
+        "8283:303 | 8283:303:0 | Do not export to direct peers",
+        "Examples:",
+        "---------",
+        "8283:2:3320 - prepend 8283 to AS 3320 (path on export will be 8283_8283_you)",
+        "8283:3:200023 - prepend 8283 to AS 200023 (path on export will be 8283_8283_8283_you)",
+        "8283:4:198203 - do not announce the route over any BGP sessions with AS 198203",
+        "(notice how you can 32-bit ASNs? :-)"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.db.ripe.net/autnum/8283",
+      "rel": "self",
+      "href": "https://rdap.db.ripe.net/autnum/8283"
+    },
+    {
+      "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+      "rel": "copyright",
+      "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+    }
+  ],
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "2003-06-23T14:40:34Z"
+    },
+    {
+      "eventAction": "last changed",
+      "eventDate": "2023-11-27T23:02:44Z"
+    }
+  ],
+  "rdapConformance": [
+    "nro_rdap_profile_asn_flat_0",
+    "cidr0",
+    "rdap_level_0",
+    "nro_rdap_profile_0"
+  ],
+  "notices": [
+    {
+      "title": "Filtered",
+      "description": [
+        "This output has been filtered."
+      ]
+    },
+    {
+      "title": "Whois Inaccuracy Reporting",
+      "description": [
+        "If you see inaccuracies in the results, please visit:"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/8283",
+          "rel": "inaccuracy-report",
+          "href": "https://www.ripe.net/contact-form?topic=ripe_dbm&show_form=true",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "title": "Source",
+      "description": [
+        "Objects returned came from source",
+        "RIPE"
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the RIPE Database query service. The objects are in RDAP format."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/autnum/8283",
+          "rel": "terms-of-service",
+          "href": "http://www.ripe.net/db/support/db-terms-conditions.pdf",
+          "type": "application/pdf"
+        }
+      ]
+    }
+  ],
+  "port43": "whois.ripe.net",
+  "objectClassName": "autnum"
+}
