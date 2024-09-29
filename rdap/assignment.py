@@ -69,7 +69,8 @@ class RIRAssignmentLookup:
 
             for rir in self.rir_lists:
                 rir_file_path = os.path.join(
-                    data_path, f"delegated-{rir}-extended-latest",
+                    data_path,
+                    f"delegated-{rir}-extended-latest",
                 )
                 self.download_data(rir, rir_file_path, cache_days)
                 self._data_files.append(rir_file_path)
@@ -116,8 +117,7 @@ class RIRAssignmentLookup:
                 file.write(response.text)
 
     def get_status(self, asn):
-        """Get RIR assignment status for an ASN
-        """
+        """Get RIR assignment status for an ASN"""
         if not hasattr(self, "_data"):
             self.load_data()
 

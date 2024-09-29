@@ -17,8 +17,7 @@ def rir_from_domain(domain):
 
 
 class RdapObject:
-    """RDAP base object, allows for lazy parsing
-    """
+    """RDAP base object, allows for lazy parsing"""
 
     def __init__(self, data, rdapc=None):
         self._rdapc = rdapc
@@ -54,15 +53,13 @@ class RdapObject:
         return self.parsed()["kind"]
 
     def parsed(self):
-        """Returns parsed dict
-        """
+        """Returns parsed dict"""
         if not self._parsed:
             self._parse()
         return self._parsed
 
     def _parse_vcard(self, data):
-        """Iterates over current level's vcardArray and gets data
-        """
+        """Iterates over current level's vcardArray and gets data"""
         vcard = dict()
 
         for row in data.get("vcardArray", [0])[1:]:
@@ -185,8 +182,7 @@ class RdapObject:
 
 
 class RdapAsn(RdapObject):
-    """access interface for lazy parsing of RDAP looked up aut-num objects
-    """
+    """access interface for lazy parsing of RDAP looked up aut-num objects"""
 
     def __init__(self, data, rdapc=None):
         # check for ASN range, meaning it's delegated and unallocated

@@ -70,7 +70,8 @@ def test_normalize_success(mock_google_client):
 
     # Verify that lookup was called
     mock_lookup.assert_called_once_with(
-        "1600 Amphitheatre Parkway, Mountain View, CA", None,
+        "1600 Amphitheatre Parkway, Mountain View, CA",
+        None,
     )
 
 

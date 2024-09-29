@@ -30,7 +30,6 @@ class GoogleKeyNotSet(Exception):
 
 
 def get_client(key: str = GOOGLE_MAPS_API_KEY):
-
     if not key:
         raise GoogleKeyNotSet("Google Maps API Key not set")
 
@@ -75,12 +74,10 @@ def lookup(formatted_address: str, client=None) -> dict:
 
 
 def normalize(formatted_address: str, date: datetime = None, client=None) -> Location:
-    """Takes a formatted address and returns a normalized location object
-    """
+    """Takes a formatted address and returns a normalized location object"""
     try:
         result = lookup(formatted_address, client)
     except (GoogleKeyNotSet, NotFound):
-
         # If a google maps key is not set, return a location object with
         # only the address field set
         return Location(

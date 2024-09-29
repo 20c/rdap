@@ -30,7 +30,7 @@ rdap = "rdap.cli:main"
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = ">=2.25.1"
-munge = {version = ">=1.3", extras = ["yaml"]}
+munge = { version = ">=1.3", extras = ["yaml"] }
 pydantic = ">=2.8.2"
 googlemaps = ">=4.10"
 phonenumbers = ">=8.13.0"
@@ -46,12 +46,10 @@ tox = ">=3.20"
 tox-gh-actions = ">2.9.1"
 
 # linting
-black = ">=20"
-isort = ">=5.7"
-flake8 = ">=3.8"
+bandit = ">=1.6.2"
 mypy = ">=0.950"
 pre-commit = ">=2.13"
-pyupgrade = ">=2.19"
+ruff = ">=0.1"
 
 # docs
 markdown = "*"
@@ -61,15 +59,23 @@ mkdocs = ">=1.2.3"
 [tool.poetry.plugins."markdown.extensions"]
 pymdgen = "pymdgen.md:Extension"
 
+
+[tool.ruff]
+
+select = [
+    "I",  # isort
+    "UP",
+]
+
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
     # at least this three should be fine in tests:
     "S101", # asserts allowed in tests...
-    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
-    "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    "ARG",  # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT",  # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
     # The below are debateable
     "PLR2004", # Magic value used in comparison, ...
-    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+    "S311",    # Standard pseudo-random generators are not suitable for cryptographic purposes
 ]
 
 [build-system]

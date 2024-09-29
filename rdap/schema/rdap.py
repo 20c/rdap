@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Dict, Union, Optional
+from typing import Dict, List, Optional, Union
 
 from pydantic import BaseModel, Field
 
@@ -38,6 +38,7 @@ class Event(BaseModel):
 
 class Notice(BaseModel):
     """Represents a notice or message in the RDAP response."""
+
     # The title of the notice
     title: Optional[str] = None
     # A list of text lines comprising the notice
@@ -55,6 +56,7 @@ class VCardValue(BaseModel):
 
 class Remark(BaseModel):
     """Represents a remark or comment in the RDAP response."""
+
     # The title of the remark
     title: Optional[str] = None
     # A list of text lines comprising the remark
@@ -63,6 +65,7 @@ class Remark(BaseModel):
 
 class Entity(BaseModel):
     """Represents an entity (organization, individual, or role) in the RDAP response."""
+
     # A unique identifier for the entity
     handle: str = Field(default_factory=str)
     # Contact information in vCard format
@@ -97,6 +100,7 @@ class Entity(BaseModel):
 
 class IPNetwork(BaseModel):
     """Represents an IP network in the RDAP response."""
+
     # list of conformance levels
     rdapConformance: List[str] = Field(default_factory=list)
     # Notices related to the IP network

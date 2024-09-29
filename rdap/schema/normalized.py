@@ -1,13 +1,11 @@
-"""Pydantic schemas for normalized RDAP data
-"""
+"""Pydantic schemas for normalized RDAP data"""
 
 import enum
 import ipaddress
 from datetime import datetime
-from typing import Any, Union
+from typing import Any, List, Optional, Union
 
 import pydantic
-from typing import List, Optional
 
 __all__ = [
     "IP_VERSION",
@@ -28,8 +26,7 @@ __all__ = [
 
 
 class IP_VERSION(int, enum.Enum):
-    """Enum for IP version
-    """
+    """Enum for IP version"""
 
     ipv4 = 4
     ipv6 = 6
@@ -75,16 +72,15 @@ class DNSSEC(str, enum.Enum):
 
 
 class GeoLocation(pydantic.BaseModel):
-    """Describes geographic coordinates
-    """
+    """Describes geographic coordinates"""
 
     latitude: float
     longitude: float
 
 
 class Location(pydantic.BaseModel):
-    """Describes a location
-    """
+    """Describes a location"""
+
     updated: Optional[datetime] = None
     country: Optional[str] = None
     city: Optional[str] = None
@@ -99,8 +95,7 @@ class Location(pydantic.BaseModel):
 
 
 class Contact(pydantic.BaseModel):
-    """Describes a point of contact
-    """
+    """Describes a point of contact"""
 
     created: Optional[datetime] = None
     updated: Optional[datetime] = None
@@ -112,7 +107,6 @@ class Contact(pydantic.BaseModel):
     @pydantic.model_validator(mode="before")
     @classmethod
     def normalize_roles(cls, data: Any) -> Any:
-
         roles = []
 
         for role in data.get("roles", []):
@@ -149,15 +143,13 @@ class Source(pydantic.BaseModel):
 
 
 class Organization(pydantic.BaseModel):
-    """Describes an organization
-    """
+    """Describes an organization"""
 
     name: str
 
 
 class Network(pydantic.BaseModel):
-    """Describes a network
-    """
+    """Describes a network"""
 
     created: Optional[datetime] = None
     updated: Optional[datetime] = None
@@ -170,8 +162,7 @@ class Network(pydantic.BaseModel):
 
 
 class IPNetwork(pydantic.BaseModel):
-    """Describes an IP network
-    """
+    """Describes an IP network"""
 
     created: Optional[datetime] = None
     updated: Optional[datetime] = None
@@ -187,7 +178,6 @@ class IPNetwork(pydantic.BaseModel):
     @pydantic.model_validator(mode="before")
     @classmethod
     def normalize_status(cls, data: Any) -> Any:
-
         status = data.get("status")
 
         if status:
@@ -197,8 +187,7 @@ class IPNetwork(pydantic.BaseModel):
 
 
 class Entity(pydantic.BaseModel):
-    """Describes an entity
-    """
+    """Describes an entity"""
 
     created: Optional[datetime] = None
     updated: Optional[datetime] = None
@@ -210,15 +199,13 @@ class Entity(pydantic.BaseModel):
 
 
 class Nameserver(pydantic.BaseModel):
-    """Describes a nameserver
-    """
+    """Describes a nameserver"""
 
     host: str
 
 
 class Domain(pydantic.BaseModel):
-    """Describes a domain
-    """
+    """Describes a domain"""
 
     created: Optional[datetime] = None
     updated: Optional[datetime] = None

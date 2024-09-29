@@ -53,7 +53,9 @@ if __name__ == "__main__":
 
     # Add the --include-expected option
     parser.add_argument(
-        "--include-expected", action="store_true", help="Include expected",
+        "--include-expected",
+        action="store_true",
+        help="Include expected",
     )
 
     args = parser.parse_args()

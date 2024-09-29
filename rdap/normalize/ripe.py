@@ -1,9 +1,9 @@
-"""Some case specific normalization functions for RIPE data.
-"""
+"""Some case specific normalization functions for RIPE data."""
+
+from typing import Union
 
 import rdap.schema.rdap as schema
 from rdap.normalize import base
-from typing import Union
 
 __all__ = [
     "Handler",
@@ -11,11 +11,11 @@ __all__ = [
 
 
 class Handler(base.Handler):
-    """RIPE sometimes puts org name into the remarks
-    """
+    """RIPE sometimes puts org name into the remarks"""
 
     def org_name(
-        self, entity: Union[schema.AutNum, schema.IPNetwork, schema.Domain],
+        self,
+        entity: Union[schema.AutNum, schema.IPNetwork, schema.Domain],
     ) -> Union[str, None]:
         """If super() return None or equal to entity.name try checking
         remarks for an entry where title == "description"

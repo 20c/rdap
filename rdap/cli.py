@@ -22,8 +22,7 @@ def add_options(parser, options):
 
 
 class Context(munge.click.Context):
-    """command line interface context
-    """
+    """command line interface context"""
 
     app_name = "rdap"
     config_class = Config
@@ -44,13 +43,19 @@ def main(argv=None):
     )
     parser.add_argument("--output-format", help="output format (yaml, json, text)")
     parser.add_argument(
-        "--show-requests", action="store_true", help="show all requests",
+        "--show-requests",
+        action="store_true",
+        help="show all requests",
     )
     parser.add_argument(
-        "--parse", action="store_true", help="parse data into object before display",
+        "--parse",
+        action="store_true",
+        help="parse data into object before display",
     )
     parser.add_argument(
-        "--normalize", action="store_true", help="normalize data before display",
+        "--normalize",
+        action="store_true",
+        help="normalize data before display",
     )
     parser.add_argument("--rir", action="store_true", help="display rir", default=False)
     parser.add_argument(

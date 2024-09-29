@@ -2,11 +2,11 @@
 
 from contextvars import ContextVar
 from datetime import datetime
+from typing import List, Optional
 
 import pydantic
 
 from rdap.exceptions import RdapHTTPError
-from typing import List, Optional
 
 __all__ = [
     "rdap_request",

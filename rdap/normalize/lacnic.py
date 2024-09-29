@@ -1,5 +1,4 @@
-"""Some case specific normalization functions for LACNIC data.
-"""
+"""Some case specific normalization functions for LACNIC data."""
 
 from rdap.normalize import base
 
@@ -9,6 +8,4 @@ __all__ = [
 
 
 class Handler(base.Handler):
-    """No known LACNIC specific normalizations.
-    """
-
+    """No known LACNIC specific normalizations."""

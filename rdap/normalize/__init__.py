@@ -1,12 +1,11 @@
-"""Contains a set of functions to parse various rdap data properties
-"""
+"""Contains a set of functions to parse various rdap data properties"""
 
 import json
+from typing import List, Union
 
 import rdap.schema.normalized as schema
 from rdap.context import RdapRequestState, rdap_request
 from rdap.normalize import afrinic, apnic, arin, base, lacnic, ripe
-from typing import List, Union
 from rdap.schema.source import (
     autnum_model,
     domain_model,
@@ -39,11 +38,9 @@ def get_sources(
     handle: str,
     entity: Union[schema.Network, schema.IPNetwork, schema.Domain, schema.Entity],
 ) -> List[schema.Source]:
-
     sources = []
 
     for source in state.sources:
-
         if not source.urls or not source.handle:
             continue
 
@@ -89,7 +86,8 @@ def normalize_autnum(data: dict, rir: str) -> dict:
     rdap_autnum = autnum_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_autnum.handle, **handler.dates(rdap_autnum.events),
+        rdap_autnum.handle,
+        **handler.dates(rdap_autnum.events),
     )
 
     org_name = handler.org_name(rdap_autnum)
@@ -124,7 +122,8 @@ def normalize_ip(data: dict, rir: str) -> dict:
     rdap_ip_network = ip_network_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_ip_network.handle, **handler.dates(rdap_ip_network.events),
+        rdap_ip_network.handle,
+        **handler.dates(rdap_ip_network.events),
     )
 
     prefix = handler.prefix(rdap_ip_network)
@@ -161,7 +160,8 @@ def normalize_domain(data: dict, rir: str) -> dict:
     rdap_domain = domain_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_domain.handle, **handler.dates(rdap_domain.events),
+        rdap_domain.handle,
+        **handler.dates(rdap_domain.events),
     )
 
     net = schema.Domain(
@@ -193,7 +193,8 @@ def normalize_entity(data: dict, rir: str) -> dict:
     rdap_entity = entity_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_entity.handle, **handler.dates(rdap_entity.events),
+        rdap_entity.handle,
+        **handler.dates(rdap_entity.events),
     )
 
     org_name = handler.org_name_from_entity(rdap_entity)

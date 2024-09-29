@@ -44,8 +44,7 @@ class RdapRequestAuth(requests.auth.AuthBase):
 
 
 def strip_auth(url):
-    """Strip any sensitive auth information out of the URL.
-    """
+    """Strip any sensitive auth information out of the URL."""
     parsed = urlsplit(url)
     if not parsed.query:
         return url
@@ -64,8 +63,7 @@ def strip_auth(url):
 
 
 class RdapClient:
-    """Client to do RDAP queries.
-    """
+    """Client to do RDAP queries."""
 
     def __init__(self, config=None, config_dir=None):
         """Initialize an RdapClient.
@@ -121,7 +119,8 @@ class RdapClient:
         )
 
         self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(
-            rdap.__version__, self.http.headers["User-Agent"],
+            rdap.__version__,
+            self.http.headers["User-Agent"],
         )
 
     def _get(self, url):
@@ -216,8 +215,7 @@ class RdapClient:
         self._recurse_roles = set(value)
 
     def get(self, query):
-        """Generic get that tries to figure out object type and returns an object.
-        """
+        """Generic get that tries to figure out object type and returns an object."""
         qstr = query.strip().lower()
 
         # IP address
@@ -280,8 +278,7 @@ class RdapClient:
         return self._last_req
 
     def get_asn(self, asn):
-        """Get an ASN object.
-        """
+        """Get an ASN object."""
         asn = int(asn)
         try:
             url = self.asn_url(asn)
@@ -294,20 +291,17 @@ class RdapClient:
         return RdapAsn(self._rdap_get(query, base_url=url).json(), self)
 
     def get_domain(self, domain):
-        """Get a domain object.
-        """
+        """Get a domain object."""
         query = f"/domain/{domain}"
         return RdapDomain(self._rdap_get(query).json(), self)
 
     def get_ip(self, address):
-        """Get an IP object.
-        """
+        """Get an IP object."""
         query = f"/ip/{address}"
         return RdapNetwork(self._rdap_get(query).json(), self)
 
     def get_entity(self, handle, base_url=None):
-        """Get entity information in object form
-        """
+        """Get entity information in object form"""
         query = f"/entity/{handle}"
         return RdapEntity(self._rdap_get(query).json(), self)
 
@@ -328,6 +322,5 @@ class RdapClient:
         return url
 
     def get_data(self, url):
-        """Get raw data and return it for when there's no need for parsing.
-        """
+        """Get raw data and return it for when there's no need for parsing."""
         return self._get(url).json()
