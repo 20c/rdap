@@ -1,5 +1,4 @@
-"""
-Contact management for RDAP requests.
+"""Contact management for RDAP requests.
 """
 
 from contextvars import ContextVar
@@ -17,8 +16,7 @@ __all__ = [
 
 
 class RdapSource(pydantic.BaseModel):
-    """
-    Describes a source of RDAP data.
+    """Describes a source of RDAP data.
     """
 
     # urls requested for this source
@@ -35,8 +33,7 @@ class RdapSource(pydantic.BaseModel):
 
 
 class RdapRequestState(pydantic.BaseModel):
-    """
-    Describe the current rdap request, tracking sources queried
+    """Describe the current rdap request, tracking sources queried
     and entities retrieved.
     """
 
@@ -51,12 +48,10 @@ class RdapRequestState(pydantic.BaseModel):
     entities: dict = pydantic.Field(default_factory=dict)
 
     def update_source(
-        self, handle: str, created: datetime | None, updated: datetime | None
+        self, handle: str, created: datetime | None, updated: datetime | None,
     ):
+        """Update the current source with the handle and dates.
         """
-        Update the current source with the handle and dates.
-        """
-
         self.sources[-1].handle = handle
         self.sources[-1].created = created
         self.sources[-1].updated = updated
@@ -71,8 +66,7 @@ rdap_request = ContextVar("rdap_request", default=RdapRequestState())
 
 
 class RdapRequestContext:
-    """
-    Opens a request context
+    """Opens a request context
 
     If no state is present, a new state is created.
 
@@ -94,7 +88,7 @@ class RdapRequestContext:
             state.sources.append(RdapSource(urls=[self.url]))
         else:
             state = RdapRequestState(
-                sources=[RdapSource(urls=[self.url] if self.url else [])]
+                sources=[RdapSource(urls=[self.url] if self.url else [])],
             )
             self.token = rdap_request.set(state)
 

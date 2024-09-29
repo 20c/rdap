@@ -1,5 +1,4 @@
-"""
-Uses googlemaps to resolve address to geolocation
+"""Uses googlemaps to resolve address to geolocation
 and into fields
 """
 
@@ -39,11 +38,9 @@ def get_client(key: str = GOOGLE_MAPS_API_KEY):
 
 
 def lookup(formatted_address: str, client=None) -> dict:
-    """
-    Return the latitude, longitude field values of the specified
+    """Return the latitude, longitude field values of the specified
     location.
     """
-
     request: RdapRequestState = rdap_request.get()
 
     key = f"geo:{formatted_address}"
@@ -65,10 +62,10 @@ def lookup(formatted_address: str, client=None) -> dict:
     ) as exc:
         raise RequestError(exc)
     except googlemaps.exceptions.Timeout:
-        raise Timeout()
+        raise Timeout
 
     if not result:
-        raise NotFound()
+        raise NotFound
 
     # cache to avoid duplicate lookups during the same
     # request context
@@ -78,13 +75,11 @@ def lookup(formatted_address: str, client=None) -> dict:
 
 
 def normalize(formatted_address: str, date: datetime = None, client=None) -> Location:
+    """Takes a formatted address and returns a normalized location object
     """
-    Takes a formatted address and returns a normalized location object
-    """
-
     try:
         result = lookup(formatted_address, client)
-    except (GoogleKeyNotSet, NotFound) as exc:
+    except (GoogleKeyNotSet, NotFound):
 
         # If a google maps key is not set, return a location object with
         # only the address field set

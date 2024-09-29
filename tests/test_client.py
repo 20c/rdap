@@ -22,7 +22,7 @@ def test_strip_auth():
 
 
 @pytest.mark.skip(
-    "this no longer raises a http error, need to investigate changes on their end"
+    "this no longer raises a http error, need to investigate changes on their end",
 )
 def test_lacnic_bad_apikey():
     rdapc = client.RdapClient(dict(lacnic_apikey="12345"))

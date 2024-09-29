@@ -34,7 +34,7 @@ pydantic = ">=2.8.2"
 googlemaps = ">=4.10"
 phonenumbers = ">=8.13.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 # testing
 coverage = ">=5"
 pytest = ">=6"
@@ -59,6 +59,17 @@ mkdocs = ">=1.2.3"
 
 [tool.poetry.plugins."markdown.extensions"]
 pymdgen = "pymdgen.md:Extension"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    # at least this three should be fine in tests:
+    "S101", # asserts allowed in tests...
+    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    # The below are debateable
+    "PLR2004", # Magic value used in comparison, ...
+    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

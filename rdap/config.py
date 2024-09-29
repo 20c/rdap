@@ -2,8 +2,7 @@ import munge
 
 
 class Config(munge.Config):
-    """
-    command line interface config
+    """command line interface config
     """
 
     defaults = {

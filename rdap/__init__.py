@@ -10,3 +10,10 @@ from rdap.exceptions import RdapException, RdapNotFoundError
 
 # objects to base namespace
 from rdap.objects import RdapAsn
+
+__all__ = [
+    "RdapClient",
+    "RdapException",
+    "RdapNotFoundError",
+    "RdapAsn",
+]

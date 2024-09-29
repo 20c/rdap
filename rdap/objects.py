@@ -17,8 +17,7 @@ def rir_from_domain(domain):
 
 
 class RdapObject:
-    """
-    RDAP base object, allows for lazy parsing
+    """RDAP base object, allows for lazy parsing
     """
 
     def __init__(self, data, rdapc=None):
@@ -55,16 +54,14 @@ class RdapObject:
         return self.parsed()["kind"]
 
     def parsed(self):
-        """
-        returns parsed dict
+        """Returns parsed dict
         """
         if not self._parsed:
             self._parse()
         return self._parsed
 
     def _parse_vcard(self, data):
-        """
-        iterates over current level's vcardArray and gets data
+        """Iterates over current level's vcardArray and gets data
         """
         vcard = dict()
 
@@ -72,11 +69,9 @@ class RdapObject:
             for typ in row:
                 if typ[0] in ["version"]:
                     continue
-                elif typ[0] == "email":
+                if typ[0] == "email":
                     vcard.setdefault("emails", set()).add(typ[3].strip().lower())
-                elif typ[0] == "fn":
-                    vcard[typ[0]] = typ[3].strip()
-                elif typ[0] == "kind":
+                elif typ[0] == "fn" or typ[0] == "kind":
                     vcard[typ[0]] = typ[3].strip()
                 elif typ[0] == "adr":
                     # WORKAROUND ARIN uses label in the extra field
@@ -95,7 +90,7 @@ class RdapObject:
         return None
 
     def _parse(self):
-        """parses data into our format, and use entities for address info ?"""
+        """Parses data into our format, and use entities for address info ?"""
         name = self._data.get("name", "")
         # emails done with a set to eat duplicates
         emails = set()
@@ -190,8 +185,7 @@ class RdapObject:
 
 
 class RdapAsn(RdapObject):
-    """
-    access interface for lazy parsing of RDAP looked up aut-num objects
+    """access interface for lazy parsing of RDAP looked up aut-num objects
     """
 
     def __init__(self, data, rdapc=None):
@@ -201,7 +195,7 @@ class RdapAsn(RdapObject):
             end = data.get("endAutnum", None)
             if start and end and start != end:
                 raise RdapNotFoundError(
-                    f"Query returned a block ({start} - {end}), AS is reported not allocated"
+                    f"Query returned a block ({start} - {end}), AS is reported not allocated",
                 )
 
         super().__init__(data, rdapc)

@@ -36,7 +36,7 @@ def test_rdap_asn_lookup(rdapc, data_normalize_autnum):
         #    f.write(json.dumps(asn.normalized, indent=2))
 
         assert json.dumps(data_normalize_autnum.expected, indent=2) == json.dumps(
-            asn.normalized, indent=2
+            asn.normalized, indent=2,
         )
 
 
@@ -50,7 +50,7 @@ def test_rdap_entity_lookup(rdapc, data_normalize_entity):
         #    f.write(json.dumps(entity.normalized, indent=2))
 
         assert json.dumps(data_normalize_entity.expected, indent=2) == json.dumps(
-            entity.normalized, indent=2
+            entity.normalized, indent=2,
         )
 
 
@@ -62,7 +62,7 @@ def test_rdap_domain_lookup(rdapc, data_normalize_domain):
     #    f.write(json.dumps(entity.normalized, indent=2))
 
     assert json.dumps(data_normalize_domain.expected, indent=2) == json.dumps(
-        entity.normalized, indent=2
+        entity.normalized, indent=2,
     )
 
 
@@ -74,5 +74,5 @@ def test_rdap_ip_lookup(rdapc, data_normalize_ip):
     #    f.write(json.dumps(entity.normalized, indent=2))
 
     assert json.dumps(data_normalize_ip.expected, indent=2) == json.dumps(
-        entity.normalized, indent=2
+        entity.normalized, indent=2,
     )

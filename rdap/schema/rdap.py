@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -70,7 +69,7 @@ class Entity(BaseModel):
     handle: str = Field(default_factory=str)
     # Contact information in vCard format
     vcardArray: list[str | list[list[str | dict | list | None]]] = Field(
-        default_factory=list
+        default_factory=list,
     )
     # Roles of the entity (e.g., registrant, technical, administrative)
     roles: list[str] = Field(default_factory=list)

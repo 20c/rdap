@@ -1,5 +1,4 @@
-"""
-Pydantic schemas for normalized RDAP data
+"""Pydantic schemas for normalized RDAP data
 """
 
 import enum
@@ -28,8 +27,7 @@ __all__ = [
 
 
 class IP_VERSION(int, enum.Enum):
-    """
-    Enum for IP version
+    """Enum for IP version
     """
 
     ipv4 = 4
@@ -76,8 +74,7 @@ class DNSSEC(str, enum.Enum):
 
 
 class GeoLocation(pydantic.BaseModel):
-    """
-    Describes geographic coordinates
+    """Describes geographic coordinates
     """
 
     latitude: float
@@ -85,8 +82,7 @@ class GeoLocation(pydantic.BaseModel):
 
 
 class Location(pydantic.BaseModel):
-    """
-    Describes a location
+    """Describes a location
     """
 
     updated: datetime | None = None
@@ -103,8 +99,7 @@ class Location(pydantic.BaseModel):
 
 
 class Contact(pydantic.BaseModel):
-    """
-    Describes a point of contact
+    """Describes a point of contact
     """
 
     created: datetime | None = None
@@ -141,8 +136,7 @@ class Contact(pydantic.BaseModel):
 
 
 class Source(pydantic.BaseModel):
-    """
-    Describes a source of rdap data
+    """Describes a source of rdap data
 
     Will contain where the data was fetched from and when
     """
@@ -155,16 +149,14 @@ class Source(pydantic.BaseModel):
 
 
 class Organization(pydantic.BaseModel):
-    """
-    Describes an organization
+    """Describes an organization
     """
 
     name: str
 
 
 class Network(pydantic.BaseModel):
-    """
-    Describes a network
+    """Describes a network
     """
 
     created: datetime | None = None
@@ -178,8 +170,7 @@ class Network(pydantic.BaseModel):
 
 
 class IPNetwork(pydantic.BaseModel):
-    """
-    Describes an IP network
+    """Describes an IP network
     """
 
     created: datetime | None = None
@@ -206,8 +197,7 @@ class IPNetwork(pydantic.BaseModel):
 
 
 class Entity(pydantic.BaseModel):
-    """
-    Describes an entity
+    """Describes an entity
     """
 
     created: datetime | None = None
@@ -220,16 +210,14 @@ class Entity(pydantic.BaseModel):
 
 
 class Nameserver(pydantic.BaseModel):
-    """
-    Describes a nameserver
+    """Describes a nameserver
     """
 
     host: str
 
 
 class Domain(pydantic.BaseModel):
-    """
-    Describes a domain
+    """Describes a domain
     """
 
     created: datetime | None = None

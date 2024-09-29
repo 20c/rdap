@@ -1,9 +1,8 @@
-"""
-Some case specific normalization functions for RIPE data.
+"""Some case specific normalization functions for RIPE data.
 """
 
-import rdap.normalize.base as base
 import rdap.schema.rdap as schema
+from rdap.normalize import base
 
 __all__ = [
     "Handler",
@@ -11,18 +10,15 @@ __all__ = [
 
 
 class Handler(base.Handler):
-    """
-    RIPE sometimes puts org name into the remarks
+    """RIPE sometimes puts org name into the remarks
     """
 
     def org_name(
-        self, entity: schema.AutNum | schema.IPNetwork | schema.Domain
+        self, entity: schema.AutNum | schema.IPNetwork | schema.Domain,
     ) -> str | None:
-        """
-        If super() return None or equal to entity.name try checking
+        """If super() return None or equal to entity.name try checking
         remarks for an entry where title == "description"
         """
-
         org_name = super().org_name(entity)
 
         if org_name is None or org_name == entity.name:

@@ -19,5 +19,5 @@ def test_rdap_ip_lookup(rdapc):
     assert obj.data
     sort_data(obj.data)
 
-    assert type(ip) == type(obj)
+    assert type(ip) is type(obj)
     assert ip.data == obj.data
