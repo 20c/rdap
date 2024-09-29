@@ -7,6 +7,9 @@
 ## 1.6.0
 ### Added
 - add regctl normalization schema
+- python 3.12 support
+### Changed
+- moved from poetry to uv
 
 
 ## 1.5.2
