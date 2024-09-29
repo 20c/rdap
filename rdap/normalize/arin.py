@@ -1,8 +1,6 @@
-"""
-Some case specific normalization functions for ARIN data.
-"""
+"""Some case specific normalization functions for ARIN data."""
 
-import rdap.normalize.base as base
+from rdap.normalize import base
 
 __all__ = [
     "Handler",
@@ -10,8 +8,4 @@ __all__ = [
 
 
 class Handler(base.Handler):
-    """
-    No known ARIN specific normalizations.
-    """
-
-    pass
+    """No known ARIN specific normalizations."""

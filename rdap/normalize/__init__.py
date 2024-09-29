@@ -1,19 +1,11 @@
-"""
-Contains a set of functions to parse various rdap data properties
-"""
+"""Contains a set of functions to parse various rdap data properties"""
 
 import json
+from typing import List, Union
 
-import rdap.normalize.afrinic as afrinic
-import rdap.normalize.apnic as apnic
-import rdap.normalize.arin as arin
-import rdap.normalize.base as base
-import rdap.normalize.geo as geo
-import rdap.normalize.lacnic as lacnic
-import rdap.normalize.ripe as ripe
 import rdap.schema.normalized as schema
-import rdap.schema.rdap as rdap_schema
 from rdap.context import RdapRequestState, rdap_request
+from rdap.normalize import afrinic, apnic, arin, base, lacnic, ripe
 from rdap.schema.source import (
     autnum_model,
     domain_model,
@@ -44,13 +36,11 @@ HANDLERS = {
 def get_sources(
     state: RdapRequestState,
     handle: str,
-    entity: schema.Network | schema.IPNetwork | schema.Domain | schema.Entity,
-) -> list[schema.Source]:
-
+    entity: Union[schema.Network, schema.IPNetwork, schema.Domain, schema.Entity],
+) -> List[schema.Source]:
     sources = []
 
     for source in state.sources:
-
         if not source.urls or not source.handle:
             continue
 
@@ -67,27 +57,23 @@ def get_sources(
 
 
 def normalize(data: dict, rir: str, typ: str) -> dict:
-    """
-    Normalize data based on RIR
+    """Normalize data based on RIR
 
     Will return a normalized dict based on the RIR
     """
-
     if typ == "autnum":
         return normalize_autnum(data, rir)
-    elif typ == "entity":
+    if typ == "entity":
         return normalize_entity(data, rir)
-    elif typ == "ip":
+    if typ == "ip":
         return normalize_ip(data, rir)
-    elif typ == "domain":
+    if typ == "domain":
         return normalize_domain(data, rir)
-    else:
-        raise ValueError(f"Type {typ} not supported")
+    raise ValueError(f"Type {typ} not supported")
 
 
 def normalize_autnum(data: dict, rir: str) -> dict:
-    """
-    Normalize data based on RIR: Autnum
+    """Normalize data based on RIR: Autnum
 
     Will return a normalized dict based on the RIR
     """
@@ -100,7 +86,8 @@ def normalize_autnum(data: dict, rir: str) -> dict:
     rdap_autnum = autnum_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_autnum.handle, **handler.dates(rdap_autnum.events)
+        rdap_autnum.handle,
+        **handler.dates(rdap_autnum.events),
     )
 
     org_name = handler.org_name(rdap_autnum)
@@ -122,8 +109,7 @@ def normalize_autnum(data: dict, rir: str) -> dict:
 
 
 def normalize_ip(data: dict, rir: str) -> dict:
-    """
-    Normalize data based on RIR: IPNetwork
+    """Normalize data based on RIR: IPNetwork
 
     Will return a normalized dict based on the RIR
     """
@@ -136,7 +122,8 @@ def normalize_ip(data: dict, rir: str) -> dict:
     rdap_ip_network = ip_network_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_ip_network.handle, **handler.dates(rdap_ip_network.events)
+        rdap_ip_network.handle,
+        **handler.dates(rdap_ip_network.events),
     )
 
     prefix = handler.prefix(rdap_ip_network)
@@ -160,8 +147,7 @@ def normalize_ip(data: dict, rir: str) -> dict:
 
 
 def normalize_domain(data: dict, rir: str) -> dict:
-    """
-    Normalize data based on RIR: Domain
+    """Normalize data based on RIR: Domain
 
     Will return a normalized dict based on the RIR
     """
@@ -174,7 +160,8 @@ def normalize_domain(data: dict, rir: str) -> dict:
     rdap_domain = domain_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_domain.handle, **handler.dates(rdap_domain.events)
+        rdap_domain.handle,
+        **handler.dates(rdap_domain.events),
     )
 
     net = schema.Domain(
@@ -193,8 +180,7 @@ def normalize_domain(data: dict, rir: str) -> dict:
 
 
 def normalize_entity(data: dict, rir: str) -> dict:
-    """
-    Normalize data based on RIR: Entity
+    """Normalize data based on RIR: Entity
 
     Will return a normalized dict based on the RIR
     """
@@ -207,7 +193,8 @@ def normalize_entity(data: dict, rir: str) -> dict:
     rdap_entity = entity_model(rir)(**data)
 
     current_rdap_request.update_source(
-        rdap_entity.handle, **handler.dates(rdap_entity.events)
+        rdap_entity.handle,
+        **handler.dates(rdap_entity.events),
     )
 
     org_name = handler.org_name_from_entity(rdap_entity)

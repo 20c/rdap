@@ -1,8 +1,6 @@
-"""
-Some case specific normalization functions for AFRINIC data.
-"""
+"""Some case specific normalization functions for AFRINIC data."""
 
-import rdap.normalize.base as base
+from rdap.normalize import base
 
 __all__ = [
     "Handler",
@@ -10,8 +8,4 @@ __all__ = [
 
 
 class Handler(base.Handler):
-    """
-    No known AFRINIC specific normalizations.
-    """
-
-    pass
+    """No known AFRINIC specific normalizations."""

@@ -8,8 +8,7 @@ import rdap
 
 
 def _this_dir():
-    """
-    returns dirname for location of this file
+    """Returns dirname for location of this file
     py.test no longer allows fixtures to be called
     directly so we provide a private function that can be
     """

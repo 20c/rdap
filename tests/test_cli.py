@@ -8,7 +8,7 @@ from rdap.cli import main
 def test_usage():
     with pytest.raises(SystemExit) as excinfo:
         main()
-    assert 2 == excinfo.value.code
+    assert excinfo.value.code == 2
 
 
 def test_lookup():

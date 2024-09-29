@@ -58,7 +58,7 @@ def test_asn_lookup(this_dir, asn, tmpdir):
     rdapc.get_asn(asn)
     print(rdapc.history)
     assert rdapc.history[0][0] != "https://data.iana.org/rdap/asn.json"
-    assert 1 == len(rdapc.history)
+    assert len(rdapc.history) == 1
 
     asn_db_file = os.path.join(tmpdir, "bootstrap", "asn.json")
     assert os.path.isfile(asn_db_file)
@@ -73,7 +73,7 @@ def test_asn_lookup(this_dir, asn, tmpdir):
     rdapc.get_asn(asn)
     print(rdapc.history)
     assert rdapc.history[0][0] != "https://data.iana.org/rdap/asn.json"
-    assert 1 == len(rdapc.history)
+    assert len(rdapc.history) == 1
 
 
 @pytest.mark.parametrize("asn", [63311])
@@ -95,7 +95,7 @@ def test_asn_bootstrap_cache(tmpdir, asn):
     rdapc.get_asn(asn)
     print(rdapc.history)
     assert rdapc.history[0][0] != "https://data.iana.org/rdap/asn.json"
-    assert 1 == len(rdapc.history)
+    assert len(rdapc.history) == 1
 
     # delete cache and manually write file
     os.remove(asn_db_file)
@@ -108,7 +108,7 @@ def test_asn_bootstrap_cache(tmpdir, asn):
     rdapc.get_asn(asn)
     print(rdapc.history)
     assert rdapc.history[0][0] != "https://data.iana.org/rdap/asn.json"
-    assert 1 == len(rdapc.history)
+    assert len(rdapc.history) == 1
 
 
 @pytest.mark.parametrize("asn", [63311])

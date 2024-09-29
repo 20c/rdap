@@ -1,7 +1,6 @@
 import ipaddress
 import json
 import os
-import re
 import time
 from functools import lru_cache
 from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
@@ -17,8 +16,7 @@ from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork
 
 
 class RdapRequestAuth(requests.auth.AuthBase):
-    """
-    Adds authentication to HTTP RDAP Request objects.
+    """Adds authentication to HTTP RDAP Request objects.
 
     Currently only supports LACNIC's APIKEY
     """
@@ -46,9 +44,7 @@ class RdapRequestAuth(requests.auth.AuthBase):
 
 
 def strip_auth(url):
-    """
-    Strip any sensitive auth information out of the URL.
-    """
+    """Strip any sensitive auth information out of the URL."""
     parsed = urlsplit(url)
     if not parsed.query:
         return url
@@ -67,13 +63,10 @@ def strip_auth(url):
 
 
 class RdapClient:
-    """
-    Client to do RDAP queries.
-    """
+    """Client to do RDAP queries."""
 
     def __init__(self, config=None, config_dir=None):
-        """
-        Initialize an RdapClient.
+        """Initialize an RdapClient.
 
         config is a dict or rdap.config.Config object
         config_dir is a string pointing to a config directory
@@ -109,7 +102,7 @@ class RdapClient:
         # use setter
         self._recurse_roles = None
         self.recurse_roles = set(
-            config.get("recurse_roles", ["administrative", "technical"])
+            config.get("recurse_roles", ["administrative", "technical"]),
         )
 
         self._last_req = None
@@ -122,11 +115,12 @@ class RdapClient:
         self.http.auth = RdapRequestAuth(
             **dict(
                 lacnic_apikey=config.get("lacnic_apikey", None),
-            )
+            ),
         )
 
         self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(
-            rdap.__version__, self.http.headers["User-Agent"]
+            rdap.__version__,
+            self.http.headers["User-Agent"],
         )
 
     def _get(self, url):
@@ -141,9 +135,7 @@ class RdapClient:
             if res.status_code == 200:
                 return res
 
-            msg = "RDAP lookup to {} returned {}".format(
-                strip_auth(res.url), res.status_code
-            )
+            msg = f"RDAP lookup to {strip_auth(res.url)} returned {res.status_code}"
             if res.status_code == 404:
                 raise RdapNotFoundError(msg)
             raise RdapHTTPError(msg)
@@ -158,16 +150,15 @@ class RdapClient:
         return self._asn_tree.get_service(asn).url
 
     def fetch_bootstrap_data(self, typ):
-        "Fetches bootstrap data in json."
+        """Fetches bootstrap data in json."""
         # TODO - check modified header
         return self._get(
             self.config.get("bootstrap_data_url", "https://data.iana.org/rdap/")
-            + f"{typ}.json"
+            + f"{typ}.json",
         ).json()
 
     def get_bootstrap_data(self, typ):
         """Checks for a local cache, fetches bootstrap data and returns it."""
-
         try:
             data_file = os.path.join(self.bootstrap_dir, f"{typ}.json")
             cache_age = time.time() - self.config.get("bootstrap_cache_ttl") * 3600
@@ -193,7 +184,6 @@ class RdapClient:
 
     def write_bootstrap_data(self, typ):
         """Fetches and writes bootstrap data."""
-
         if not self.bootstrap_dir:
             raise ValueError("bootstrap dir is not set")
 
@@ -218,17 +208,14 @@ class RdapClient:
 
     @recurse_roles.setter
     def recurse_roles(self, value):
-        """
-        Sets the set of roles this client will do recursive lookups for.
+        """Sets the set of roles this client will do recursive lookups for.
 
         Will accept any interable that can be passed to set().
         """
         self._recurse_roles = set(value)
 
     def get(self, query):
-        """
-        Generic get that tries to figure out object type and returns an object.
-        """
+        """Generic get that tries to figure out object type and returns an object."""
         qstr = query.strip().lower()
 
         # IP address
@@ -253,8 +240,7 @@ class RdapClient:
 
     @lru_cache(maxsize=1024)
     def get_rdap(self, url):
-        """
-        Get RDAP information from an full RDAP url and returns an object
+        """Get RDAP information from an full RDAP url and returns an object
 
         Note: this relies on objectClassName which not all RDAP registries support.
         """
@@ -269,14 +255,13 @@ class RdapClient:
         classname = data.get("objectClassName", None)
         if not classname:
             raise NotImplementedError(
-                f"query '{url}' did not return an objectClassName"
+                f"query '{url}' did not return an objectClassName",
             )
         if classname in classes:
             return classes[classname](data, self)
-        else:
-            raise NotImplementedError(
-                f"Unknown objectClassName '{classname}' from '{url}'"
-            )
+        raise NotImplementedError(
+            f"Unknown objectClassName '{classname}' from '{url}'",
+        )
 
     def _rdap_get(self, query, base_url=None):
         """Does an HTTP get for the given url and query.
@@ -293,9 +278,7 @@ class RdapClient:
         return self._last_req
 
     def get_asn(self, asn):
-        """
-        Get an ASN object.
-        """
+        """Get an ASN object."""
         asn = int(asn)
         try:
             url = self.asn_url(asn)
@@ -308,34 +291,26 @@ class RdapClient:
         return RdapAsn(self._rdap_get(query, base_url=url).json(), self)
 
     def get_domain(self, domain):
-        """
-        Get a domain object.
-        """
+        """Get a domain object."""
         query = f"/domain/{domain}"
         return RdapDomain(self._rdap_get(query).json(), self)
 
     def get_ip(self, address):
-        """
-        Get an IP object.
-        """
+        """Get an IP object."""
         query = f"/ip/{address}"
         return RdapNetwork(self._rdap_get(query).json(), self)
 
     def get_entity(self, handle, base_url=None):
-        """
-        get entity information in object form
-        """
+        """Get entity information in object form"""
         query = f"/entity/{handle}"
         return RdapEntity(self._rdap_get(query).json(), self)
 
     def get_entity_url(self, handle):
-        """
-        Get entity url for handle.
+        """Get entity url for handle.
 
         This function must be able to handle doing recursive lookups to the current URL
         after a bootstrap redirect for registries that don't link 'self'
         """
-
         if self.last_req_url:
             url = self.last_req_url
 
@@ -347,7 +322,5 @@ class RdapClient:
         return url
 
     def get_data(self, url):
-        """
-        Get raw data and return it for when there's no need for parsing.
-        """
+        """Get raw data and return it for when there's no need for parsing."""
         return self._get(url).json()

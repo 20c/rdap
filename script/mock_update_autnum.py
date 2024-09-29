@@ -11,11 +11,11 @@ def rdap_autnum_file_list(directory):
     expected_file_list = []
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)) and filename.endswith(
-            ".input"
+            ".input",
         ):
             input_file_list.append(filename)
         elif os.path.isfile(os.path.join(directory, filename)) and filename.endswith(
-            ".expected"
+            ".expected",
         ):
             expected_file_list.append(filename)
     return input_file_list, expected_file_list
@@ -53,7 +53,9 @@ if __name__ == "__main__":
 
     # Add the --include-expected option
     parser.add_argument(
-        "--include-expected", action="store_true", help="Include expected"
+        "--include-expected",
+        action="store_true",
+        help="Include expected",
     )
 
     args = parser.parse_args()
