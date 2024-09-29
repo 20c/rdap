@@ -6,6 +6,7 @@ import json
 import rdap.schema.normalized as schema
 from rdap.context import RdapRequestState, rdap_request
 from rdap.normalize import afrinic, apnic, arin, base, lacnic, ripe
+from typing import List, Union
 from rdap.schema.source import (
     autnum_model,
     domain_model,
@@ -36,8 +37,8 @@ HANDLERS = {
 def get_sources(
     state: RdapRequestState,
     handle: str,
-    entity: schema.Network | schema.IPNetwork | schema.Domain | schema.Entity,
-) -> list[schema.Source]:
+    entity: Union[schema.Network, schema.IPNetwork, schema.Domain, schema.Entity],
+) -> List[schema.Source]:
 
     sources = []
 

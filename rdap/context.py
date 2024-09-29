@@ -1,5 +1,4 @@
-"""Contact management for RDAP requests.
-"""
+"""Contact management for RDAP requests."""
 
 from contextvars import ContextVar
 from datetime import datetime
@@ -7,6 +6,7 @@ from datetime import datetime
 import pydantic
 
 from rdap.exceptions import RdapHTTPError
+from typing import List, Optional
 
 __all__ = [
     "rdap_request",
@@ -16,20 +16,19 @@ __all__ = [
 
 
 class RdapSource(pydantic.BaseModel):
-    """Describes a source of RDAP data.
-    """
+    """Describes a source of RDAP data."""
 
     # urls requested for this source
-    urls: list[str] = pydantic.Field(default_factory=list)
+    urls: List[str] = pydantic.Field(default_factory=list)
 
     # rdap object handle
-    handle: str | None = None
+    handle: Optional[str] = None
 
     # source creation date (if available)
-    created: datetime | None = None
+    created: Optional[datetime] = None
 
     # source last update date (if available)
-    updated: datetime | None = None
+    updated: Optional[datetime] = None
 
 
 class RdapRequestState(pydantic.BaseModel):
@@ -38,20 +37,22 @@ class RdapRequestState(pydantic.BaseModel):
     """
 
     # list of sources for the current request
-    sources: list[RdapSource] = pydantic.Field(default_factory=list)
+    sources: List[RdapSource] = pydantic.Field(default_factory=list)
 
     # reference to the rdap client instance
-    client: object | None = None
+    client: Optional[object] = None
 
     # cache of entities (to avoid duplicate requests to the same entity
     # within the current request context)
     entities: dict = pydantic.Field(default_factory=dict)
 
     def update_source(
-        self, handle: str, created: datetime | None, updated: datetime | None,
+        self,
+        handle: str,
+        created: Optional[datetime],
+        updated: Optional[datetime],
     ):
-        """Update the current source with the handle and dates.
-        """
+        """Update the current source with the handle and dates."""
         self.sources[-1].handle = handle
         self.sources[-1].created = created
         self.sources[-1].updated = updated
@@ -79,7 +80,6 @@ class RdapRequestContext:
         self.client = client
 
     def __enter__(self):
-
         # get existing state
 
         state = rdap_request.get()
