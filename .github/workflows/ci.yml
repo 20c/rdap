@@ -8,10 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Install virtualenv from poetry
-        uses: 20c/workflows/poetry@v1
-      # need to setup mkdocs config
+        uses: actions/checkout@v4
+      - name: Install
+        uses: astral-sh/setup-uv@v2
       #- name: deploy mkdocs gh-pages site
       #  run: |
       #    poetry run mkdocs gh-deploy --force
