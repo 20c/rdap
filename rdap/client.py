@@ -12,7 +12,7 @@ import rdap.bootstrap
 from rdap.config import Config
 from rdap.context import RdapRequestContext
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
-from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork, RdapHistory
+from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapHistory, RdapNetwork
 
 
 class RdapRequestAuth(requests.auth.AuthBase):

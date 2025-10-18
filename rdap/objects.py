@@ -329,9 +329,7 @@ class RdapHistory:
             self._records = [
                 RdapHistoryRecord(record, self._rdapc) for record in records_data
             ]
-            self._records.sort(
-                key=lambda r: r.applicable_from or "", reverse=True
-            )
+            self._records.sort(key=lambda r: r.applicable_from or "", reverse=True)
         return self._records
 
     def filter_by_handle(self, handle):
