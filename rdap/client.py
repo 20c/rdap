@@ -12,7 +12,7 @@ import rdap
 import rdap.bootstrap
 from rdap.config import Config
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
-from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork
+from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapNetwork, RdapHistory
 
 
 class RdapRequestAuth(requests.auth.AuthBase):
@@ -345,3 +345,29 @@ class RdapClient:
         Get raw data and return it for when there's no need for parsing.
         """
         return self._get(url).json()
+
+    def get_ip_history(self, address, rir_url=None):
+        """
+        Get historical RDAP information for an IP address.
+
+        This queries the /history/ip/{address} endpoint, which is currently
+        only supported by APNIC. Other RIRs may add support in the future.
+
+        Args:
+            address: IP address or prefix to query
+            rir_url: Optional RIR-specific RDAP URL. If not provided, will
+                    attempt to use APNIC's history endpoint.
+
+        Returns:
+            RdapHistory object containing historical records
+
+        Raises:
+            RdapHTTPError: If the history endpoint returns an error
+            RdapNotFoundError: If the address is not found
+        """
+        if not rir_url:
+            rir_url = "https://rdap.apnic.net"
+
+        query = f"/history/ip/{address}"
+        response = self._rdap_get(query, base_url=rir_url)
+        return RdapHistory(response.json(), self, queried_prefix=str(address))
