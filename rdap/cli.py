@@ -6,6 +6,7 @@ import munge.click
 
 import rdap
 from rdap.config import Config
+from rdap.context import RdapRequestContext
 
 
 def add_options(parser, options):
@@ -21,9 +22,7 @@ def add_options(parser, options):
 
 
 class Context(munge.click.Context):
-    """
-    command line interface context
-    """
+    """command line interface context"""
 
     app_name = "rdap"
     config_class = Config
@@ -44,10 +43,19 @@ def main(argv=None):
     )
     parser.add_argument("--output-format", help="output format (yaml, json, text)")
     parser.add_argument(
-        "--show-requests", action="store_true", help="show all requests"
+        "--show-requests",
+        action="store_true",
+        help="show all requests",
     )
     parser.add_argument(
-        "--parse", action="store_true", help="parse data into object before display"
+        "--parse",
+        action="store_true",
+        help="parse data into object before display",
+    )
+    parser.add_argument(
+        "--normalize",
+        action="store_true",
+        help="normalize data before display",
     )
     parser.add_argument("--rir", action="store_true", help="display rir", default=False)
     parser.add_argument(
@@ -75,13 +83,16 @@ def main(argv=None):
 
     codec = munge.get_codec(output_format)()
     for each in argd["query"]:
-        obj = client.get(each)
-        if argd.get("rir", False):
-            print(f"rir: {obj.get_rir()}")
-        if argd.get("parse", False):
-            print(codec.dumps(obj.parsed()))
-        else:
-            print(codec.dumps(obj.data))
+        with RdapRequestContext(client=client):
+            obj = client.get(each)
+            if argd.get("rir", False):
+                print(f"rir: {obj.get_rir()}")
+            if argd.get("parse", False):
+                print(codec.dumps(obj.parsed()))
+            elif argd.get("normalize", False):
+                print(codec.dumps(obj.normalized))
+            else:
+                print(codec.dumps(obj.data))
 
     if argd.get("show_requests", False):
         print("# Requests")

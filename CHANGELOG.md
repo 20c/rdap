@@ -4,6 +4,24 @@
 ## Unreleased
 
 
+## 1.6.0
+### Added
+- add regctl normalization schema
+- python 3.12 support
+### Changed
+- moved from poetry to uv
+
+
+## 1.5.2
+### Fixed
+- issue introduced in 1.5.1 that could cause some contact points to be lost
+
+
+## 1.5.1
+### Fixed
+- fixes problem where ASN lookup would sometimes return incorrect organization names through maintainer objects.
+
+
 ## 1.5.0
 ### Added
 - get ripe org name out of remarks

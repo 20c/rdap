@@ -39,7 +39,7 @@ class AsnTree:
                 self.insert(url, asn_range)
 
     def insert(self, url, asn_range):
-        "Insert a service locator record."
+        """Insert a service locator record."""
         top = None
         try:
             bottom, top = map(int, asn_range.split("-"))
@@ -53,7 +53,7 @@ class AsnTree:
         return service
 
     def get_service(self, asn):
-        "Return service for asn.  Raise LookupError if not found."
+        """Return service for asn.  Raise LookupError if not found."""
         i = bisect_right(self._keys, asn)
         # correct record will be the previous one
         service = self._items[i - 1]

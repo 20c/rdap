@@ -1,0 +1,307 @@
+{
+  "created": "2003-06-23T14:40:34Z",
+  "updated": "2023-11-27T23:02:44Z",
+  "asn": 8283,
+  "name": "COLOCLUE-AS",
+  "organization": {
+    "name": "Netwerkvereniging Coloclue"
+  },
+  "locations": [
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Bijsterveld 1\n4902 ZN Oosterhout\nThe Netherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "BytePark\nGruttostraat 63\nNL-2665 EL Bleiswijk\nThe Netherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Frans Duwaerstraat 34\n1318 AC\nAlmere\nNETHERLANDS",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Frans Duwaerstraat 34\n1318 AC ALMERE\nThe Netherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Frans Duwaerstraat 34\n1318AC Almere\nNetherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Kanaalstraat 89-BS",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Kruier 1\n1567LA Assendelft\nNetherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Maasstraat 16\n1442RV Purmerend\nNetherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "NETHERLANDS",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Purmer 60, 8244AT Lelystad",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Wamberg 26-1\n1083CV\nAmsterdam\nNETHERLANDS",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    },
+    {
+      "updated": null,
+      "country": "US",
+      "city": "Mountain View",
+      "postal_code": "94043",
+      "address": "Wandeling 8\n4301 JT Zierikzee\nNetherlands",
+      "geo": {
+        "latitude": 37.4224764,
+        "longitude": -122.0842499
+      },
+      "floor": "4",
+      "suite": "Suite 200"
+    }
+  ],
+  "contacts": [
+    {
+      "created": null,
+      "updated": null,
+      "name": "Jasper Backer",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+31 6 83708052",
+      "email": null
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Jelle Luteijn",
+      "roles": [
+        "admin",
+        "technical"
+      ],
+      "phone": null,
+      "email": "hostmaster@luje.net"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Jurrian van Iersel",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+31 85 876 8785",
+      "email": "ripe@jurrian.vaniersel.net"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Mark Scholten",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+31 6 42408602",
+      "email": null
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Menno Wouter Thomas Spaans",
+      "roles": [
+        "admin"
+      ],
+      "phone": "+31 6 24206858",
+      "email": "menno@someones.net"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Netwerkvereniging Coloclue",
+      "roles": [
+        "abuse",
+        "admin",
+        "registrant",
+        "technical"
+      ],
+      "phone": "+31 6 51387718",
+      "email": "abuse@coloclue.net"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Niels Raijer",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+31 6 54918205",
+      "email": null
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Paul de Weerd",
+      "roles": [
+        "admin",
+        "technical"
+      ],
+      "phone": "+31 6 51387718",
+      "email": "weerd@weirdnet.nl"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Rogier Krieger",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+31 15 212 8820",
+      "email": "hostmaster@bytepark.net"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Tijn Buijs",
+      "roles": [
+        "admin",
+        "technical"
+      ],
+      "phone": "+31 6 13962562",
+      "email": "contact@cybertinus.nl"
+    },
+    {
+      "created": null,
+      "updated": null,
+      "name": "Tim de Boer",
+      "roles": [
+        "technical"
+      ],
+      "phone": "+31 6 40282615",
+      "email": null
+    }
+  ],
+  "sources": [
+    {
+      "created": "2014-11-17T14:28:43-05:00",
+      "updated": "2018-10-24T22:58:16-04:00",
+      "handle": "AS63311",
+      "urls": [
+        "https://rdap.org/autnum/63311",
+        "https://rdap.org/autnum/63311"
+      ],
+      "description": null
+    },
+    {
+      "created": "2003-06-23T14:40:34Z",
+      "updated": "2023-11-27T23:02:44Z",
+      "handle": "AS8283",
+      "urls": [
+        "https://rdap.org/autnum/8283",
+        "https://rdap.org/autnum/8283"
+      ],
+      "description": null
+    }
+  ]
+}

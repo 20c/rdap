@@ -7,9 +7,7 @@ from rdap import RdapAsn, RdapNotFoundError
 def assert_parsed(data, parsed):
     # dump in json format for easily adding expected
     print(
-        "echo \\\n'{}'\\\n > {}/{}.expected".format(
-            data.dumps(parsed), data.path, data.name
-        )
+        f"echo \\\n'{data.dumps(parsed)}'\\\n > {data.path}/{data.name}.expected",
     )
     assert data.expected == parsed
 
@@ -35,7 +33,7 @@ def test_rdap_asn_lookup_no_client(rdapc):
 
 def test_get_rdap(rdapc):
     obj = rdapc.get_rdap("https://rdap.arin.net/registry/autnum/63311")
-    assert type(obj) == RdapAsn
+    assert type(obj) is RdapAsn
 
 
 @pytest_filedata.RequestsData("rdap")  # XXX , real_http=True)

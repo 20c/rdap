@@ -1,4 +1,5 @@
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
+from rdap.normalize import normalize
 
 
 def rir_from_domain(domain):
@@ -16,9 +17,7 @@ def rir_from_domain(domain):
 
 
 class RdapObject:
-    """
-    RDAP base object, allows for lazy parsing
-    """
+    """RDAP base object, allows for lazy parsing"""
 
     def __init__(self, data, rdapc=None):
         self._rdapc = rdapc
@@ -54,28 +53,22 @@ class RdapObject:
         return self.parsed()["kind"]
 
     def parsed(self):
-        """
-        returns parsed dict
-        """
+        """Returns parsed dict"""
         if not self._parsed:
             self._parse()
         return self._parsed
 
     def _parse_vcard(self, data):
-        """
-        iterates over current level's vcardArray and gets data
-        """
+        """Iterates over current level's vcardArray and gets data"""
         vcard = dict()
 
         for row in data.get("vcardArray", [0])[1:]:
             for typ in row:
                 if typ[0] in ["version"]:
                     continue
-                elif typ[0] == "email":
+                if typ[0] == "email":
                     vcard.setdefault("emails", set()).add(typ[3].strip().lower())
-                elif typ[0] == "fn":
-                    vcard[typ[0]] = typ[3].strip()
-                elif typ[0] == "kind":
+                elif typ[0] == "fn" or typ[0] == "kind":
                     vcard[typ[0]] = typ[3].strip()
                 elif typ[0] == "adr":
                     # WORKAROUND ARIN uses label in the extra field
@@ -94,17 +87,20 @@ class RdapObject:
         return None
 
     def _parse(self):
-        """parses data into our format, and use entities for address info ?"""
+        """Parses data into our format, and use entities for address info ?"""
         name = self._data.get("name", "")
         # emails done with a set to eat duplicates
         emails = set()
         org_name = ""
         org_address = ""
+        org_name_final = False
+        org_address_final = False
 
         for ent in self._data.get("entities", []):
             vcard = self._parse_vcard(ent)
             emails |= vcard.get("emails", set())
             roles = ent.get("roles", [])
+            kind = vcard.get("kind", "")
             handle = ent.get("handle", None)
             # try for link to 'self', if registry doesn't supply it, fall back to creating it.
             handle_url = self._parse_entity_self_link(ent)
@@ -112,10 +108,14 @@ class RdapObject:
                 handle_url = self._rdapc.get_entity_url(handle)
 
             if "registrant" in roles:
-                if "fn" in vcard:
+                if "fn" in vcard and not org_name_final:
                     org_name = vcard["fn"]
-                if "adr" in vcard:
+                    if "org" in kind:
+                        org_name_final = True
+                if "adr" in vcard and not org_address_final:
                     org_address = vcard["adr"]
+                    if "org" in kind:
+                        org_address_final = True
 
             # check nested entities
             for nent in ent.get("entities", []):
@@ -182,9 +182,7 @@ class RdapObject:
 
 
 class RdapAsn(RdapObject):
-    """
-    access interface for lazy parsing of RDAP looked up aut-num objects
-    """
+    """access interface for lazy parsing of RDAP looked up aut-num objects"""
 
     def __init__(self, data, rdapc=None):
         # check for ASN range, meaning it's delegated and unallocated
@@ -193,25 +191,41 @@ class RdapAsn(RdapObject):
             end = data.get("endAutnum", None)
             if start and end and start != end:
                 raise RdapNotFoundError(
-                    f"Query returned a block ({start} - {end}), AS is reported not allocated"
+                    f"Query returned a block ({start} - {end}), AS is reported not allocated",
                 )
 
         super().__init__(data, rdapc)
+
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "autnum")
 
 
 class RdapNetwork(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
 
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "ip")
+
 
 class RdapDomain(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
 
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "domain")
+
 
 class RdapEntity(RdapObject):
     def __init__(self, data, rdapc=None):
         super().__init__(data, rdapc)
+
+    @property
+    def normalized(self) -> dict:
+        return normalize(self._data, self.get_rir(), "entity")
 
 
 class RdapHistoryRecord:

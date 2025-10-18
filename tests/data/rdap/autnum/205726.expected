@@ -1,1 +1,10 @@
-{"org_address": "", "org_name": "", "emails": ["abuse@vusam.com", "daan.vangorkum@vusam.com"], "name": "Vusam"}
+{
+  "name": "Vusam",
+  "emails": [
+    "abuse@vusam.com",
+    "daan.vangorkum@vusam.com",
+    "support@vusam.com"
+  ],
+  "org_name": "Daan Jurriaan van Gorkum trading as Vusam V.O.F",
+  "org_address": "Postbus 8515\n8934BT\nLeeuwarden\nNETHERLANDS"
+}

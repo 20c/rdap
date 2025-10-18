@@ -1,1 +1,16 @@
-{"org_address": "", "org_name": "Netwerkvereniging Coloclue, Amsterdam, Netherlands", "emails": ["ops@coloclue.net", "routers@coloclue.net"], "name": "COLOCLUE-AS"}
+{
+  "name": "COLOCLUE-AS",
+  "emails": [
+    "abuse@coloclue.net",
+    "contact@cybertinus.nl",
+    "hostmaster@bytepark.net",
+    "hostmaster@luje.net",
+    "menno@someones.net",
+    "ops@coloclue.net",
+    "ripe@jurrian.vaniersel.net",
+    "routers@coloclue.net",
+    "weerd@weirdnet.nl"
+  ],
+  "org_name": "Netwerkvereniging Coloclue, Netwerkvereniging Coloclue, Amsterdam, Netherlands",
+  "org_address": "Frans Duwaerstraat 34\n1318 AC\nAlmere\nNETHERLANDS"
+}

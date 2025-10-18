@@ -1,10 +1,11 @@
-[tool.poetry]
+[project]
 name = "rdap"
-version = "1.5.0"
+version = "1.6.0"
 description = "Registration Data Access Protocol tools"
-authors = ["20C <code@20c.com>"]
+authors = [{ name = "20C", email = "code@20c.com" }]
 readme = "README.md"
 license = "Apache-2.0"
+requires-python = ">= 3.8"
 
 repository = "https://github.com/20c/rdap"
 
@@ -16,48 +17,65 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Internet",
     "Topic :: Software Development",
     "Topic :: Software Development :: Libraries",
 ]
+dependencies = [
+    "googlemaps >= 4",
+    "munge[yaml] >= 1",
+    "phonenumbers >= 8",
+    "pydantic >= 2",
+    "requests >= 2",
+    "setuptools>=75.1.0",
+]
 
 
-[tool.poetry.scripts]
+[project.scripts]
 rdap = "rdap.cli:main"
 
 
-[tool.poetry.dependencies]
-python = "^3.8"
-requests = ">=2.25.1"
-munge = {version = ">=1.3", extras = ["yaml"]}
-
-
-[tool.poetry.dev-dependencies]
-# testing
-coverage = ">=5"
-pytest = ">=6"
-pytest-django = ">=3.8"
-pytest-filedata = "^0.4.0"
-pytest-cov = "*"
-tox = ">=3.20"
-tox-gh-actions = "^2.9.1"
-
-# linting
-black = ">=20"
-isort = ">=5.7"
-flake8 = ">=3.8"
-mypy = ">=0.950"
-pre-commit = ">=2.13"
-pyupgrade = ">=2.19"
-
-# docs
-markdown = "*"
-markdown-include = ">=0.5,<1"
-mkdocs = ">=1.2.3"
-
-[tool.poetry.plugins."markdown.extensions"]
+[project.plugins."markdown.extensions"]
 pymdgen = "pymdgen.md:Extension"
 
+
+[project.optional-dependencies]
+dev = [
+    "coverage >= 7",
+    "pytest >= 8",
+    "pytest-filedata >= 1",
+    "pytest-cov >= 5",
+    "tox >= 4",
+    "tox-gh-actions >= 3",
+    "tox-uv>=1.13.0",
+    "bandit >= 1",
+    "mypy >= 1",
+    "pre-commit >= 3",
+    "ruff >= 0",
+    # docs
+    "markdown >= 3",
+    "markdown-include >= 0",
+    "mkdocs >= 1",
+]
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+select = [
+    "I",  # isort
+    "UP",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    # at least this three should be fine in tests:
+    "S101", # asserts allowed in tests...
+    "ARG",  # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT",  # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    # The below are debateable
+    "PLR2004", # Magic value used in comparison, ...
+    "S311",    # Standard pseudo-random generators are not suitable for cryptographic purposes
+]
