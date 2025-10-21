@@ -261,7 +261,9 @@ class RdapHistoryRecord:
         return self.applicable_until is None
 
     @property
-    def content(self) -> Optional[Union[RdapNetwork, RdapAsn, RdapDomain, RdapEntity, RdapObject]]:
+    def content(
+        self,
+    ) -> Optional[Union[RdapNetwork, RdapAsn, RdapDomain, RdapEntity, RdapObject]]:
         """
         Returns the parsed RDAP object for this historical record.
         Lazily creates an RdapNetwork object from the content data.
