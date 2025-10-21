@@ -1,3 +1,5 @@
+from typing import List, Optional, Union
+
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 from rdap.normalize import normalize
 
@@ -244,22 +246,22 @@ class RdapHistoryRecord:
         self._content_obj = None
 
     @property
-    def applicable_from(self):
+    def applicable_from(self) -> Optional[str]:
         """Timestamp when this record became active"""
         return self._record_data.get("applicableFrom")
 
     @property
-    def applicable_until(self):
+    def applicable_until(self) -> Optional[str]:
         """Timestamp when this record was superseded (None if current)"""
         return self._record_data.get("applicableUntil")
 
     @property
-    def is_current(self):
+    def is_current(self) -> bool:
         """Returns True if this is the currently active record"""
         return self.applicable_until is None
 
     @property
-    def content(self):
+    def content(self) -> Optional[Union[RdapNetwork, RdapAsn, RdapDomain, RdapEntity, RdapObject]]:
         """
         Returns the parsed RDAP object for this historical record.
         Lazily creates an RdapNetwork object from the content data.
@@ -281,12 +283,12 @@ class RdapHistoryRecord:
         return self._content_obj
 
     @property
-    def handle(self):
+    def handle(self) -> Optional[str]:
         """Shortcut to get the handle from content"""
         return self._record_data.get("content", {}).get("handle")
 
     @property
-    def data(self):
+    def data(self) -> dict:
         """Returns the raw record data"""
         return self._record_data
 
@@ -314,12 +316,12 @@ class RdapHistory:
         self._records = None
 
     @property
-    def data(self):
+    def data(self) -> dict:
         """Returns raw history data"""
         return self._data
 
     @property
-    def records(self):
+    def records(self) -> List[RdapHistoryRecord]:
         """
         Returns all historical records as RdapHistoryRecord objects.
         Records are sorted newest to oldest (reverse chronological).
@@ -332,7 +334,7 @@ class RdapHistory:
             self._records.sort(key=lambda r: r.applicable_from or "", reverse=True)
         return self._records
 
-    def filter_by_handle(self, handle):
+    def filter_by_handle(self, handle: str) -> List[RdapHistoryRecord]:
         """
         Filter records by exact handle match.
 
@@ -344,7 +346,7 @@ class RdapHistory:
         """
         return [r for r in self.records if r.handle == handle]
 
-    def get_most_specific_records(self):
+    def get_most_specific_records(self) -> List[RdapHistoryRecord]:
         """
         Returns only the records for the most specific (smallest) IP block.
         This filters out parent/larger allocations.
@@ -368,7 +370,7 @@ class RdapHistory:
 
         return []
 
-    def get_current_record(self):
+    def get_current_record(self) -> Optional[RdapHistoryRecord]:
         """
         Returns the currently active record (applicableUntil is None).
 
