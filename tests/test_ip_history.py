@@ -12,7 +12,8 @@ import rdap
 def history_data():
     """Load test data for APNIC history endpoint"""
     test_file = os.path.join(
-        os.path.dirname(__file__), "data/rdap/ip/101.203.88.0_history.input"
+        os.path.dirname(__file__),
+        "data/rdap/ip/101.203.88.0_history.input",
     )
     with open(test_file) as fh:
         return json.load(fh)

@@ -36,8 +36,8 @@ HANDLERS = {
 def get_sources(
     state: RdapRequestState,
     handle: str,
-    entity: Union[schema.Network, schema.IPNetwork, schema.Domain, schema.Entity],
-) -> List[schema.Source]:
+    entity: schema.Network | schema.IPNetwork | schema.Domain | schema.Entity,
+) -> list[schema.Source]:
     sources = []
 
     for source in state.sources:

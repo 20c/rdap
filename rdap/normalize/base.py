@@ -2,7 +2,6 @@
 
 import ipaddress
 from datetime import datetime
-from typing import Dict, List, Optional, Union
 
 import phonenumbers
 
@@ -17,7 +16,7 @@ __all__ = [
 
 
 class Handler:
-    def locations_from_entity(self, entity: schema.Entity) -> List[str]:
+    def locations_from_entity(self, entity: schema.Entity) -> list[str]:
         """Will parse an address from an entity
 
         Will return the address if it can be found, otherwise None
@@ -49,8 +48,8 @@ class Handler:
 
     def locations(
         self,
-        entity: Union[schema.AutNum, schema.IPNetwork, schema.Domain],
-    ) -> List[str]:
+        entity: schema.AutNum | schema.IPNetwork | schema.Domain,
+    ) -> list[str]:
         """Will parse an address from an object
 
         Will return the address if it can be found, if no address
@@ -73,7 +72,7 @@ class Handler:
         self,
         entity: schema.Entity,
         deep: bool = True,
-    ) -> List[Contact]:
+    ) -> list[Contact]:
         """Will parse contacts from an entity
 
         Will return a list of contacts if it can be found, otherwise an empty list
@@ -129,9 +128,9 @@ class Handler:
 
     def contacts(
         self,
-        entity: Union[schema.AutNum, schema.IPNetwork, schema.Domain],
+        entity: schema.AutNum | schema.IPNetwork | schema.Domain,
         deep: bool = True,
-    ) -> List[Contact]:
+    ) -> list[Contact]:
         """Will parse contacts from an object
 
         Will return a list of contacts if it can be found, otherwise an empty list
@@ -187,9 +186,9 @@ class Handler:
     def recurse_contacts(
         self,
         entity: schema.Entity,
-        contacts: List[Contact],
-        roles: List[str],
-    ) -> List[Contact]:
+        contacts: list[Contact],
+        roles: list[str],
+    ) -> list[Contact]:
         request_state: RdapRequestState = rdap_request.get()
         client = request_state.client
 
@@ -211,7 +210,7 @@ class Handler:
                         ],
                     )
 
-    def org_name_from_entity(self, entity: schema.Entity) -> Optional[str]:
+    def org_name_from_entity(self, entity: schema.Entity) -> str | None:
         """Will parse an org name from an entity
 
         Will return the org name if it can be found, otherwise None
@@ -239,8 +238,8 @@ class Handler:
 
     def org_name(
         self,
-        entity: Union[schema.AutNum, schema.IPNetwork, schema.Domain],
-    ) -> Optional[str]:
+        entity: schema.AutNum | schema.IPNetwork | schema.Domain,
+    ) -> str | None:
         """Will parse an org name from an object
 
         Will return the org name if it can be found, if no org name
@@ -256,7 +255,7 @@ class Handler:
     def prefix(
         self,
         ip_network: schema.IPNetwork,
-    ) -> Union[ipaddress.IPv4Network, ipaddress.IPv6Network, None]:
+    ) -> ipaddress.IPv4Network | ipaddress.IPv6Network | None:
         """Will return the CIDR of an IPNetwork object
         "cidr0_cidrs" : [ {
             "v4prefix" : "206.41.110.0",
@@ -284,7 +283,7 @@ class Handler:
 
         return None
 
-    def ip_version(self, ip_network: schema.IPNetwork) -> Union[int, None]:
+    def ip_version(self, ip_network: schema.IPNetwork) -> int | None:
         """Will return the IP version of an IPNetwork object"""
         prefix = self.prefix(ip_network)
 
@@ -303,7 +302,7 @@ class Handler:
     def parent_prefix(
         self,
         ip_network: schema.IPNetwork,
-    ) -> Union[ipaddress.IPv4Network, ipaddress.IPv6Network, None]:
+    ) -> ipaddress.IPv4Network | ipaddress.IPv6Network | None:
         """Parent network prefix from `parentHandle`
 
         "parentHandle" : "NET-206-0-0-0-0",
@@ -356,7 +355,7 @@ class Handler:
 
         return DNSSEC.insecure
 
-    def nameservers(self, domain: schema.Domain) -> List[Nameserver]:
+    def nameservers(self, domain: schema.Domain) -> list[Nameserver]:
         """Returns normalized nameservers from a domain object"""
         nameservers = []
 
@@ -365,7 +364,7 @@ class Handler:
 
         return nameservers
 
-    def dates(self, events: List[schema.Event]) -> Dict[str, str]:
+    def dates(self, events: list[schema.Event]) -> dict[str, str]:
         """Return the created and updated dates from the events"""
         created = None
         updated = None

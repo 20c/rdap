@@ -326,8 +326,7 @@ class RdapClient:
         return self._get(url).json()
 
     def get_ip_history(self, address, rir_url=None):
-        """
-        Get historical RDAP information for an IP address.
+        """Get historical RDAP information for an IP address.
 
         This queries the /history/ip/{address} endpoint, which is currently
         only supported by APNIC. Other RIRs may add support in the future.
@@ -343,6 +342,7 @@ class RdapClient:
         Raises:
             RdapHTTPError: If the history endpoint returns an error
             RdapNotFoundError: If the address is not found
+
         """
         if not rir_url:
             rir_url = "https://rdap.apnic.net"

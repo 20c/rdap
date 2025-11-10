@@ -3,7 +3,7 @@
 import enum
 import ipaddress
 from datetime import datetime
-from typing import Any, List, Optional, Union
+from typing import Any
 
 import pydantic
 
@@ -81,14 +81,14 @@ class GeoLocation(pydantic.BaseModel):
 class Location(pydantic.BaseModel):
     """Describes a location"""
 
-    updated: Optional[datetime] = None
-    country: Optional[str] = None
-    city: Optional[str] = None
-    postal_code: Optional[str] = None
-    address: Optional[str] = None
-    geo: Optional[GeoLocation] = None
-    floor: Optional[str] = None
-    suite: Optional[str] = None
+    updated: datetime | None = None
+    country: str | None = None
+    city: str | None = None
+    postal_code: str | None = None
+    address: str | None = None
+    geo: GeoLocation | None = None
+    floor: str | None = None
+    suite: str | None = None
 
     def __hash__(self):
         return f"{self.address}-{self.city}-{self.country}-{self.postal_code}-{self.floor}-{self.suite}".__hash__()
@@ -97,12 +97,12 @@ class Location(pydantic.BaseModel):
 class Contact(pydantic.BaseModel):
     """Describes a point of contact"""
 
-    created: Optional[datetime] = None
-    updated: Optional[datetime] = None
+    created: datetime | None = None
+    updated: datetime | None = None
     name: str
-    roles: List[ROLE] = pydantic.Field(default_factory=list)
-    phone: Optional[str] = None
-    email: Optional[str] = None
+    roles: list[ROLE] = pydantic.Field(default_factory=list)
+    phone: str | None = None
+    email: str | None = None
 
     @pydantic.model_validator(mode="before")
     @classmethod
@@ -135,11 +135,11 @@ class Source(pydantic.BaseModel):
     Will contain where the data was fetched from and when
     """
 
-    created: Optional[datetime] = None
-    updated: Optional[datetime] = None
+    created: datetime | None = None
+    updated: datetime | None = None
     handle: str
-    urls: List[str] = pydantic.Field(default_factory=list)
-    description: Optional[str] = None
+    urls: list[str] = pydantic.Field(default_factory=list)
+    description: str | None = None
 
 
 class Organization(pydantic.BaseModel):
@@ -151,29 +151,29 @@ class Organization(pydantic.BaseModel):
 class Network(pydantic.BaseModel):
     """Describes a network"""
 
-    created: Optional[datetime] = None
-    updated: Optional[datetime] = None
+    created: datetime | None = None
+    updated: datetime | None = None
     asn: int
     name: str
     organization: Organization
-    locations: List[Location] = pydantic.Field(default_factory=list)
-    contacts: List[Contact] = pydantic.Field(default_factory=list)
-    sources: List[Source] = pydantic.Field(default_factory=list)
+    locations: list[Location] = pydantic.Field(default_factory=list)
+    contacts: list[Contact] = pydantic.Field(default_factory=list)
+    sources: list[Source] = pydantic.Field(default_factory=list)
 
 
 class IPNetwork(pydantic.BaseModel):
     """Describes an IP network"""
 
-    created: Optional[datetime] = None
-    updated: Optional[datetime] = None
-    prefix: Optional[Union[ipaddress.IPv4Network, ipaddress.IPv6Network]] = None
-    version: Optional[IP_VERSION] = None
-    name: Optional[str] = None
-    type: Optional[str] = None
+    created: datetime | None = None
+    updated: datetime | None = None
+    prefix: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
+    version: IP_VERSION | None = None
+    name: str | None = None
+    type: str | None = None
     status: STATUS
-    parent: Optional[Union[ipaddress.IPv4Network, ipaddress.IPv6Network]] = None
-    contacts: List[Contact] = pydantic.Field(default_factory=list)
-    sources: List[Source] = pydantic.Field(default_factory=list)
+    parent: ipaddress.IPv4Network | ipaddress.IPv6Network | None = None
+    contacts: list[Contact] = pydantic.Field(default_factory=list)
+    sources: list[Source] = pydantic.Field(default_factory=list)
 
     @pydantic.model_validator(mode="before")
     @classmethod
@@ -189,13 +189,13 @@ class IPNetwork(pydantic.BaseModel):
 class Entity(pydantic.BaseModel):
     """Describes an entity"""
 
-    created: Optional[datetime] = None
-    updated: Optional[datetime] = None
+    created: datetime | None = None
+    updated: datetime | None = None
     name: str
-    organization: Optional[Organization] = None
-    locations: List[Location] = pydantic.Field(default_factory=list)
-    contacts: List[Contact] = pydantic.Field(default_factory=list)
-    sources: List[Source] = pydantic.Field(default_factory=list)
+    organization: Organization | None = None
+    locations: list[Location] = pydantic.Field(default_factory=list)
+    contacts: list[Contact] = pydantic.Field(default_factory=list)
+    sources: list[Source] = pydantic.Field(default_factory=list)
 
 
 class Nameserver(pydantic.BaseModel):
@@ -207,11 +207,11 @@ class Nameserver(pydantic.BaseModel):
 class Domain(pydantic.BaseModel):
     """Describes a domain"""
 
-    created: Optional[datetime] = None
-    updated: Optional[datetime] = None
+    created: datetime | None = None
+    updated: datetime | None = None
     name: str
     handle: str
     dns_sec: DNSSEC
-    nameservers: List[Nameserver] = pydantic.Field(default_factory=list)
-    contacts: List[Contact] = pydantic.Field(default_factory=list)
-    sources: List[Source] = pydantic.Field(default_factory=list)
+    nameservers: list[Nameserver] = pydantic.Field(default_factory=list)
+    contacts: list[Contact] = pydantic.Field(default_factory=list)
+    sources: list[Source] = pydantic.Field(default_factory=list)

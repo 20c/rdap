@@ -5,7 +5,7 @@ description = "Registration Data Access Protocol tools"
 authors = [{ name = "20C", email = "code@20c.com" }]
 readme = "README.md"
 license = "Apache-2.0"
-requires-python = ">= 3.8"
+requires-python = ">= 3.10"
 
 repository = "https://github.com/20c/rdap"
 
@@ -13,11 +13,10 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Internet",
     "Topic :: Software Development",
     "Topic :: Software Development :: Libraries",
@@ -63,10 +62,59 @@ dev = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.ruff]
+[tool.ruff.lint]
 select = [
-    "I",  # isort
-    "UP",
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "UP",  # pyupgrade
+    "I",   # isort
+    "N",   # pep8-naming
+    "D",   # pydocstyle
+    "B",   # flake8-bugbear
+    "S",   # flake8-bandit
+    "A",   # flake8-builtins
+    "COM", # flake8-commas
+    "C4",  # flake8-comprehensions
+    "DTZ", # flake8-datetimez
+    "T10", # flake8-debugger
+    "DJ",  # flake8-django
+    "EM",  # flake8-errmsg
+    "EXE", # flake8-executable
+    "FA",  # flake8-future-annotations
+    "ISC", # flake8-implicit-str-concat
+    "ICN", # flake8-import-conventions
+    "G",   # flake8-logging-format
+    "INP", # flake8-no-pep420
+    "PIE", # flake8-pie
+    "T20", # flake8-print
+    "PYI", # flake8-pyi
+    "PT",  # flake8-pytest-style
+    "Q",   # flake8-quotes
+    "RSE", # flake8-raise
+    "RET", # flake8-return
+    "SLF", # flake8-self
+    "SLOT", # flake8-slots
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "TCH", # flake8-type-checking
+    "INT", # flake8-gettext
+    "ARG", # flake8-unused-arguments
+    "PTH", # flake8-use-pathlib
+    "TD",  # flake8-todos
+    "FIX", # flake8-fixme
+    "ERA", # eradicate
+    "PD",  # pandas-vet
+    "PGH", # pygrep-hooks
+    "PL",  # pylint
+    "TRY", # tryceratops
+    "FLY", # flynt
+    "NPY", # NumPy-specific rules
+    "AIR", # Airflow
+    "PERF", # Perflint
+    # "FURB", # refurb (needs preview mode)
+    "LOG", # flake8-logging
+    "RUF", # ruff-specific rules
 ]
 
 [tool.ruff.lint.per-file-ignores]

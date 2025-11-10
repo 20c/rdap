@@ -2,7 +2,6 @@
 
 from contextvars import ContextVar
 from datetime import datetime
-from typing import List, Optional
 
 import pydantic
 
@@ -19,16 +18,16 @@ class RdapSource(pydantic.BaseModel):
     """Describes a source of RDAP data."""
 
     # urls requested for this source
-    urls: List[str] = pydantic.Field(default_factory=list)
+    urls: list[str] = pydantic.Field(default_factory=list)
 
     # rdap object handle
-    handle: Optional[str] = None
+    handle: str | None = None
 
     # source creation date (if available)
-    created: Optional[datetime] = None
+    created: datetime | None = None
 
     # source last update date (if available)
-    updated: Optional[datetime] = None
+    updated: datetime | None = None
 
 
 class RdapRequestState(pydantic.BaseModel):
@@ -37,10 +36,10 @@ class RdapRequestState(pydantic.BaseModel):
     """
 
     # list of sources for the current request
-    sources: List[RdapSource] = pydantic.Field(default_factory=list)
+    sources: list[RdapSource] = pydantic.Field(default_factory=list)
 
     # reference to the rdap client instance
-    client: Optional[object] = None
+    client: object | None = None
 
     # cache of entities (to avoid duplicate requests to the same entity
     # within the current request context)
@@ -49,8 +48,8 @@ class RdapRequestState(pydantic.BaseModel):
     def update_source(
         self,
         handle: str,
-        created: Optional[datetime],
-        updated: Optional[datetime],
+        created: datetime | None,
+        updated: datetime | None,
     ):
         """Update the current source with the handle and dates."""
         self.sources[-1].handle = handle
