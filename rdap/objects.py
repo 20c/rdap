@@ -1,3 +1,5 @@
+from typing import List, Optional, Union
+
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 from rdap.normalize import normalize
 
@@ -226,3 +228,156 @@ class RdapEntity(RdapObject):
     @property
     def normalized(self) -> dict:
         return normalize(self._data, self.get_rir(), "entity")
+
+
+class RdapHistoryRecord:
+    """
+    Represents a single historical record from an RDAP history query.
+
+    Each record contains:
+    - applicableFrom: timestamp when this record became active
+    - applicableUntil: timestamp when this record was superseded (None if current)
+    - content: the RDAP object data at that point in time
+    """
+
+    def __init__(self, record_data, rdapc=None):
+        self._rdapc = rdapc
+        self._record_data = record_data
+        self._content_obj = None
+
+    @property
+    def applicable_from(self) -> Optional[str]:
+        """Timestamp when this record became active"""
+        return self._record_data.get("applicableFrom")
+
+    @property
+    def applicable_until(self) -> Optional[str]:
+        """Timestamp when this record was superseded (None if current)"""
+        return self._record_data.get("applicableUntil")
+
+    @property
+    def is_current(self) -> bool:
+        """Returns True if this is the currently active record"""
+        return self.applicable_until is None
+
+    @property
+    def content(
+        self,
+    ) -> Optional[Union[RdapNetwork, RdapAsn, RdapDomain, RdapEntity, RdapObject]]:
+        """
+        Returns the parsed RDAP object for this historical record.
+        Lazily creates an RdapNetwork object from the content data.
+        """
+        if not self._content_obj:
+            content_data = self._record_data.get("content", {})
+            if content_data:
+                object_class = content_data.get("objectClassName")
+                if object_class == "ip network":
+                    self._content_obj = RdapNetwork(content_data, self._rdapc)
+                elif object_class == "autnum":
+                    self._content_obj = RdapAsn(content_data, self._rdapc)
+                elif object_class == "domain":
+                    self._content_obj = RdapDomain(content_data, self._rdapc)
+                elif object_class == "entity":
+                    self._content_obj = RdapEntity(content_data, self._rdapc)
+                else:
+                    self._content_obj = RdapObject(content_data, self._rdapc)
+        return self._content_obj
+
+    @property
+    def handle(self) -> Optional[str]:
+        """Shortcut to get the handle from content"""
+        return self._record_data.get("content", {}).get("handle")
+
+    @property
+    def data(self) -> dict:
+        """Returns the raw record data"""
+        return self._record_data
+
+
+class RdapHistory:
+    """
+    Represents the complete history response from an RDAP history query.
+
+    Contains a list of RdapHistoryRecord objects sorted by time.
+    Provides filtering options to get specific records (exact match, parent blocks, etc.)
+    """
+
+    def __init__(self, data, rdapc=None, queried_prefix=None):
+        """
+        Initialize RdapHistory object.
+
+        Args:
+            data: Raw RDAP history response data
+            rdapc: RdapClient instance
+            queried_prefix: The prefix that was queried (for filtering purposes)
+        """
+        self._rdapc = rdapc
+        self._data = data
+        self._queried_prefix = queried_prefix
+        self._records = None
+
+    @property
+    def data(self) -> dict:
+        """Returns raw history data"""
+        return self._data
+
+    @property
+    def records(self) -> List[RdapHistoryRecord]:
+        """
+        Returns all historical records as RdapHistoryRecord objects.
+        Records are sorted newest to oldest (reverse chronological).
+        """
+        if self._records is None:
+            records_data = self._data.get("records", [])
+            self._records = [
+                RdapHistoryRecord(record, self._rdapc) for record in records_data
+            ]
+            self._records.sort(key=lambda r: r.applicable_from or "", reverse=True)
+        return self._records
+
+    def filter_by_handle(self, handle: str) -> List[RdapHistoryRecord]:
+        """
+        Filter records by exact handle match.
+
+        Args:
+            handle: The handle to filter by (e.g., "101.203.88.0 - 101.203.95.255")
+
+        Returns:
+            List of RdapHistoryRecord objects matching the handle
+        """
+        return [r for r in self.records if r.handle == handle]
+
+    def get_most_specific_records(self) -> List[RdapHistoryRecord]:
+        """
+        Returns only the records for the most specific (smallest) IP block.
+        This filters out parent/larger allocations.
+
+        Returns:
+            List of RdapHistoryRecord objects for the most specific block
+        """
+        if not self.records:
+            return []
+
+        # Find the record with the smallest IP range (most specific)
+        # We'll use the current record (applicableUntil == None) to determine this
+        current_records = [r for r in self.records if r.is_current]
+
+        if not current_records:
+            current_records = [self.records[0]] if self.records else []
+
+        if current_records:
+            most_specific_handle = current_records[0].handle
+            return self.filter_by_handle(most_specific_handle)
+
+        return []
+
+    def get_current_record(self) -> Optional[RdapHistoryRecord]:
+        """
+        Returns the currently active record (applicableUntil is None).
+
+        Returns:
+            RdapHistoryRecord object or None if no current record found
+        """
+        current = [r for r in self.records if r.is_current]
+        return current[0] if current else None
