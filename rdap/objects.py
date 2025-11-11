@@ -1,5 +1,3 @@
-from typing import List, Optional, Union
-
 from rdap.exceptions import RdapHTTPError, RdapNotFoundError
 from rdap.normalize import normalize
 
@@ -24,7 +22,7 @@ class RdapObject:
     def __init__(self, data, rdapc=None):
         self._rdapc = rdapc
         self._data = data
-        self._parsed = dict()
+        self._parsed = {}
 
     @property
     def data(self):
@@ -62,7 +60,7 @@ class RdapObject:
 
     def _parse_vcard(self, data):
         """Iterates over current level's vcardArray and gets data"""
-        vcard = dict()
+        vcard = {}
 
         for row in data.get("vcardArray", [0])[1:]:
             for typ in row:
@@ -125,17 +123,20 @@ class RdapObject:
                 emails |= vcard.get("emails", set())
 
             # if role is in settings to recurse, try to do a lookup
-            if handle and self._rdapc:
-                if not self._rdapc.recurse_roles.isdisjoint(roles):
-                    try:
-                        rdata = self._rdapc.get_data(handle_url)
-                        vcard = self._parse_vcard(rdata)
-                        emails |= vcard.get("emails", set())
+            if (
+                handle
+                and self._rdapc
+                and not self._rdapc.recurse_roles.isdisjoint(roles)
+            ):
+                try:
+                    rdata = self._rdapc.get_data(handle_url)
+                    vcard = self._parse_vcard(rdata)
+                    emails |= vcard.get("emails", set())
 
-                    # check for HTTP Errors to ignore
-                    except RdapHTTPError:
-                        if not self._rdapc.config.get("ignore_recurse_errors"):
-                            raise
+                # check for HTTP Errors to ignore
+                except RdapHTTPError:
+                    if not self._rdapc.config.get("ignore_recurse_errors"):
+                        raise
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
@@ -161,23 +162,27 @@ class RdapObject:
             except KeyError:
                 pass
 
-        self._parsed = dict(
-            name=name,
-            emails=sorted(emails),
-            org_name=org_name,
-            org_address=org_address,
-        )
+        self._parsed = {
+            "name": name,
+            "emails": sorted(emails),
+            "org_name": org_name,
+            "org_address": org_address,
+        }
 
     def get_rir(self):
         """Gets the RIR for the object, if possible"""
         try:
-            if "port43" in self._data:
-                if rir := rir_from_domain(self._data.get("port43")):
-                    return rir
+            if "port43" in self._data and (
+                rir := rir_from_domain(self._data.get("port43"))
+            ):
+                return rir
 
-            if self._rdapc and self._rdapc.last_req_url:
-                if rir := rir_from_domain(self._rdapc.last_req_url):
-                    return rir
+            if (
+                self._rdapc
+                and self._rdapc.last_req_url
+                and (rir := rir_from_domain(self._rdapc.last_req_url))
+            ):
+                return rir
 
         except Exception:
             return None
@@ -231,8 +236,7 @@ class RdapEntity(RdapObject):
 
 
 class RdapHistoryRecord:
-    """
-    Represents a single historical record from an RDAP history query.
+    """Represents a single historical record from an RDAP history query.
 
     Each record contains:
     - applicableFrom: timestamp when this record became active
@@ -246,12 +250,12 @@ class RdapHistoryRecord:
         self._content_obj = None
 
     @property
-    def applicable_from(self) -> Optional[str]:
+    def applicable_from(self) -> str | None:
         """Timestamp when this record became active"""
         return self._record_data.get("applicableFrom")
 
     @property
-    def applicable_until(self) -> Optional[str]:
+    def applicable_until(self) -> str | None:
         """Timestamp when this record was superseded (None if current)"""
         return self._record_data.get("applicableUntil")
 
@@ -263,9 +267,8 @@ class RdapHistoryRecord:
     @property
     def content(
         self,
-    ) -> Optional[Union[RdapNetwork, RdapAsn, RdapDomain, RdapEntity, RdapObject]]:
-        """
-        Returns the parsed RDAP object for this historical record.
+    ) -> RdapNetwork | RdapAsn | RdapDomain | RdapEntity | RdapObject | None:
+        """Returns the parsed RDAP object for this historical record.
         Lazily creates an RdapNetwork object from the content data.
         """
         if not self._content_obj:
@@ -285,7 +288,7 @@ class RdapHistoryRecord:
         return self._content_obj
 
     @property
-    def handle(self) -> Optional[str]:
+    def handle(self) -> str | None:
         """Shortcut to get the handle from content"""
         return self._record_data.get("content", {}).get("handle")
 
@@ -296,21 +299,20 @@ class RdapHistoryRecord:
 
 
 class RdapHistory:
-    """
-    Represents the complete history response from an RDAP history query.
+    """Represents the complete history response from an RDAP history query.
 
     Contains a list of RdapHistoryRecord objects sorted by time.
     Provides filtering options to get specific records (exact match, parent blocks, etc.)
     """
 
     def __init__(self, data, rdapc=None, queried_prefix=None):
-        """
-        Initialize RdapHistory object.
+        """Initialize RdapHistory object.
 
         Args:
             data: Raw RDAP history response data
             rdapc: RdapClient instance
             queried_prefix: The prefix that was queried (for filtering purposes)
+
         """
         self._rdapc = rdapc
         self._data = data
@@ -323,9 +325,8 @@ class RdapHistory:
         return self._data
 
     @property
-    def records(self) -> List[RdapHistoryRecord]:
-        """
-        Returns all historical records as RdapHistoryRecord objects.
+    def records(self) -> list[RdapHistoryRecord]:
+        """Returns all historical records as RdapHistoryRecord objects.
         Records are sorted newest to oldest (reverse chronological).
         """
         if self._records is None:
@@ -336,25 +337,25 @@ class RdapHistory:
             self._records.sort(key=lambda r: r.applicable_from or "", reverse=True)
         return self._records
 
-    def filter_by_handle(self, handle: str) -> List[RdapHistoryRecord]:
-        """
-        Filter records by exact handle match.
+    def filter_by_handle(self, handle: str) -> list[RdapHistoryRecord]:
+        """Filter records by exact handle match.
 
         Args:
             handle: The handle to filter by (e.g., "101.203.88.0 - 101.203.95.255")
 
         Returns:
             List of RdapHistoryRecord objects matching the handle
+
         """
         return [r for r in self.records if r.handle == handle]
 
-    def get_most_specific_records(self) -> List[RdapHistoryRecord]:
-        """
-        Returns only the records for the most specific (smallest) IP block.
+    def get_most_specific_records(self) -> list[RdapHistoryRecord]:
+        """Returns only the records for the most specific (smallest) IP block.
         This filters out parent/larger allocations.
 
         Returns:
             List of RdapHistoryRecord objects for the most specific block
+
         """
         if not self.records:
             return []
@@ -372,12 +373,12 @@ class RdapHistory:
 
         return []
 
-    def get_current_record(self) -> Optional[RdapHistoryRecord]:
-        """
-        Returns the currently active record (applicableUntil is None).
+    def get_current_record(self) -> RdapHistoryRecord | None:
+        """Returns the currently active record (applicableUntil is None).
 
         Returns:
             RdapHistoryRecord object or None if no current record found
+
         """
         current = [r for r in self.records if r.is_current]
         return current[0] if current else None

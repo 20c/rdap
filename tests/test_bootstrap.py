@@ -78,10 +78,10 @@ def test_asn_lookup(this_dir, asn, tmpdir):
 
 @pytest.mark.parametrize("asn", [63311])
 def test_asn_bootstrap_cache(tmpdir, asn):
-    config = dict(
-        self_bootstrap=True,
-        bootstrap_dir=tmpdir,
-    )
+    config = {
+        "self_bootstrap": True,
+        "bootstrap_dir": tmpdir,
+    }
     asn_db_file = os.path.join(tmpdir, "asn.json")
 
     # check download and cache
@@ -113,9 +113,9 @@ def test_asn_bootstrap_cache(tmpdir, asn):
 
 @pytest.mark.parametrize("asn", [63311])
 def test_asn_bootstrap_no_cache(asn):
-    config = dict(
-        self_bootstrap=True,
-    )
+    config = {
+        "self_bootstrap": True,
+    }
 
     # check download and cache
     rdapc = rdap.RdapClient(config)

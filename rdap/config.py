@@ -1,10 +1,12 @@
+from typing import ClassVar
+
 import munge
 
 
 class Config(munge.Config):
     """command line interface config"""
 
-    defaults = {
+    defaults: ClassVar = {
         "config": {
             "rdap": {
                 "bootstrap_url": "https://rdap.org/",

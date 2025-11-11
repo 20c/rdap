@@ -13,7 +13,7 @@ def assert_parsed(data, parsed):
 
 
 def test_rdap_asn_object(rdapc):
-    data = dict(test="data")
+    data = {"test": "data"}
     asn = RdapAsn(data, rdapc)
     assert rdapc == asn._rdapc
     assert data == asn._data

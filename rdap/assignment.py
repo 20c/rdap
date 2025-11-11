@@ -1,5 +1,6 @@
 import datetime
 import os
+from typing import ClassVar
 
 import requests
 
@@ -11,7 +12,7 @@ class RIRAssignmentLookup:
     Files will be downloaded from  https://ftp.ripe.net/pub/stats/{rir}/delegated-{rir}-extended-latest
     """
 
-    rir_lists = ["afrinic", "apnic", "arin", "lacnic", "ripencc"]
+    rir_lists: ClassVar = ["afrinic", "apnic", "arin", "lacnic", "ripencc"]
 
     def parse_data(self, line):
         """Parses a line from a data file and attempts to return the ASN
@@ -37,11 +38,8 @@ class RIRAssignmentLookup:
             asn = parts[3]
             count = int(parts[4])
             status = parts[6].strip()
-            asns = None
 
-            asns = [{"asn": int(asn) + i, "status": status} for i in range(count)]
-
-            return asns
+            return [{"asn": int(asn) + i, "status": status} for i in range(count)]
 
         except IndexError:
             return None
@@ -99,7 +97,8 @@ class RIRAssignmentLookup:
         """Download RIR network assignment status data from RIPE
         https://ftp.ripe.net/pub/stats/{rir}/delegated-{rir}-extended-latesy
         """
-        # Only download/re-download the file if it doesn't exist or the file is older than a day django_settings.RIR_ALLOCATION_DATA_CACHE_DAYS
+        # Only download/re-download the file if it doesn't exist
+        # or the file is older than cache_days
         if (
             not os.path.exists(file_path)
             or (
@@ -111,7 +110,7 @@ class RIRAssignmentLookup:
             url = (
                 f"https://ftp.ripe.net/pub/stats/{rir}/delegated-{rir}-extended-latest"
             )
-            response = requests.get(url)
+            response = requests.get(url, timeout=30)
 
             with open(file_path, "w") as file:
                 file.write(response.text)

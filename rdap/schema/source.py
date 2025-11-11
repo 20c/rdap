@@ -2,10 +2,10 @@ from rdap.schema import rdap
 
 __all__ = [
     "SCHEMAS_BY_RIR",
-    "ip_network_model",
-    "domain_model",
     "autnum_model",
+    "domain_model",
     "entity_model",
+    "ip_network_model",
 ]
 
 SCHEMAS_BY_RIR = {

@@ -1,7 +1,6 @@
 """Contains a set of functions to parse various rdap data properties"""
 
 import json
-from typing import List, Union
 
 import rdap.schema.normalized as schema
 from rdap.context import RdapRequestState, rdap_request
@@ -14,12 +13,12 @@ from rdap.schema.source import (
 )
 
 __all__ = [
+    "get_sources",
     "normalize",
     "normalize_autnum",
+    "normalize_domain",
     "normalize_entity",
     "normalize_ip",
-    "normalize_domain",
-    "get_sources",
 ]
 
 HANDLERS = {
@@ -36,8 +35,8 @@ HANDLERS = {
 def get_sources(
     state: RdapRequestState,
     handle: str,
-    entity: Union[schema.Network, schema.IPNetwork, schema.Domain, schema.Entity],
-) -> List[schema.Source]:
+    entity: schema.Network | schema.IPNetwork | schema.Domain | schema.Entity,
+) -> list[schema.Source]:
     sources = []
 
     for source in state.sources:
@@ -199,10 +198,7 @@ def normalize_entity(data: dict, rir: str) -> dict:
 
     org_name = handler.org_name_from_entity(rdap_entity)
 
-    if org_name:
-        org = schema.Organization(name=org_name)
-    else:
-        org = None
+    org = schema.Organization(name=org_name) if org_name else None
 
     entity = schema.Entity(
         name=rdap_entity.handle,
