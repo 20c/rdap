@@ -43,6 +43,29 @@ options:
 ```
 
 
+## Testing
+
+### Running Tests
+
+By default, all tests run including network tests. Network tests automatically skip on timeout or connection errors to avoid CI failures due to transient network issues.
+
+```sh
+# Run all tests (default - network tests skip on timeout)
+pytest
+
+# Run tests excluding network tests entirely
+pytest -m "not network"
+
+# Run only network tests
+pytest -m "network"
+
+# Run network tests in strict mode (fail on timeout instead of skip)
+pytest -m "network" --network-strict
+```
+
+Network tests are marked with `@pytest.mark.network`. When these tests encounter timeouts or connection errors, they automatically skip instead of failing (unless run with `--network-strict`).
+
+
 ## Config file
 
 The client uses the `--home` option to point to a directory, by default will check in order: `$RDAP_HOME`, `./.rdap`, `~/.rdap`, `~/.config/rdap`

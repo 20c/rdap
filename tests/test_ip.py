@@ -1,3 +1,6 @@
+import pytest
+
+
 def sort_data(data):
     """Sorts data returned from rdap queries for comparing."""
     for entity in data.get("entities", []):
@@ -6,6 +9,7 @@ def sort_data(data):
             print(entity["roles"])
 
 
+@pytest.mark.network
 def test_rdap_ip_lookup(rdapc):
     query = "1.1.1.1"
     ip = rdapc.get_ip(query)
