@@ -152,4 +152,4 @@ def test_rdap_history_record_without_content():
 
     assert record.applicable_from == "2020-01-01T00:00:00Z"
     assert record.applicable_until == "2021-01-01T00:00:00Z"
-    assert record.is_current == False
+    assert record.is_current is False

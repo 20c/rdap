@@ -8,20 +8,20 @@ from typing import Any
 import pydantic
 
 __all__ = [
-    "IP_VERSION",
-    "STATUS",
-    "ROLE",
     "DNSSEC",
-    "GeoLocation",
-    "Location",
+    "IP_VERSION",
+    "ROLE",
+    "STATUS",
     "Contact",
-    "Source",
-    "Organization",
-    "Network",
-    "IPNetwork",
-    "Entity",
-    "Nameserver",
     "Domain",
+    "Entity",
+    "GeoLocation",
+    "IPNetwork",
+    "Location",
+    "Nameserver",
+    "Network",
+    "Organization",
+    "Source",
 ]
 
 

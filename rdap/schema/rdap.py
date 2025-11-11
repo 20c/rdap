@@ -3,13 +3,13 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 __all__ = [
-    "Link",
-    "Event",
-    "Notice",
-    "VCardValue",
-    "Remark",
     "Entity",
+    "Event",
     "IPNetwork",
+    "Link",
+    "Notice",
+    "Remark",
+    "VCardValue",
 ]
 
 

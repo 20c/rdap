@@ -22,7 +22,7 @@ class RdapObject:
     def __init__(self, data, rdapc=None):
         self._rdapc = rdapc
         self._data = data
-        self._parsed = dict()
+        self._parsed = {}
 
     @property
     def data(self):
@@ -60,7 +60,7 @@ class RdapObject:
 
     def _parse_vcard(self, data):
         """Iterates over current level's vcardArray and gets data"""
-        vcard = dict()
+        vcard = {}
 
         for row in data.get("vcardArray", [0])[1:]:
             for typ in row:
@@ -123,17 +123,20 @@ class RdapObject:
                 emails |= vcard.get("emails", set())
 
             # if role is in settings to recurse, try to do a lookup
-            if handle and self._rdapc:
-                if not self._rdapc.recurse_roles.isdisjoint(roles):
-                    try:
-                        rdata = self._rdapc.get_data(handle_url)
-                        vcard = self._parse_vcard(rdata)
-                        emails |= vcard.get("emails", set())
+            if (
+                handle
+                and self._rdapc
+                and not self._rdapc.recurse_roles.isdisjoint(roles)
+            ):
+                try:
+                    rdata = self._rdapc.get_data(handle_url)
+                    vcard = self._parse_vcard(rdata)
+                    emails |= vcard.get("emails", set())
 
-                    # check for HTTP Errors to ignore
-                    except RdapHTTPError:
-                        if not self._rdapc.config.get("ignore_recurse_errors"):
-                            raise
+                # check for HTTP Errors to ignore
+                except RdapHTTPError:
+                    if not self._rdapc.config.get("ignore_recurse_errors"):
+                        raise
 
         # WORKAROUND APNIC keeps org info in remarks
         if "apnic" in self._data.get("port43", ""):
@@ -159,23 +162,27 @@ class RdapObject:
             except KeyError:
                 pass
 
-        self._parsed = dict(
-            name=name,
-            emails=sorted(emails),
-            org_name=org_name,
-            org_address=org_address,
-        )
+        self._parsed = {
+            "name": name,
+            "emails": sorted(emails),
+            "org_name": org_name,
+            "org_address": org_address,
+        }
 
     def get_rir(self):
         """Gets the RIR for the object, if possible"""
         try:
-            if "port43" in self._data:
-                if rir := rir_from_domain(self._data.get("port43")):
-                    return rir
+            if "port43" in self._data and (
+                rir := rir_from_domain(self._data.get("port43"))
+            ):
+                return rir
 
-            if self._rdapc and self._rdapc.last_req_url:
-                if rir := rir_from_domain(self._rdapc.last_req_url):
-                    return rir
+            if (
+                self._rdapc
+                and self._rdapc.last_req_url
+                and (rir := rir_from_domain(self._rdapc.last_req_url))
+            ):
+                return rir
 
         except Exception:
             return None

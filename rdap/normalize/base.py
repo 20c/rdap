@@ -42,9 +42,7 @@ class Handler:
                 locations.extend(self.locations_from_entity(_entity))
 
         # remove dupes
-        locations = list(set(locations))
-
-        return locations
+        return list(set(locations))
 
     def locations(
         self,
@@ -179,7 +177,7 @@ class Handler:
 
         # sort roles
         for contact in contacts:
-            contact.roles = sorted(list(set(contact.roles)))
+            contact.roles = sorted(set(contact.roles))
 
         return contacts
 

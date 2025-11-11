@@ -12,8 +12,8 @@ from rdap.exceptions import RdapException, RdapNotFoundError
 from rdap.objects import RdapAsn
 
 __all__ = [
+    "RdapAsn",
     "RdapClient",
     "RdapException",
     "RdapNotFoundError",
-    "RdapAsn",
 ]

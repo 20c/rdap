@@ -8,9 +8,9 @@ import pydantic
 from rdap.exceptions import RdapHTTPError
 
 __all__ = [
-    "rdap_request",
     "RdapRequestContext",
     "RdapRequestState",
+    "rdap_request",
 ]
 
 

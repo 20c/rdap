@@ -37,7 +37,7 @@ class RdapRequestAuth(requests.auth.AuthBase):
         # apikeys, quick and dirty until other RIRs support them
         # checks scheme as well since API keys shouldn't be sent over http
         if request.url.startswith("https://rdap.lacnic.net/"):
-            params = dict(apikey=self.lacnic_apikey)
+            params = {"apikey": self.lacnic_apikey}
             request.prepare_url(request.url, params)
 
         return request
@@ -87,7 +87,7 @@ class RdapClient:
 
         else:
             self.config_dir = None
-            config = dict()
+            config = {}
 
         self.config = config
 
@@ -113,9 +113,9 @@ class RdapClient:
 
         self.http = requests.Session()
         self.http.auth = RdapRequestAuth(
-            **dict(
-                lacnic_apikey=config.get("lacnic_apikey", None),
-            ),
+            **{
+                "lacnic_apikey": config.get("lacnic_apikey"),
+            },
         )
 
         self.http.headers["User-Agent"] = "20C-rdap/{} {}".format(
@@ -311,15 +311,9 @@ class RdapClient:
         This function must be able to handle doing recursive lookups to the current URL
         after a bootstrap redirect for registries that don't link 'self'
         """
-        if self.last_req_url:
-            url = self.last_req_url
-
-        # last ditch effort to use bootstrap
-        else:
-            url = self.url
-
-        url = f"{url}/entity/{handle}"
-        return url
+        # Use last request URL if available, otherwise use bootstrap URL
+        url = self.last_req_url if self.last_req_url else self.url
+        return f"{url}/entity/{handle}"
 
     def get_data(self, url):
         """Get raw data and return it for when there's no need for parsing."""

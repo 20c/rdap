@@ -34,8 +34,7 @@ def pytest_generate_tests(metafunc):
 def iana_asn():
     asn_file = os.path.join(_this_dir(), "data/iana/bootstrap/asn.json")
     with open(asn_file) as fh:
-        data = json.load(fh)
-        return data
+        return json.load(fh)
 
 
 @pytest.fixture
