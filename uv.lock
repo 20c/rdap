@@ -1,5 +1,5 @@
 version = 1
-requires-python = ">=3.10"
+requires-python = ">=3.10, <4.0"
 
 [[package]]
 name = "annotated-types"
@@ -993,7 +993,6 @@ dependencies = [
     { name = "phonenumbers" },
     { name = "pydantic" },
     { name = "requests" },
-    { name = "setuptools" },
 ]
 
 [package.optional-dependencies]
@@ -1032,7 +1031,6 @@ requires-dist = [
     { name = "pytest-filedata", marker = "extra == 'dev'", specifier = ">=1" },
     { name = "requests", specifier = ">=2" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0" },
-    { name = "setuptools", specifier = ">=75.1.0" },
     { name = "tox", marker = "extra == 'dev'", specifier = ">=4" },
     { name = "tox-gh-actions", marker = "extra == 'dev'", specifier = ">=3" },
     { name = "tox-uv", marker = "extra == 'dev'", specifier = ">=1.13.0" },
@@ -1102,15 +1100,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/54/1a/a49f071f04c42345c793d22f6cf5e0920095e286119ee53a64a3a3004825/ruff-0.14.4-py3-none-win32.whl", hash = "sha256:643b69cb63cd996f1fc7229da726d07ac307eae442dd8974dbc7cf22c1e18fff", size = 12493429 },
     { url = "https://files.pythonhosted.org/packages/bc/22/e58c43e641145a2b670328fb98bc384e20679b5774258b1e540207580266/ruff-0.14.4-py3-none-win_amd64.whl", hash = "sha256:26673da283b96fe35fa0c939bf8411abec47111644aa9f7cfbd3c573fb125d2c", size = 13635380 },
     { url = "https://files.pythonhosted.org/packages/30/bd/4168a751ddbbf43e86544b4de8b5c3b7be8d7167a2a5cb977d274e04f0a1/ruff-0.14.4-py3-none-win_arm64.whl", hash = "sha256:dd09c292479596b0e6fec8cd95c65c3a6dc68e9ad17b8f2382130f87ff6a75bb", size = 12663065 },
-]
-
-[[package]]
-name = "setuptools"
-version = "80.9.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/18/5d/3bf57dcd21979b887f014ea83c24ae194cfcd12b9e0fda66b957c69d1fca/setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c", size = 1319958 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922", size = 1201486 },
 ]
 
 [[package]]
