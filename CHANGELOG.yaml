@@ -1,12 +1,16 @@
 Unreleased:
-  added:
-  - python 3.13
+  added: []
   fixed: []
   changed: []
   deprecated: []
+  removed: []
+  security: []
+1.7.0:
+  added:
+  - rdap history object
+  - python 3.13
   removed:
   - python 3.8 and 3.9
-  security: []
 1.6.0:
   added:
   - add regctl normalization schema

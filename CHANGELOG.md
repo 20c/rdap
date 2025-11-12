@@ -4,6 +4,14 @@
 ## Unreleased
 
 
+## 1.7.0
+### Added
+- rdap history object
+- python 3.13
+### Removed
+- python 3.8 and 3.9
+
+
 ## 1.6.0
 ### Added
 - add regctl normalization schema

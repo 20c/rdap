@@ -1,14 +1,12 @@
 [project]
 name = "rdap"
-version = "1.7.0-rc0"
+version = "1.7.0-rc1"
 description = "Registration Data Access Protocol tools"
 authors = [{ name = "20C", email = "code@20c.com" }]
 readme = "README.md"
 license = "Apache-2.0"
-requires-python = ">= 3.10"
-
-repository = "https://github.com/20c/rdap"
-
+requires-python = ">=3.10,<4.0"
+keywords = ["rdap", "whois", "arin", "ripe", "apnic", "lacnic", "afrinic"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -27,17 +25,15 @@ dependencies = [
     "phonenumbers >= 8",
     "pydantic >= 2",
     "requests >= 2",
-    "setuptools>=75.1.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/20c/rdap"
+Repository = "https://github.com/20c/rdap"
+Issues = "https://github.com/20c/rdap/issues"
 
 [project.scripts]
 rdap = "rdap.cli:main"
-
-
-[project.plugins."markdown.extensions"]
-pymdgen = "pymdgen.md:Extension"
-
 
 [project.optional-dependencies]
 dev = [
