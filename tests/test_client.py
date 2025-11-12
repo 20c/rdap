@@ -31,14 +31,17 @@ def test_lacnic_bad_apikey():
     assert "returned 400" in str(excinfo.value)
 
 
+@pytest.mark.network
 def test_lacnic_no_apikey(rdapc):
     assert rdapc.get_asn(28001).parsed()
 
 
+@pytest.mark.network
 def test_ignore_recurse_errors():
     rdapc = client.RdapClient({"lacnic_apikey": "12345", "ignore_recurse_errors": True})
     rdapc.get_asn(28001).parsed()
 
 
+@pytest.mark.network
 def test_asdomain_lookup(rdapc):
     rdapc.get("as63311.net")

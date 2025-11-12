@@ -1,6 +1,9 @@
+import pytest
+
 from rdap import RdapClient
 
 
+@pytest.mark.network
 def test_rdap_domain_lookup():
     rdapc = RdapClient()
     rdapc.url = "https://rdap.norid.no"

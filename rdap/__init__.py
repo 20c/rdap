@@ -1,6 +1,6 @@
-from pkg_resources import get_distribution
+import importlib.metadata
 
-__version__ = get_distribution("rdap").version
+__version__ = importlib.metadata.version("rdap")
 
 # client to base namespace
 from rdap.client import RdapClient

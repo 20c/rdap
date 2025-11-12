@@ -19,11 +19,13 @@ def test_rdap_asn_object(rdapc):
     assert data == asn._data
 
 
+@pytest.mark.network
 def test_rdap_asn_lookup_not_found(rdapc):
     with pytest.raises(RdapNotFoundError):
         rdapc.get_asn(65535)
 
 
+@pytest.mark.network
 def test_rdap_asn_lookup_no_client(rdapc):
     asn = rdapc.get_asn(63311)
     # force null the client
@@ -31,6 +33,7 @@ def test_rdap_asn_lookup_no_client(rdapc):
     assert asn.parsed()
 
 
+@pytest.mark.network
 def test_get_rdap(rdapc):
     obj = rdapc.get_rdap("https://rdap.arin.net/registry/autnum/63311")
     assert type(obj) is RdapAsn

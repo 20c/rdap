@@ -11,12 +11,14 @@ def test_usage():
     assert excinfo.value.code == 2
 
 
+@pytest.mark.network
 def test_lookup():
     args = ["as63311", "--show-requests"]
     rv = main(args)
     assert rv == 0
 
 
+@pytest.mark.network
 def test_write_bootstrap_data(tmpdir):
     config_file = str(os.path.join(tmpdir, "config.yml"))
     with open(config_file, "w") as fh:

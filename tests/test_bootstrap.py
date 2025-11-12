@@ -43,6 +43,7 @@ def test_asn_lookup_notfound(this_dir, asn):
     assert "No service found for AS" in str(excinfo.value)
 
 
+@pytest.mark.network
 @pytest.mark.parametrize("asn", [63311])
 def test_asn_lookup(this_dir, asn, tmpdir):
     config_dir = os.path.join(this_dir, "data", "iana")
@@ -76,6 +77,7 @@ def test_asn_lookup(this_dir, asn, tmpdir):
     assert len(rdapc.history) == 1
 
 
+@pytest.mark.network
 @pytest.mark.parametrize("asn", [63311])
 def test_asn_bootstrap_cache(tmpdir, asn):
     config = {
@@ -111,6 +113,7 @@ def test_asn_bootstrap_cache(tmpdir, asn):
     assert len(rdapc.history) == 1
 
 
+@pytest.mark.network
 @pytest.mark.parametrize("asn", [63311])
 def test_asn_bootstrap_no_cache(asn):
     config = {
