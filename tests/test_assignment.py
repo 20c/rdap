@@ -10,9 +10,11 @@ from rdap.exceptions import RIRAssignmentError
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data", "assignment")
 
+
 class TestLookup(RIRAssignmentLookup):
     def download_data(self, rir, file_path, cache_days):
         setattr(self, "_downloaded_{rir}", file_path)
+
 
 def _read_fixture(name):
     with open(os.path.join(DATA_DIR, name)) as fh:
@@ -178,8 +180,6 @@ def test_cache_expired_uses_seconds_not_floored_days(tmp_path):
     dest.write_text(GOOD_DATA)
     # 1.5 days old: floored .days == 1 (old check would NOT refresh), but this
     # is older than cache_days=1 (86400s) so it must be treated as expired
-    stale = (
-        datetime.datetime.now() - datetime.timedelta(days=1, hours=12)
-    ).timestamp()
+    stale = (datetime.datetime.now() - datetime.timedelta(days=1, hours=12)).timestamp()
     os.utime(dest, (stale, stale))
     assert lookup._cache_expired(str(dest), cache_days=1) is True
