@@ -2,6 +2,9 @@
 
 
 ## Unreleased
+### Fixed
+- `RIRAssignmentLookup`: validate downloaded delegated-stats data (HTTP status + completeness against the file's summary count) and never overwrite a good cache with a failed/truncated fetch, so a partial download no longer makes allocated ASNs read as unassigned
+- `RIRAssignmentLookup`: cache freshness now uses elapsed seconds instead of floored `timedelta.days`, so `cache_days=1` refreshes at 24h rather than ~48h
 
 
 ## 1.7.0
