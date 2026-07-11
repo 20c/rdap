@@ -60,6 +60,8 @@ def test_expected_asn_count_and_record_count():
     assert lookup.count_asn_records(GOOD_DATA) == 3
     # no summary line -> None (fixtures / older files)
     assert lookup.expected_asn_count("ripencc|NL|asn|100|1|x|allocated|u\n") is None
+    # summary line with a non-numeric count -> None
+    assert lookup.expected_asn_count("ripencc|*|asn|*|notanumber|summary\n") is None
 
 
 def test_validate_content_accepts_complete_data():
@@ -162,6 +164,24 @@ def test_download_failure_with_corrupt_cache_raises(tmp_path):
         pytest.raises(RIRAssignmentError),
     ):
         lookup.download_data("ripencc", str(dest), cache_days=1)
+
+
+def test_download_cleans_up_temp_on_replace_failure(tmp_path):
+    # if the atomic replace fails, the temp file must not be left behind
+    lookup = RIRAssignmentLookup()
+    dest = tmp_path / "delegated-ripencc-extended-latest"
+
+    resp = requests.Response()
+    resp.status_code = 200
+    resp._content = GOOD_DATA.encode()
+    with (
+        patch("rdap.assignment.requests.get", return_value=resp),
+        patch("rdap.assignment.os.replace", side_effect=OSError("boom")),
+        pytest.raises(OSError),
+    ):
+        lookup.download_data("ripencc", str(dest))
+
+    assert list(tmp_path.glob("*.tmp")) == []
 
 
 def test_cache_not_expired_skips_download(tmp_path):

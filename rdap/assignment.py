@@ -136,23 +136,21 @@ class RIRAssignmentLookup:
             self._data = {}
 
             for rir_file_path in self._data_files:
-                logger.debug("loading RIR assignment data from %s", rir_file_path)
                 # download_data guarantees each file is present and valid (or
                 # raised), so parse directly here
+                logger.debug("loading RIR assignment data from %s", rir_file_path)
                 with open(rir_file_path) as fh:
-                    text = fh.read()
+                    for line in fh.read().splitlines():
+                        asns = self.parse_data(line)
 
-                for line in text.splitlines():
-                    asns = self.parse_data(line)
+                        if not asns:
+                            continue
 
-                    if not asns:
-                        continue
-
-                    try:
-                        for data in asns:
-                            self._data[int(data["asn"])] = data["status"]
-                    except (TypeError, ValueError):
-                        pass
+                        try:
+                            for data in asns:
+                                self._data[int(data["asn"])] = data["status"]
+                        except (TypeError, ValueError):
+                            pass
 
         return self._data
 
