@@ -1,7 +1,10 @@
+from unittest.mock import patch
+
 import pytest
 import pytest_filedata
 
 from rdap import RdapAsn, RdapNotFoundError
+from rdap.exceptions import RdapBootstrapError
 
 
 def assert_parsed(data, parsed):
@@ -23,6 +26,18 @@ def test_rdap_asn_object(rdapc):
 def test_rdap_asn_lookup_not_found(rdapc):
     with pytest.raises(RdapNotFoundError):
         rdapc.get_asn(65535)
+
+
+def test_rdap_asn_bootstrap_miss_raises_bootstrap_error(rdapc):
+    # a bootstrap lookup miss (no service resolved -> no registry query) must
+    # raise RdapBootstrapError, not be indistinguishable from an authoritative
+    # 404. It stays a RdapNotFoundError subclass for backwards compatibility.
+    assert issubclass(RdapBootstrapError, RdapNotFoundError)
+    with (
+        patch.object(rdapc, "asn_url", side_effect=LookupError("no service")),
+        pytest.raises(RdapBootstrapError),
+    ):
+        rdapc.get_asn(219273)
 
 
 @pytest.mark.network

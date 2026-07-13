@@ -2,6 +2,8 @@
 
 
 ## Unreleased
+### Added
+- `RdapBootstrapError` (subclass of `RdapNotFoundError`) raised on a self-bootstrap lookup miss, so callers can distinguish "no registry was queried" from an authoritative 404
 ### Fixed
 - `RIRAssignmentLookup`: validate downloaded delegated-stats data (HTTP status + completeness against the file's summary count) and never overwrite a good cache with a failed/truncated fetch, so a partial download no longer makes allocated ASNs read as unassigned
 - `RIRAssignmentLookup`: cache freshness now uses elapsed seconds instead of floored `timedelta.days`, so `cache_days=1` refreshes at 24h rather than ~48h

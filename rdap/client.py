@@ -11,7 +11,7 @@ import rdap
 import rdap.bootstrap
 from rdap.config import Config
 from rdap.context import RdapRequestContext
-from rdap.exceptions import RdapHTTPError, RdapNotFoundError
+from rdap.exceptions import RdapBootstrapError, RdapHTTPError, RdapNotFoundError
 from rdap.objects import RdapAsn, RdapDomain, RdapEntity, RdapHistory, RdapNetwork
 
 
@@ -282,9 +282,10 @@ class RdapClient:
         asn = int(asn)
         try:
             url = self.asn_url(asn)
-        # catch bootstrap Lookup errors and report as not found
+        # bootstrap has no service for this ASN -- no registry query was made,
+        # so this is a bootstrap miss, not an authoritative not-found
         except LookupError as excinfo:
-            raise RdapNotFoundError(str(excinfo))
+            raise RdapBootstrapError(str(excinfo)) from excinfo
 
         # save reqest to get url for following entity lookups
         query = f"/autnum/{asn}"
