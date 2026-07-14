@@ -56,8 +56,10 @@ TRUNCATED_DATA = _read_fixture("sample-truncated")
 
 def test_expected_asn_count_and_record_count():
     lookup = RIRAssignmentLookup()
-    assert lookup.expected_asn_count(GOOD_DATA) == 3
-    assert lookup.count_asn_records(GOOD_DATA) == 3
+    # 4 record lines: the value=5 range record (ASNs 300-304) counts as ONE
+    # record, matching the summary-line semantics of real delegated files
+    assert lookup.expected_asn_count(GOOD_DATA) == 4
+    assert lookup.count_asn_records(GOOD_DATA) == 4
     # no summary line -> None (fixtures / older files)
     assert lookup.expected_asn_count("ripencc|NL|asn|100|1|x|allocated|u\n") is None
     # summary line with a non-numeric count -> None
