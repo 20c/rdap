@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.10, <4.0"
 
 [[package]]
@@ -15,7 +16,7 @@ name = "bandit"
 version = "1.8.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "pyyaml" },
     { name = "rich" },
     { name = "stevedore" },
@@ -155,7 +156,7 @@ name = "click"
 version = "8.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz", hash = "sha256:e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4", size = 276943 }
 wheels = [
@@ -516,7 +517,7 @@ version = "1.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "ghp-import" },
     { name = "jinja2" },
     { name = "markdown" },
@@ -985,7 +986,7 @@ wheels = [
 
 [[package]]
 name = "rdap"
-version = "1.7.0rc1"
+version = "1.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "googlemaps" },
@@ -1035,6 +1036,7 @@ requires-dist = [
     { name = "tox-gh-actions", marker = "extra == 'dev'", specifier = ">=3" },
     { name = "tox-uv", marker = "extra == 'dev'", specifier = ">=1.13.0" },
 ]
+provides-extras = ["dev"]
 
 [[package]]
 name = "requests"

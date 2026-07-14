@@ -6,13 +6,20 @@ __version__ = importlib.metadata.version("rdap")
 from rdap.client import RdapClient
 
 # exceptions to base namespace
-from rdap.exceptions import RdapException, RdapNotFoundError
+from rdap.exceptions import (
+    RdapBootstrapError,
+    RdapException,
+    RdapNotFoundError,
+    RIRAssignmentError,
+)
 
 # objects to base namespace
 from rdap.objects import RdapAsn
 
 __all__ = [
+    "RIRAssignmentError",
     "RdapAsn",
+    "RdapBootstrapError",
     "RdapClient",
     "RdapException",
     "RdapNotFoundError",
