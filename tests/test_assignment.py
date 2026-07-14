@@ -205,3 +205,39 @@ def test_cache_expired_uses_seconds_not_floored_days(tmp_path):
     stale = (datetime.datetime.now() - datetime.timedelta(days=1, hours=12)).timestamp()
     os.utime(dest, (stale, stale))
     assert lookup._cache_expired(str(dest), cache_days=1) is True
+
+
+def test_load_data_failure_memoizes_nothing(tmp_path):
+    # a load that fails partway through the download loop must not leave
+    # partial state memoized -- a retry on the same instance would otherwise
+    # skip the download phase entirely and serve a subset of RIRs, with every
+    # absent ASN reading as unassigned
+    lookup = RIRAssignmentLookup()
+
+    def download_fail_on_arin(rir, file_path, cache_days=1):
+        if rir == "arin":
+            raise RIRAssignmentError(f"no usable data for {rir}")
+        with open(file_path, "w") as fh:
+            fh.write(GOOD_DATA)
+
+    with (
+        patch.object(lookup, "download_data", side_effect=download_fail_on_arin),
+        pytest.raises(RIRAssignmentError),
+    ):
+        lookup.load_data(str(tmp_path))
+
+    assert not hasattr(lookup, "_data_files")
+    assert not hasattr(lookup, "_data")
+
+    # a retry on the same instance re-runs all downloads and loads everything
+    def download_ok(rir, file_path, cache_days=1):
+        with open(file_path, "w") as fh:
+            fh.write(GOOD_DATA)
+
+    with patch.object(lookup, "download_data", side_effect=download_ok):
+        lookup.load_data(str(tmp_path))
+
+    assert lookup.get_status(219272) == "allocated"
+    # the value=5 range record expands to ASNs 300-304
+    assert lookup.get_status(304) == "assigned"
+    assert lookup.get_status(305) is None

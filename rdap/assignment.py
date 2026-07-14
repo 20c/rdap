@@ -122,7 +122,7 @@ class RIRAssignmentLookup:
         (which would make allocated ASNs read as unassigned).
         """
         if not hasattr(self, "_data_files"):
-            self._data_files = []
+            data_files = []
 
             for rir in self.rir_lists:
                 rir_file_path = os.path.join(
@@ -130,10 +130,16 @@ class RIRAssignmentLookup:
                     f"delegated-{rir}-extended-latest",
                 )
                 self.download_data(rir, rir_file_path, cache_days)
-                self._data_files.append(rir_file_path)
+                data_files.append(rir_file_path)
+
+            # memoize only once every file downloaded/validated: a partial
+            # list would make a retry on this instance skip the download
+            # phase and serve a subset of RIRs, with their absent ASNs
+            # reading as unassigned
+            self._data_files = data_files
 
         if not hasattr(self, "_data"):
-            self._data = {}
+            data = {}
 
             for rir_file_path in self._data_files:
                 # download_data guarantees each file is present and valid (or
@@ -147,10 +153,13 @@ class RIRAssignmentLookup:
                             continue
 
                         try:
-                            for data in asns:
-                                self._data[int(data["asn"])] = data["status"]
+                            for parsed in asns:
+                                data[int(parsed["asn"])] = parsed["status"]
                         except (TypeError, ValueError):
                             pass
+
+            # same rule as _data_files: memoize only the complete dataset
+            self._data = data
 
         return self._data
 
