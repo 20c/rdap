@@ -13,7 +13,7 @@ class RdapNotFoundError(RdapHTTPError):
 class RdapBootstrapError(RdapNotFoundError):
     """No RDAP service could be resolved for the resource from bootstrap data.
 
-    Raised when self-bootstrap lookup finds no service for an ASN/prefix -- i.e.
+    Raised when self-bootstrap lookup finds no service for an ASN -- i.e.
     no registry query was made at all, which is NOT the same as an authoritative
     404. A newly-assigned block can be absent from bootstrap for a while, so
     callers must not treat this as proof the resource does not exist.

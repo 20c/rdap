@@ -11,14 +11,18 @@ from rdap.exceptions import RIRAssignmentError
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data", "assignment")
 
 
-class TestLookup(RIRAssignmentLookup):
-    def download_data(self, rir, file_path, cache_days):
-        setattr(self, "_downloaded_{rir}", file_path)
-
-
 def _read_fixture(name):
     with open(os.path.join(DATA_DIR, name)) as fh:
         return fh.read()
+
+
+GOOD_DATA = _read_fixture("sample-complete")
+TRUNCATED_DATA = _read_fixture("sample-truncated")
+
+
+class TestLookup(RIRAssignmentLookup):
+    def download_data(self, rir, file_path, cache_days):
+        setattr(self, "_downloaded_{rir}", file_path)
 
 
 def test_lookup():
@@ -48,10 +52,6 @@ def test_lookup():
 
     # ripe
     assert lookup.get_status(7) == "allocated"
-
-
-GOOD_DATA = _read_fixture("sample-complete")
-TRUNCATED_DATA = _read_fixture("sample-truncated")
 
 
 def test_expected_asn_count_and_record_count():
