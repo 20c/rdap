@@ -164,9 +164,8 @@ class RIRAssignmentLookup:
         return self._data
 
     def _cache_expired(self, file_path, cache_days):
-        """True if `file_path` is missing or older than `cache_days`. Uses
-        elapsed seconds; the old `.days > cache_days` floored to whole days, so
-        `cache_days=1` only refreshed at ~48h instead of 24h.
+        """True if `file_path` is missing or older than `cache_days`
+        (measured in elapsed seconds).
         """
         if not os.path.exists(file_path):
             return True
